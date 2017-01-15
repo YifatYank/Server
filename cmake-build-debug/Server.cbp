@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="Server"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/home/adi/AdvancedPrograming/Server/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/adi/AdvancedPrograming/Server/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/adi/AdvancedPrograming/Server/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/adi/AdvancedPrograming/Server/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/adi/AdvancedPrograming/Server/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/home/adi/AdvancedPrograming/Server/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/adi/AdvancedPrograming/Server/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/adi/AdvancedPrograming/Server/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/adi/AdvancedPrograming/Server/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/adi/AdvancedPrograming/Server/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/home/adi/AdvancedPrograming/Server/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/adi/AdvancedPrograming/Server/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/adi/AdvancedPrograming/Server/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/adi/AdvancedPrograming/Server/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/adi/AdvancedPrograming/Server/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Server">
+				<Option output="/home/adi/AdvancedPrograming/Server/cmake-build-debug/Server" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/adi/AdvancedPrograming/Server/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/usr/include/c++/5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
+					<Add directory="/usr/include/c++/5/backward"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/adi/AdvancedPrograming/Server/cmake-build-debug/Makefile&quot;  VERBOSE=1 Server"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/adi/AdvancedPrograming/Server/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/adi/AdvancedPrograming/Server/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/adi/AdvancedPrograming/Server/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Server/fast">
+				<Option output="/home/adi/AdvancedPrograming/Server/cmake-build-debug/Server" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/adi/AdvancedPrograming/Server/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/usr/include/c++/5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
+					<Add directory="/usr/include/c++/5/backward"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/adi/AdvancedPrograming/Server/cmake-build-debug/Makefile&quot;  VERBOSE=1 Server/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/adi/AdvancedPrograming/Server/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/adi/AdvancedPrograming/Server/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/adi/AdvancedPrograming/Server/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/home/adi/AdvancedPrograming/Server/BfsGrid.cpp">
+			<Option target="Server"/>
+		</Unit>
+		<Unit filename="/home/adi/AdvancedPrograming/Server/BfsGrid.h">
+			<Option target="Server"/>
+		</Unit>
+		<Unit filename="/home/adi/AdvancedPrograming/Server/Cab.cpp">
+			<Option target="Server"/>
+		</Unit>
+		<Unit filename="/home/adi/AdvancedPrograming/Server/Cab.h">
+			<Option target="Server"/>
+		</Unit>
+		<Unit filename="/home/adi/AdvancedPrograming/Server/Definitions.h">
+			<Option target="Server"/>
+		</Unit>
+		<Unit filename="/home/adi/AdvancedPrograming/Server/Driver.cpp">
+			<Option target="Server"/>
+		</Unit>
+		<Unit filename="/home/adi/AdvancedPrograming/Server/Driver.h">
+			<Option target="Server"/>
+		</Unit>
+		<Unit filename="/home/adi/AdvancedPrograming/Server/Enums.h">
+			<Option target="Server"/>
+		</Unit>
+		<Unit filename="/home/adi/AdvancedPrograming/Server/Grid.cpp">
+			<Option target="Server"/>
+		</Unit>
+		<Unit filename="/home/adi/AdvancedPrograming/Server/Grid.h">
+			<Option target="Server"/>
+		</Unit>
+		<Unit filename="/home/adi/AdvancedPrograming/Server/GridNode.cpp">
+			<Option target="Server"/>
+		</Unit>
+		<Unit filename="/home/adi/AdvancedPrograming/Server/GridNode.h">
+			<Option target="Server"/>
+		</Unit>
+		<Unit filename="/home/adi/AdvancedPrograming/Server/Luxury.cpp">
+			<Option target="Server"/>
+		</Unit>
+		<Unit filename="/home/adi/AdvancedPrograming/Server/Luxury.h">
+			<Option target="Server"/>
+		</Unit>
+		<Unit filename="/home/adi/AdvancedPrograming/Server/Passenger.cpp">
+			<Option target="Server"/>
+		</Unit>
+		<Unit filename="/home/adi/AdvancedPrograming/Server/Passenger.h">
+			<Option target="Server"/>
+		</Unit>
+		<Unit filename="/home/adi/AdvancedPrograming/Server/Point.cpp">
+			<Option target="Server"/>
+		</Unit>
+		<Unit filename="/home/adi/AdvancedPrograming/Server/Point.h">
+			<Option target="Server"/>
+		</Unit>
+		<Unit filename="/home/adi/AdvancedPrograming/Server/PointNode.cpp">
+			<Option target="Server"/>
+		</Unit>
+		<Unit filename="/home/adi/AdvancedPrograming/Server/PointNode.h">
+			<Option target="Server"/>
+		</Unit>
+		<Unit filename="/home/adi/AdvancedPrograming/Server/Socket.cpp">
+			<Option target="Server"/>
+		</Unit>
+		<Unit filename="/home/adi/AdvancedPrograming/Server/Socket.h">
+			<Option target="Server"/>
+		</Unit>
+		<Unit filename="/home/adi/AdvancedPrograming/Server/Standart.cpp">
+			<Option target="Server"/>
+		</Unit>
+		<Unit filename="/home/adi/AdvancedPrograming/Server/Standart.h">
+			<Option target="Server"/>
+		</Unit>
+		<Unit filename="/home/adi/AdvancedPrograming/Server/TaxiCenter.cpp">
+			<Option target="Server"/>
+		</Unit>
+		<Unit filename="/home/adi/AdvancedPrograming/Server/TaxiCenter.h">
+			<Option target="Server"/>
+		</Unit>
+		<Unit filename="/home/adi/AdvancedPrograming/Server/Trip.cpp">
+			<Option target="Server"/>
+		</Unit>
+		<Unit filename="/home/adi/AdvancedPrograming/Server/Trip.h">
+			<Option target="Server"/>
+		</Unit>
+		<Unit filename="/home/adi/AdvancedPrograming/Server/Udp.cpp">
+			<Option target="Server"/>
+		</Unit>
+		<Unit filename="/home/adi/AdvancedPrograming/Server/Udp.h">
+			<Option target="Server"/>
+		</Unit>
+		<Unit filename="/home/adi/AdvancedPrograming/Server/main.cpp">
+			<Option target="Server"/>
+		</Unit>
+		<Unit filename="/home/adi/AdvancedPrograming/Server/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>
