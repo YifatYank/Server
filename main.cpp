@@ -15,7 +15,7 @@
 #include "Definitions.h"
 #include "TaxiCenter.h"
 #include "Socket.h"
-#include "Udp.h"
+#include "Tcp.h"
 using namespace std;
 
 list <pstring> * split(string * str,char ch);
@@ -62,7 +62,7 @@ int main(int argc, char* argv[]) {
     char askLocation[] = "location";
     char go[] = "go";
     char bye[] = "bye";
-    Udp * udp;
+    Tcp * tcp;
 
     if(argc != 2) {
         delete[](recivedMassage);
@@ -75,8 +75,8 @@ int main(int argc, char* argv[]) {
     port = stringToInt(argv[1]);
 
     // Initialized comunication;
-    udp = new Udp(true, port);
-    udp->initialize();
+    tcp = new Tcp(true, port);
+    tcp->initialize();
 
     // Getting the grid size and creates the grid.
     cin >> height >> width;
@@ -107,27 +107,40 @@ int main(int argc, char* argv[]) {
                 cin >> numOfDrivers;
 
                 for (index = 0; index < numOfDrivers; ++index) {
-                    // Get the driver
-                    udp->reciveData(recivedMassage, 2048);
-                    tempDriver = desrializeDriver(recivedMassage);
-                    sendMessage = emptyMassage;
-                    udp->sendData(sendMessage);
+                    int socketD;
+                    socketD = tcp->acceptOneClient();
+                    pthread_t t1, t2;
+                    int status = pthread_create(&t1, NULL, connectToClient, (void *) socketD);
+                    if (status) {
+                        cout << "Error creating thread";
+                    }
 
-                    // Get the cab request
-                    udp->reciveData(recivedMassage, 2048);
-                    vehicle_id = stringToInt(recivedMassage);
+//static void connectToClient() {
+    tcp->reciveData(recivedMassage, 2048, socketD);
+    tempDriver = desrializeDriver(recivedMassage);
+    sendMessage = emptyMassage;
+    tcp->sendData(sendMessage);
 
-                    // Add the driver to the texi center drivers list
-                    center->addDriver(tempDriver->getID(), tempDriver->getMlStatus(), tempDriver->getAge(),
-                                      tempDriver->getExp(), vehicle_id);
-                    delete (tempDriver);
+    // Get the cab request
+    tcp->reciveData(recivedMassage, 2048, socketD);
+    vehicle_id = stringToInt(recivedMassage);
 
-                    // Send the driver the cab he reqected.
-                    tempCab = center->findCab(vehicle_id);
-                    sendMessage = serialize(tempCab);
-                    udp->sendData(sendMessage);
-                    // White for the client to tell he recived the message
-                    udp->reciveData(recivedMassage,2048);
+    // Add the driver to the texi center drivers list
+    center->addDriver(tempDriver->getID(), tempDriver->getMlStatus(), tempDriver->getAge(),
+                      tempDriver->getExp(), vehicle_id);
+    delete (tempDriver);
+
+    // Send the driver the cab he reqected.
+    tempCab = center->findCab(vehicle_id);
+    sendMessage = serialize(tempCab);
+    tcp->sendData(sendMessage);
+    // White for the client to tell he recived the message
+    tcp->reciveData(recivedMassage, 2048, socketD);
+
+//}
+
+
+
                 }
 
                 break;
@@ -150,7 +163,7 @@ int main(int argc, char* argv[]) {
                         tempTrp = center->findTrip(id);
                         // Send the driver the massage.
                         sendMessage = serialize(tempTrp);
-                        udp->sendData(sendMessage);
+                        tcp->sendData(sendMessage);
                     } else {
                         // There was not a driver avalable to take the trip.
                         // Put the trip in a wating list.
@@ -185,8 +198,8 @@ int main(int argc, char* argv[]) {
             case 4: {
                 cin >> id;
                 sendMessage = askLocation;
-                udp->sendData(sendMessage);
-                udp->reciveData(recivedMassage, 2048);
+                tcp->sendData(sendMessage);
+                tcp->reciveData(recivedMassage, 2048, 0);
                 obPoint = deserializePoint(recivedMassage);
                 tempStr = obPoint->getString();
                 cout << *tempStr << endl;
@@ -211,7 +224,7 @@ int main(int argc, char* argv[]) {
                                 tempTrp = center->findTrip(id);
                                 // Send the driver the massage.
                                 sendMessage = serialize(tempTrp);
-                                udp->sendData(sendMessage);
+                                tcp->sendData(sendMessage);
 
                                 // Take out the trip from the list of trips needed to be taken by a driver.
                                 tripsToAssignDriver->pop_front();
@@ -246,10 +259,10 @@ int main(int argc, char* argv[]) {
 
                 // Tell the driver to go.
                 sendMessage = go;
-                udp->sendData(sendMessage);
+                tcp->sendData(sendMessage);
 
                 // checks if the driver reached its destination
-                udp->reciveData(recivedMassage, 2048);
+                tcp->reciveData(recivedMassage, 2048, 0);
                 // If the driver reached his destination
                 if (strcmp(recivedMassage,"yes") == 0) {
                     // There is only one driver.
@@ -281,8 +294,8 @@ int main(int argc, char* argv[]) {
 
                 // Tell the driver the program has ended
                 sendMessage = bye;
-                udp->sendData(sendMessage);
-                delete (udp);
+                tcp->sendData(sendMessage);
+                delete (tcp);
                 break;
             }
         }
@@ -409,6 +422,30 @@ string serialize(Trip * trp){
 
     return serial_str;
 }
+void ConnectToClient(){
+    // Get the driver
+    tcp->reciveData(recivedMassage, 2048);
+    tempDriver = desrializeDriver(recivedMassage);
+    sendMessage = emptyMassage;
+    tcp->sendData(sendMessage);
+
+    // Get the cab request
+    tcp->reciveData(recivedMassage, 2048);
+    vehicle_id = stringToInt(recivedMassage);
+
+    // Add the driver to the texi center drivers list
+    center->addDriver(tempDriver->getID(), tempDriver->getMlStatus(), tempDriver->getAge(),
+                      tempDriver->getExp(), vehicle_id);
+    delete (tempDriver);
+
+    // Send the driver the cab he reqected.
+    tempCab = center->findCab(vehicle_id);
+    sendMessage = serialize(tempCab);
+    tcp->sendData(sendMessage);
+    // White for the client to tell he recived the message
+    tcp->reciveData(recivedMassage,2048);
+}
+
 Driver * desrializeDriver(char * str) {
     Driver * driver;
     int index;
