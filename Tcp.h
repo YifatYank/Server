@@ -1,30 +1,32 @@
-//
-// Created by yifat on 02/01/17.
-//
+/************************************************************
+* File description: TCP header file. the class inherit from	*
+* socket. methods of tcp socket type						*
+************************************************************/
 
-#ifndef SERVER_UDP_H
-#define SERVER_UDP_H
+#ifndef TCP_H_
+#define TCP_H_
 
 #include "Socket.h"
 
-
-class Udp: public Socket {
+class Tcp: public Socket {
+private:
+	int descriptorCommunicateClient;
 public:
 	/***********************************************************************
-	* function name: Udp												   *
+	* function name: Tcp												   *
 	* The Input: Boolean, true - if server, false if client and port number*
 	* The output: none										               *
-	* The Function operation: creating new Udp						       *
+	* The Function operation: creating new Tcp						       *
 	***********************************************************************/
-	Udp(bool isServers, int port_num);
+	Tcp(bool isServers, int port_num);
 	/***********************************************************************
-	* function name: ~Udp												   *
+	* function name: ~Tcp												   *
 	* The Input: none													   *
 	* The output: none										               *
 	* The Function operation: default destructor					       *
 	***********************************************************************/
-	virtual ~Udp();
-	/***********************************************************************
+	virtual ~Tcp();
+/***********************************************************************
 	* function name: initialize											   *
 	* The Input: none              										   *
 	* The output: int number representing the return status		           *
@@ -37,7 +39,7 @@ public:
 	* The Input: string representing the data to send		               *
 	* The output: int number representing the return status		           *
 	* The Function operation: sending the input data to the socket         *
-	* who connect to this socket.										   *
+	* who connect to this socket. 										   *
 	***********************************************************************/
 	int sendData(string data);
 	/***********************************************************************
@@ -47,7 +49,13 @@ public:
 	* The Function operation: getting data from the other socket and print *
 	* the data															   *
 	***********************************************************************/
-	int reciveData(char* buffer, int size);
+	int reciveData(char *buffer, int size, int i);
+
+	int acceptOneClient();
+
+	int sendData(string data, int clientDescriptor);
+
+	int receiveData(char *buffer, int size, int clientDescriptor);
 };
 
-#endif //SERVER_UDP_H
+#endif /* TCP_H_ */

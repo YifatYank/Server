@@ -8,38 +8,38 @@
 		<Option virtualFolders="CMake Files\;"/>
 		<Build>
 			<Target title="all">
-				<Option working_dir="/home/adi/AdvancedPrograming/Server/cmake-build-debug"/>
+				<Option working_dir="/home/adi/ClionProjects/Server/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/home/adi/AdvancedPrograming/Server/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/adi/AdvancedPrograming/Server/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/home/adi/AdvancedPrograming/Server/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/home/adi/AdvancedPrograming/Server/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/adi/ClionProjects/Server/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/adi/ClionProjects/Server/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/adi/ClionProjects/Server/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/adi/ClionProjects/Server/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="edit_cache">
-				<Option working_dir="/home/adi/AdvancedPrograming/Server/cmake-build-debug"/>
+				<Option working_dir="/home/adi/ClionProjects/Server/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/home/adi/AdvancedPrograming/Server/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/adi/AdvancedPrograming/Server/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/home/adi/AdvancedPrograming/Server/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/home/adi/AdvancedPrograming/Server/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/adi/ClionProjects/Server/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/adi/ClionProjects/Server/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/adi/ClionProjects/Server/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/adi/ClionProjects/Server/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="rebuild_cache">
-				<Option working_dir="/home/adi/AdvancedPrograming/Server/cmake-build-debug"/>
+				<Option working_dir="/home/adi/ClionProjects/Server/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/home/adi/AdvancedPrograming/Server/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/adi/AdvancedPrograming/Server/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/home/adi/AdvancedPrograming/Server/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/home/adi/AdvancedPrograming/Server/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/adi/ClionProjects/Server/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/adi/ClionProjects/Server/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/adi/ClionProjects/Server/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/adi/ClionProjects/Server/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="Server">
-				<Option output="/home/adi/AdvancedPrograming/Server/cmake-build-debug/Server" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/adi/AdvancedPrograming/Server/cmake-build-debug"/>
+				<Option output="/home/adi/ClionProjects/Server/cmake-build-debug/Server" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/adi/ClionProjects/Server/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
@@ -54,15 +54,15 @@
 					<Add directory="/usr/include/c++/5/backward"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/home/adi/AdvancedPrograming/Server/cmake-build-debug/Makefile&quot;  VERBOSE=1 Server"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/adi/AdvancedPrograming/Server/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/home/adi/AdvancedPrograming/Server/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/home/adi/AdvancedPrograming/Server/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/adi/ClionProjects/Server/cmake-build-debug/Makefile&quot;  VERBOSE=1 Server"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/adi/ClionProjects/Server/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/adi/ClionProjects/Server/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/adi/ClionProjects/Server/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="Server/fast">
-				<Option output="/home/adi/AdvancedPrograming/Server/cmake-build-debug/Server" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/adi/AdvancedPrograming/Server/cmake-build-debug"/>
+				<Option output="/home/adi/ClionProjects/Server/cmake-build-debug/Server" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/adi/ClionProjects/Server/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
@@ -77,107 +77,107 @@
 					<Add directory="/usr/include/c++/5/backward"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/home/adi/AdvancedPrograming/Server/cmake-build-debug/Makefile&quot;  VERBOSE=1 Server/fast"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/adi/AdvancedPrograming/Server/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/home/adi/AdvancedPrograming/Server/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/home/adi/AdvancedPrograming/Server/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/adi/ClionProjects/Server/cmake-build-debug/Makefile&quot;  VERBOSE=1 Server/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/adi/ClionProjects/Server/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/adi/ClionProjects/Server/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/adi/ClionProjects/Server/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/home/adi/AdvancedPrograming/Server/BfsGrid.cpp">
+		<Unit filename="/home/adi/ClionProjects/Server/BfsGrid.cpp">
 			<Option target="Server"/>
 		</Unit>
-		<Unit filename="/home/adi/AdvancedPrograming/Server/BfsGrid.h">
+		<Unit filename="/home/adi/ClionProjects/Server/BfsGrid.h">
 			<Option target="Server"/>
 		</Unit>
-		<Unit filename="/home/adi/AdvancedPrograming/Server/Cab.cpp">
+		<Unit filename="/home/adi/ClionProjects/Server/Cab.cpp">
 			<Option target="Server"/>
 		</Unit>
-		<Unit filename="/home/adi/AdvancedPrograming/Server/Cab.h">
+		<Unit filename="/home/adi/ClionProjects/Server/Cab.h">
 			<Option target="Server"/>
 		</Unit>
-		<Unit filename="/home/adi/AdvancedPrograming/Server/Definitions.h">
+		<Unit filename="/home/adi/ClionProjects/Server/Definitions.h">
 			<Option target="Server"/>
 		</Unit>
-		<Unit filename="/home/adi/AdvancedPrograming/Server/Driver.cpp">
+		<Unit filename="/home/adi/ClionProjects/Server/Driver.cpp">
 			<Option target="Server"/>
 		</Unit>
-		<Unit filename="/home/adi/AdvancedPrograming/Server/Driver.h">
+		<Unit filename="/home/adi/ClionProjects/Server/Driver.h">
 			<Option target="Server"/>
 		</Unit>
-		<Unit filename="/home/adi/AdvancedPrograming/Server/Enums.h">
+		<Unit filename="/home/adi/ClionProjects/Server/Enums.h">
 			<Option target="Server"/>
 		</Unit>
-		<Unit filename="/home/adi/AdvancedPrograming/Server/Grid.cpp">
+		<Unit filename="/home/adi/ClionProjects/Server/Grid.cpp">
 			<Option target="Server"/>
 		</Unit>
-		<Unit filename="/home/adi/AdvancedPrograming/Server/Grid.h">
+		<Unit filename="/home/adi/ClionProjects/Server/Grid.h">
 			<Option target="Server"/>
 		</Unit>
-		<Unit filename="/home/adi/AdvancedPrograming/Server/GridNode.cpp">
+		<Unit filename="/home/adi/ClionProjects/Server/GridNode.cpp">
 			<Option target="Server"/>
 		</Unit>
-		<Unit filename="/home/adi/AdvancedPrograming/Server/GridNode.h">
+		<Unit filename="/home/adi/ClionProjects/Server/GridNode.h">
 			<Option target="Server"/>
 		</Unit>
-		<Unit filename="/home/adi/AdvancedPrograming/Server/Luxury.cpp">
+		<Unit filename="/home/adi/ClionProjects/Server/Luxury.cpp">
 			<Option target="Server"/>
 		</Unit>
-		<Unit filename="/home/adi/AdvancedPrograming/Server/Luxury.h">
+		<Unit filename="/home/adi/ClionProjects/Server/Luxury.h">
 			<Option target="Server"/>
 		</Unit>
-		<Unit filename="/home/adi/AdvancedPrograming/Server/Passenger.cpp">
+		<Unit filename="/home/adi/ClionProjects/Server/Passenger.cpp">
 			<Option target="Server"/>
 		</Unit>
-		<Unit filename="/home/adi/AdvancedPrograming/Server/Passenger.h">
+		<Unit filename="/home/adi/ClionProjects/Server/Passenger.h">
 			<Option target="Server"/>
 		</Unit>
-		<Unit filename="/home/adi/AdvancedPrograming/Server/Point.cpp">
+		<Unit filename="/home/adi/ClionProjects/Server/Point.cpp">
 			<Option target="Server"/>
 		</Unit>
-		<Unit filename="/home/adi/AdvancedPrograming/Server/Point.h">
+		<Unit filename="/home/adi/ClionProjects/Server/Point.h">
 			<Option target="Server"/>
 		</Unit>
-		<Unit filename="/home/adi/AdvancedPrograming/Server/PointNode.cpp">
+		<Unit filename="/home/adi/ClionProjects/Server/PointNode.cpp">
 			<Option target="Server"/>
 		</Unit>
-		<Unit filename="/home/adi/AdvancedPrograming/Server/PointNode.h">
+		<Unit filename="/home/adi/ClionProjects/Server/PointNode.h">
 			<Option target="Server"/>
 		</Unit>
-		<Unit filename="/home/adi/AdvancedPrograming/Server/Socket.cpp">
+		<Unit filename="/home/adi/ClionProjects/Server/Socket.cpp">
 			<Option target="Server"/>
 		</Unit>
-		<Unit filename="/home/adi/AdvancedPrograming/Server/Socket.h">
+		<Unit filename="/home/adi/ClionProjects/Server/Socket.h">
 			<Option target="Server"/>
 		</Unit>
-		<Unit filename="/home/adi/AdvancedPrograming/Server/Standart.cpp">
+		<Unit filename="/home/adi/ClionProjects/Server/Standart.cpp">
 			<Option target="Server"/>
 		</Unit>
-		<Unit filename="/home/adi/AdvancedPrograming/Server/Standart.h">
+		<Unit filename="/home/adi/ClionProjects/Server/Standart.h">
 			<Option target="Server"/>
 		</Unit>
-		<Unit filename="/home/adi/AdvancedPrograming/Server/TaxiCenter.cpp">
+		<Unit filename="/home/adi/ClionProjects/Server/TaxiCenter.cpp">
 			<Option target="Server"/>
 		</Unit>
-		<Unit filename="/home/adi/AdvancedPrograming/Server/TaxiCenter.h">
+		<Unit filename="/home/adi/ClionProjects/Server/TaxiCenter.h">
 			<Option target="Server"/>
 		</Unit>
-		<Unit filename="/home/adi/AdvancedPrograming/Server/Trip.cpp">
+		<Unit filename="/home/adi/ClionProjects/Server/Trip.cpp">
 			<Option target="Server"/>
 		</Unit>
-		<Unit filename="/home/adi/AdvancedPrograming/Server/Trip.h">
+		<Unit filename="/home/adi/ClionProjects/Server/Trip.h">
 			<Option target="Server"/>
 		</Unit>
-		<Unit filename="/home/adi/AdvancedPrograming/Server/Udp.cpp">
+		<Unit filename="/home/adi/ClionProjects/Server/Udp.cpp">
 			<Option target="Server"/>
 		</Unit>
-		<Unit filename="/home/adi/AdvancedPrograming/Server/Udp.h">
+		<Unit filename="/home/adi/ClionProjects/Server/Udp.h">
 			<Option target="Server"/>
 		</Unit>
-		<Unit filename="/home/adi/AdvancedPrograming/Server/main.cpp">
+		<Unit filename="/home/adi/ClionProjects/Server/main.cpp">
 			<Option target="Server"/>
 		</Unit>
-		<Unit filename="/home/adi/AdvancedPrograming/Server/CMakeLists.txt">
+		<Unit filename="/home/adi/ClionProjects/Server/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
 	</Project>
