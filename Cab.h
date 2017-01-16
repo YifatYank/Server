@@ -28,7 +28,6 @@
 #include <boost/serialization/access.hpp>
 #include <boost/serialization/base_object.hpp>
 #include <boost/serialization/export.hpp>
-#include "Grid.h"
 #include "Trip.h"
 #include "Point.h"
 #include "Enums.h"
