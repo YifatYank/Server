@@ -8,6 +8,9 @@
 #include "TaxiCenter.h"
 #include "Standart.h"
 #include "Luxury.h"
+#include "Grid.h"
+
+
 TaxiCenter::TaxiCenter(Grid *grid) {
     this->grid = grid;
     this->drivers = new list<pDriver>;
@@ -16,6 +19,8 @@ TaxiCenter::TaxiCenter(Grid *grid) {
     this->dummyCab = new Cab(-1, HONDA, RED);
     this->dummtTrip = new Trip (-1,-1, Point(-1,-1) , Point(-1,-1),-1, -1);
     this->dummyDriver = new Driver (-1, -1, single,-1);
+
+
 }
 TaxiCenter::~TaxiCenter(){
     this->deleteCabsList();
@@ -30,20 +35,58 @@ TaxiCenter::~TaxiCenter(){
 };
 
 
-Driver * TaxiCenter::answerCalls(int id, int taarif, Point start, Point end, int numOfPassangers, int startTime){
+Driver * TaxiCenter::answerCalls(int id, int taarif, Point start, Point end, int numOfPassangers, int startTime, pthread_t * thread){
     Trip * trip;
-
+    list<void *> * parametersToThread;
+    Grid * g;
+    int threadNo;
 
     // Checkd if there is already trip with the same id in the taxi center.
     trip = this->findTrip(id);
     if(trip->getID() == -1) {
         trip = new Trip(id, taarif, start, end, numOfPassangers, startTime);
-        trip->setTrip_path(this->grid->getSortesrPath(&start, &end));
-        this->trips->push_front(trip);
-        return this->dummyDriver;//return this->AssignTripToDriver(trip);
 
+        // Prapare to sent the calaulates of the path to a difrent thread.
+        parametersToThread = new list<void *>();
+        parametersToThread->push_front(trip);
+        parametersToThread->push_front(this->grid);
+
+        // The calcuation if the path will be in anothe thread.
+        threadNo = pthread_create(thread,NULL,threadFunction,parametersToThread);
+
+        // If thecreation has faled
+        if(threadNo < 0) {
+            delete (trip);
+            return NULL;
+        }
+        //trip->setTrip_path(this->grid->getSortesrPath(&start, &end));
+
+        this->trips->push_front(trip);
+        return this->dummyDriver;
     }
+
+    // If there is already a trip with that same id.
     return NULL;
+}
+
+void *TaxiCenter::threadFunction(void *parameters) {
+    Grid * grid;
+    Trip * trip;
+    list <void *> * lst;
+
+    // 'parmeters' is a list of parameters.
+    lst = (list<void *> *)parameters;
+
+    // Get the grid out of the parameters list.
+    grid = (Grid *)lst->front();
+    lst->pop_front();
+    trip = (Trip *)lst->front();
+    lst->pop_front();
+
+    // Delete the list.
+    delete(lst);
+
+    trip->setTrip_path(grid->getSortesrPath(trip->getSP(), trip->getEP()));
 }
 
 void TaxiCenter::addDriver(int id, Marital_Status ms, int age, int yearsOfExp) {
@@ -267,3 +310,5 @@ Driver *TaxiCenter::AssignTripToDriver(Trip * trip) {
     return chosenDriver;
 
 }
+
+

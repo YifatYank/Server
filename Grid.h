@@ -8,12 +8,14 @@
 #include "Point.h"
 #include "GridNode.h"
 #include <list>
+#include <pthread.h>
 using namespace std;
 
 class Grid {
 private:
     int height;
     int width;
+    pthread_mutex_t gridLock;
     GridNode *** grideWorld;
     GridNode *** tempGride;
     /* initiateGrid.
@@ -101,6 +103,8 @@ public:
     * @return lstToReturn list of points
     */
     list <Point *> * getSortesrPath(Point * start, Point * end);
+
+    //static void * threadFunction(void * points);
 };
 
 #endif //UNITTEST_GRID_H

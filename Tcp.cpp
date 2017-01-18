@@ -5,7 +5,6 @@
 *	sending and receiving data. Use this variable when calling sendData and receiveData.
 */
 
-
 /************************************************************
 * File description: TCP implementation.						*
 * the class inherit from socket. 							*
@@ -95,11 +94,6 @@ int Tcp::initialize() {
 
 }
 
-
-
-
-
-
 /***********************************************************************
 * function name: acceptOneClient									   *
 * The Input: None                                                      *
@@ -122,11 +116,6 @@ int Tcp::acceptOneClient(){
     }
     return  clientDescriptor;
 }
-
-
-
-
-
 
 /***********************************************************************
 * function name: sendData											   *

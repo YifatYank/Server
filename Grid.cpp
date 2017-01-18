@@ -11,6 +11,7 @@ Grid::Grid(int x, int y) {
     this->width = y + 2;
     this->initiateGrid();
     this->tempGride = NULL;
+    pthread_mutex_init(&this->gridLock, 0);
 }
 
 bool Grid::isObstical(int x, int y) {
@@ -168,8 +169,8 @@ list<pPoint> * Grid::getNeighborsOfPoint(Point * p) {
 }
 
 list<Point *> *Grid::getSortesrPath(Point *start, Point *end) {
-    //start = this->grideWorld[start->getX() + 1][start->getY() + 1]->getPlace();
-    //end = this->grideWorld[end->getX() + 1][end->getY() + 1]->getPlace();
+    pthread_mutex_lock(&this->gridLock);
+
     start = this->grideWorld[start->getX()][start->getY()]->getPlace();
     end = this->grideWorld[end->getX()][end->getY()]->getPlace();
     Point * tempPoint;
@@ -192,24 +193,7 @@ list<Point *> *Grid::getSortesrPath(Point *start, Point *end) {
     this->deleteTempGrid();
     this->tempGride = NULL;
 
-    //tempList = new list<pPoint>();
-/*
-    while(!lstToReturn->empty()){
-        tempPoint = lstToReturn->front();
-        lstToReturn->pop_front();
-        tempList->push_front(tempPoint);
-    }
-
-    while(!tempList->empty()) {
-        tempPoint = tempList->front();
-        tempList->pop_front();
-        tempPoint->setX(tempPoint->getX() - 1);
-        tempPoint->setY(tempPoint->getY() - 1);
-        lstToReturn->push_front(tempPoint);
-    }
-*/
-
-    //delete(tempList);
+    pthread_mutex_unlock(&this->gridLock);
 
     return lstToReturn;
 }
@@ -250,3 +234,25 @@ void Grid::deleteTempGrid() {
     }
     delete [](this->tempGride);
 }
+
+/*void *Grid::threadFunction(void *parameters) {
+    Point * start, * end;
+    Grid * grid;
+    void * pointer;
+
+    // The void * is a list of parameters.
+    list<void *> * lst = (list<void *> *)parameters;
+
+    grid = (Grid *) lst->front();
+    lst->pop_front();
+
+    start = (Point *)lst->front();
+    lst->pop_front();
+    end = (Point *)lst->front();
+    lst->pop_front();
+
+    free(lst);
+
+    return grid->getSortesrPath(start, end);
+}
+*/

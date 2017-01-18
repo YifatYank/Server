@@ -7,10 +7,12 @@ using namespace std;
 #define UNITTEST_TAXICENTER_H
 
 #include <list>
+#include "Grid.h"
 #include "Point.h"
 #include "Cab.h"
 #include "Driver.h"
 #include "Definitions.h"
+#include <pthread.h>
 class TaxiCenter {
 private:
     Driver * dummyDriver;
@@ -58,7 +60,7 @@ public:
  * @param start starting point
  * @param numOfPassangers number of passengers
 */
-    Driver * answerCalls(int id, int taarif, Point start, Point end, int numOfPassangers, int startTime);
+    Driver * answerCalls(int id, int taarif, Point start, Point end, int numOfPassangers, int startTime, pthread_t * thread);
 /**
  * addDriver
  * @param id id of a driver
@@ -136,6 +138,9 @@ public:
 */
     Trip * findTrip(int id);
     Driver * AssignTripToDriver(int tripId);
+
+
+    static void * threadFunction(void * parameters);
 };
 
 
