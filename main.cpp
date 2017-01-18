@@ -18,6 +18,8 @@
 #include "Tcp.h"
 #include "Grid.h"
 #include <pthread.h>
+#include <map>
+
 using namespace std;
 
 list <pstring> * split(string * str,char ch);
@@ -31,6 +33,7 @@ Point * deserializePoint(char * str);
 
 int main(int argc, char* argv[]) {
     int task;
+    int socketD;
     int numOfDrivers;
     int id;
     int index;
@@ -110,17 +113,18 @@ int main(int argc, char* argv[]) {
             case 1: {
                 // Get the number of drivers
                 cin >> numOfDrivers;
+                map <int, int> desToDriverMap;
 
                 for (index = 0; index < numOfDrivers; ++index) {
-                    int socketD;
-//                    socketD = tcp->acceptOneClient();
-         //               pthread_t t1, t2;
-       //                 int status = pthread_create(&t1, NULL, connectToClient, (void *) socketD);
-       //             if (status) {
-//                        cout << "Error creating thread";
-         //           }
 
-/**static void connectToClient() {
+                    socketD = tcp->acceptOneClient();
+                        pthread_t t1, t2;
+                        int status = pthread_create(&t1, NULL, connectToClient, (void *) socketD);//<--- NULL??
+                    if (status) {
+                        cout << "Error creating thread";
+                    }
+
+/*static void connectToClient() {
     tcp->reciveData(recivedMassage, 4096, socketD);
     tempDriver = desrializeDriver(recivedMassage);
     sendMessage = emptyMassage;
@@ -143,8 +147,8 @@ int main(int argc, char* argv[]) {
     tcp->reciveData(recivedMassage, 4096, socketD);
 
 }*/
+                desToDriverMap[socketD] = drivers[index].front()->getID();
                 }
-
                 break;
             }
                 // Gets a new trip

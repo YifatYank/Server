@@ -17,7 +17,6 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "/home/adi/ClionProjects/Server/Standart.cpp" "/home/adi/ClionProjects/Server/cmake-build-debug/CMakeFiles/Server.dir/Standart.cpp.o"
   "/home/adi/ClionProjects/Server/TaxiCenter.cpp" "/home/adi/ClionProjects/Server/cmake-build-debug/CMakeFiles/Server.dir/TaxiCenter.cpp.o"
   "/home/adi/ClionProjects/Server/Trip.cpp" "/home/adi/ClionProjects/Server/cmake-build-debug/CMakeFiles/Server.dir/Trip.cpp.o"
-  "/home/adi/ClionProjects/Server/Udp.cpp" "/home/adi/ClionProjects/Server/cmake-build-debug/CMakeFiles/Server.dir/Udp.cpp.o"
   "/home/adi/ClionProjects/Server/main.cpp" "/home/adi/ClionProjects/Server/cmake-build-debug/CMakeFiles/Server.dir/main.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")

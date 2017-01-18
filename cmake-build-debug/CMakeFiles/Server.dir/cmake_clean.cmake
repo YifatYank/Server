@@ -13,7 +13,6 @@ file(REMOVE_RECURSE
   "CMakeFiles/Server.dir/TaxiCenter.cpp.o"
   "CMakeFiles/Server.dir/Trip.cpp.o"
   "CMakeFiles/Server.dir/Socket.cpp.o"
-  "CMakeFiles/Server.dir/Udp.cpp.o"
   "Server.pdb"
   "Server"
 )

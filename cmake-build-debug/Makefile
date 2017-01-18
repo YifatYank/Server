@@ -474,33 +474,6 @@ Trip.cpp.s:
 	$(MAKE) -f CMakeFiles/Server.dir/build.make CMakeFiles/Server.dir/Trip.cpp.s
 .PHONY : Trip.cpp.s
 
-Udp.o: Udp.cpp.o
-
-.PHONY : Udp.o
-
-# target to build an object file
-Udp.cpp.o:
-	$(MAKE) -f CMakeFiles/Server.dir/build.make CMakeFiles/Server.dir/Udp.cpp.o
-.PHONY : Udp.cpp.o
-
-Udp.i: Udp.cpp.i
-
-.PHONY : Udp.i
-
-# target to preprocess a source file
-Udp.cpp.i:
-	$(MAKE) -f CMakeFiles/Server.dir/build.make CMakeFiles/Server.dir/Udp.cpp.i
-.PHONY : Udp.cpp.i
-
-Udp.s: Udp.cpp.s
-
-.PHONY : Udp.s
-
-# target to generate assembly for a file
-Udp.cpp.s:
-	$(MAKE) -f CMakeFiles/Server.dir/build.make CMakeFiles/Server.dir/Udp.cpp.s
-.PHONY : Udp.cpp.s
-
 main.o: main.cpp.o
 
 .PHONY : main.o
@@ -576,9 +549,6 @@ help:
 	@echo "... Trip.o"
 	@echo "... Trip.i"
 	@echo "... Trip.s"
-	@echo "... Udp.o"
-	@echo "... Udp.i"
-	@echo "... Udp.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

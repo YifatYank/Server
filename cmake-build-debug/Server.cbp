@@ -168,12 +168,6 @@
 		<Unit filename="/home/adi/ClionProjects/Server/Trip.h">
 			<Option target="Server"/>
 		</Unit>
-		<Unit filename="/home/adi/ClionProjects/Server/Udp.cpp">
-			<Option target="Server"/>
-		</Unit>
-		<Unit filename="/home/adi/ClionProjects/Server/Udp.h">
-			<Option target="Server"/>
-		</Unit>
 		<Unit filename="/home/adi/ClionProjects/Server/main.cpp">
 			<Option target="Server"/>
 		</Unit>
