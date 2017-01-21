@@ -19,7 +19,7 @@ TaxiCenter::TaxiCenter(Grid *grid) {
     this->dummyCab = new Cab(-1, HONDA, RED);
     this->dummtTrip = new Trip (-1,-1, Point(-1,-1) , Point(-1,-1),-1, -1);
     this->dummyDriver = new Driver (-1, -1, single,-1);
-
+    pthread_mutex_init(&this->lockDrivers, 0);
 
 }
 TaxiCenter::~TaxiCenter(){
@@ -32,6 +32,7 @@ TaxiCenter::~TaxiCenter(){
     delete(this->dummyCab);
     delete(this->dummyDriver);
     delete(this->dummtTrip);
+    pthread_mutex_destroy(&this->lockDrivers);
 };
 
 
@@ -76,7 +77,6 @@ void *TaxiCenter::threadFunction(void *parameters) {
 
     // 'parmeters' is a list of parameters.
     lst = (list<void *> *)parameters;
-
     // Get the grid out of the parameters list.
     grid = (Grid *)lst->front();
     lst->pop_front();
@@ -90,12 +90,16 @@ void *TaxiCenter::threadFunction(void *parameters) {
 }
 
 void TaxiCenter::addDriver(int id, Marital_Status ms, int age, int yearsOfExp) {
-    Driver * driver = this->findDriver(id);
+    Driver * driver;
+
+    pthread_mutex_lock(&this->lockDrivers);
+    driver = this->findDriver(id);
     // If he driver is not exist in the center
     if (driver->getID() == - 1) {
         driver = new Driver(id, age, ms, yearsOfExp);
         this->drivers->push_front(driver);
     }
+    pthread_mutex_unlock(&this->lockDrivers);
 }
 
 void TaxiCenter::addTaxi(int id, Manufacturer mf, Color c, int type){

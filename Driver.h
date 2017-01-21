@@ -151,6 +151,8 @@ public:
     * @returns true if the cab got to the ending point,false otherwise
     */
     bool drive();
+    void driveToDestination();
+
 };
 
 typedef Driver * pDriver;

@@ -75,5 +75,3 @@ void Cab::setTaarif(int i) {
 void Cab::setSpeed(int speed) {
     this->speed = speed;
 }
-
-

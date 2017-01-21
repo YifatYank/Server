@@ -100,25 +100,36 @@ void Driver::setTrip(Trip *trip) {
 }
 
 bool Driver::drive() {
+    Point * p;
     if(this->cab != NULL) {
         if(this->cab->getTrip() != NULL) {
-            this->cab->setLocation(*this->cab->getTrip()->getEP());
-            this->cab->setTrip(NULL);
             // If its the time to move
-            //this->cab->moveNext();
+            this->cab->moveNext();
             // If the driver reached the destination
-            //if (*this->cab->getLocation() == *this->cab->getTrip()->getEP()) {
-            //    this->cab->setTrip(NULL);
+            p = this->cab->getLocation();
+            if (*p == *this->cab->getTrip()->getEP()) {
+                this->cab->setTrip(NULL);
                 // Returns that the driver has reached his destination.
-            //    return true;
-            //} else {
+                delete(p);
+                return true;
+            } else {
                 // Returns that the driver has not reached his destination yet.
-            //    return false;
-            //}
+                delete(p);
+                return false;
+            }
         }
     }
 
     // In this case the driver is standing still, and there for there is no
     // destination he is driving to.
     return true;
+}
+
+void Driver::driveToDestination() {
+    if(this->cab != NULL) {
+        if (this->cab->getTrip() != NULL) {
+            this->cab->setLocation(*this->cab->getTrip()->getEP());
+            this->cab->setTrip(NULL);
+        }
+    }
 }

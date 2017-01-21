@@ -2,7 +2,7 @@
 // Created by yifat on 01/12/16.
 //
 
-using namespace std;
+
 #ifndef UNITTEST_TAXICENTER_H
 #define UNITTEST_TAXICENTER_H
 
@@ -13,6 +13,7 @@ using namespace std;
 #include "Driver.h"
 #include "Definitions.h"
 #include <pthread.h>
+using namespace std;
 class TaxiCenter {
 private:
     Driver * dummyDriver;
@@ -22,6 +23,7 @@ private:
     list <Cab *> * cabs;
     list <Trip *> * trips;
     Grid * grid;
+    pthread_mutex_t lockDrivers;
 
 /**
  * deleteDriversList

@@ -13,6 +13,7 @@
 
 #include "Tcp.h"
 
+
 /***********************************************************************
 * function name: Tcp												   *
 * The Input: Boolean, true - if server, false if client	and port number*
@@ -23,7 +24,7 @@
 Tcp::Tcp(bool isServers, int port_num) {
     this->port_number = port_num;
     this->isServer = isServers;
-
+    this->soketMapping = new map<int,int>();
 }
 
 /***********************************************************************
@@ -33,7 +34,7 @@ Tcp::Tcp(bool isServers, int port_num) {
 * The Function operation: default destructor					       *
 ***********************************************************************/
 Tcp::~Tcp() {
-    // TODO Auto-generated destructor stub
+    delete(soketMapping);
 }
 
 /***********************************************************************
@@ -117,6 +118,7 @@ int Tcp::acceptOneClient(){
     return  clientDescriptor;
 }
 
+
 /***********************************************************************
 * function name: sendData											   *
 * The Input: string data to send and descriptor Communicate of Client  *
@@ -152,8 +154,8 @@ int Tcp::sendData(string data, int clientDescriptor) {
 * The Function operation: getting data from the other socket to,	   *
 * enter it to the buffer and print the data							   *
 ***********************************************************************/
-int Tcp::receiveData(char* buffer, int size, int clientDescriptor) {
-    ssize_t read_bytes = recv(this->isServer ? clientDescriptor : this->socketDescriptor, buffer, size, 0);
+int Tcp::reciveData(char* buffer, int size,int socketDescriptor) {
+    ssize_t read_bytes = recv(this->isServer ? socketDescriptor : this->socketDescriptor, buffer, size, 0);
     //checking the errors
     if (read_bytes <= 0) {
         string host = "";
@@ -176,3 +178,22 @@ int Tcp::receiveData(char* buffer, int size, int clientDescriptor) {
     //return correct if there were no problem
     return read_bytes;
 }
+
+Tcp * Tcp::getTcp(bool isServers, int port_num) {
+    static Tcp * tcp = new Tcp(isServers, port_num);
+    return tcp;
+}
+
+void Tcp::addMapping(int soketId, int descriptor) {
+    this->soketMapping->insert(std::pair<int,int>(descriptor,soketId));
+}
+
+int Tcp::sendDataByMapping(string data, int clientDescriptor) {
+    this->sendData(data, this->soketMapping->at(clientDescriptor));
+}
+
+int Tcp::reciveDataByMapping(char *buffer, int size, int socketDescriptor) {
+    this->reciveData(buffer,size, this->soketMapping->at(socketDescriptor));
+}
+
+
