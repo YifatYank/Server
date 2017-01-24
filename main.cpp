@@ -24,41 +24,48 @@
 using namespace std;
 
 struct threadArgs {
-    TaxiCenter * center;
-    list<int>  * driversIds;
+    TaxiCenter *center;
+    list<int> *driversIds;
     int socketD;
 };
 
-void * connectToClient(void * params);
-void addTaxiToCenter(TaxiCenter * center);
-void addTripToCenter(TaxiCenter * center, list <pthread_t> *  calcTripThread, list<int> * tripsToAssignDriver);
-void askDriverLocation();
-void getObsticals(Grid * grid);
-void * getClients(void * params);
-void tellDriversToGo(int time, TaxiCenter * center, list<int> * tripsToAssignDriver,
-                     list <pthread_t> *  calcTripThread, list <pDriver> * drivers);
-void sayByeToDrivers(TaxiCenter * center);
+void *connectToClient(void *params);
 
-int main(int argc, char* argv[]) {
+void addTaxiToCenter(TaxiCenter *center);
+
+void addTripToCenter(TaxiCenter *center, list <pthread_t> *calcTripThread, list<int> *tripsToAssignDriver);
+
+void askDriverLocation();
+
+void getObsticals(Grid *grid);
+
+void *getClients(void *params);
+
+void tellDriversToGo(int time, TaxiCenter *center, list<int> *tripsToAssignDriver,
+                     list <pthread_t> *calcTripThread, list <pDriver> *drivers);
+
+void sayByeToDrivers(TaxiCenter *center);
+
+int main(int argc, char *argv[]) {
     int task;
     int height, width;
     int time = 0;
     int port;
-    TaxiCenter * center;
-    Grid* grid;
-    list<int>  * driversIds = new list<int>();
-    list <pDriver> * drivers = new list<pDriver >();
-    list<int> * tripsToAssignDriver = new list<int>();
-    list <pthread_t> *  calcTripThread = new list<pthread_t>();
-    list <void *> * parameterToThread;
+    TaxiCenter *center;
+    Grid *grid;
+    list<int> *driversIds = new list<int>();
+    list <pDriver> *drivers = new list<pDriver>();
+    list<int> *tripsToAssignDriver = new list<int>();
+    list <pthread_t> *calcTripThread = new list<pthread_t>();
+    list<void *> *parameterToThread;
     bool continueProg = true;
-    Tcp * tcp;
-    struct threadArgs * args;
+    Tcp *tcp;
+    struct threadArgs *args;
     int numOfDrivers;
 
-    if(argc != 2) {
-        delete(tripsToAssignDriver);
-        delete(drivers);
+    if (argc != 2) {
+        delete (tripsToAssignDriver);
+        delete (drivers);
         return 0;
     }
 
@@ -69,11 +76,15 @@ int main(int argc, char* argv[]) {
 
     // Getting the grid size and creates the grid.
     cin >> height >> width;
+    while (height < 0 || width < 0) {
+        cout << "invalid input!" << endl;
+        cin >> height >> width;
+    }
     grid = new Grid(width, height);
     center = new TaxiCenter(grid);
     getObsticals(grid);
 
-    cin>>task;
+    cin >> task;
     while (continueProg) {
         switch (task) {
             // Gets a new driver.
@@ -81,15 +92,16 @@ int main(int argc, char* argv[]) {
 
                 cin >> numOfDrivers;
                 pthread_t t;
-                args = (struct threadArgs *)malloc (sizeof(struct threadArgs));
+                args = (struct threadArgs *) malloc(sizeof(struct threadArgs));
                 args->center = center;
                 args->socketD = numOfDrivers;
                 args->driversIds = driversIds;
-                int status = pthread_create(&t,NULL,getClients,args);//(&t, NULL, getClients  ,parameterToThread);//<--- NULL??
+                int status = pthread_create(&t, NULL, getClients,
+                                            args);//(&t, NULL, getClients  ,parameterToThread);//<--- NULL??
                 if (status) {
                     cout << "Error creating thread";
                 }
-              //  getClients((void *)center);
+                //  getClients((void *)center);
                 break;
             }
                 // Gets a new trip
@@ -109,7 +121,7 @@ int main(int argc, char* argv[]) {
             }
             case 9: {
                 ++time;
-                tellDriversToGo(time,center, tripsToAssignDriver,calcTripThread,drivers);
+                tellDriversToGo(time, center, tripsToAssignDriver, calcTripThread, drivers);
                 break;
             }
             case 7: {
@@ -117,6 +129,10 @@ int main(int argc, char* argv[]) {
                 continueProg = false;
                 // Tell the driver the program has ended
                 sayByeToDrivers(center);
+                break;
+            }
+            default: {
+                continueProg = true;
                 break;
             }
         }
@@ -129,7 +145,7 @@ int main(int argc, char* argv[]) {
         drivers->pop_front();
     }
     delete (drivers);
-    while(!calcTripThread->empty()) {
+    while (!calcTripThread->empty()) {
         calcTripThread->pop_front();
     }
     delete (calcTripThread);
@@ -138,29 +154,29 @@ int main(int argc, char* argv[]) {
     }
     delete (tripsToAssignDriver);
 
-    while(!driversIds->empty()) {
+    while (!driversIds->empty()) {
         driversIds->pop_front();
     }
-    delete(driversIds);
+    delete (driversIds);
     delete (center);
     delete (grid);
-    delete(Tcp::getTcp(true,0));
+    delete (Tcp::getTcp(true, 0));
     return 0;
 }
 
-void * connectToClient(void * params) {
+void *connectToClient(void *params) {
     int vehicle_id;
     int socketD;
-    Cab * tempCab;
-    Driver * tempDriver;
-    char * recivedMassage = new char[4096];
+    Cab *tempCab;
+    Driver *tempDriver;
+    char *recivedMassage = new char[4096];
     char emptyMassage[] = "0";
     string sendMessage;
     //list <void * > * lst;
-    Tcp * tcp = Tcp::getTcp(true, 0);
-    TaxiCenter * center;
-    list <int> * ids;
-    struct threadArgs * args = (struct threadArgs *)params;
+    Tcp *tcp = Tcp::getTcp(true, 0);
+    TaxiCenter *center;
+    list<int> *ids;
+    struct threadArgs *args = (struct threadArgs *) params;
 
     // Get the parameters from the params list.
     ids = args->driversIds;
@@ -171,7 +187,7 @@ void * connectToClient(void * params) {
     tcp->reciveData(recivedMassage, 4096, socketD);
     tempDriver = HelpFunctions::desrializeDriver(recivedMassage);
     sendMessage = emptyMassage;
-    tcp->sendData(sendMessage,socketD);
+    tcp->sendData(sendMessage, socketD);
 
     // Get the cab request
     tcp->reciveData(recivedMassage, 4096, socketD);
@@ -194,20 +210,21 @@ void * connectToClient(void * params) {
     ids->push_front(tempDriver->getID());
     delete (tempDriver);
 }
-void * getClients(void * params){
-    struct threadArgs * args = (struct threadArgs *)params;
+
+void *getClients(void *params) {
+    struct threadArgs *args = (struct threadArgs *) params;
     int numOfDrivers, index, socketD;
     int status;
-    Tcp * tcp;
-    TaxiCenter * center;
-    list <int> * ids;
+    Tcp *tcp;
+    TaxiCenter *center;
+    list<int> *ids;
 
 
-    tcp = Tcp::getTcp(true,0);
+    tcp = Tcp::getTcp(true, 0);
     ids = args->driversIds;
-    center =  args->center;
+    center = args->center;
     numOfDrivers = args->socketD;
-    free (args);
+    free(args);
 
     // Get the number of drivers
 
@@ -215,7 +232,7 @@ void * getClients(void * params){
     for (index = 0; index < numOfDrivers; ++index) {
         socketD = tcp->acceptOneClient();
         pthread_t t1;
-        args = (struct threadArgs *)malloc (sizeof(struct threadArgs));
+        args = (struct threadArgs *) malloc(sizeof(struct threadArgs));
         args->socketD = socketD;
         args->center = center;
         args->driversIds = ids;
@@ -227,13 +244,22 @@ void * getClients(void * params){
         }
     }
 }
-void addTaxiToCenter(TaxiCenter * center){
+
+void addTaxiToCenter(TaxiCenter *center) {
     int id, type;
     char dummy, c, man;
     Color color;
-    Manufacturer  mf;
+    Manufacturer mf;
 
     cin >> id >> dummy >> type >> dummy >> man >> dummy >> c;
+    while (cin.bad()) {
+        cout << "inserted invalid types of input" << endl;
+        cin >> id >> dummy >> type >> dummy >> man >> dummy >> c;
+    }
+    while (id < 0 || type < 0 || type > 1) {
+        cout << "invalid input!" << endl;
+        cin >> id >> dummy >> type >> dummy >> man >> dummy >> c;
+    }
     mf = TESLA;
     if (man == 'H') { mf = HONDA; }
     else if (man == 'T') { mf = TESLA; }
@@ -249,22 +275,34 @@ void addTaxiToCenter(TaxiCenter * center){
 
     center->addTaxi(id, mf, color, type);
 }
-void addTripToCenter(TaxiCenter * center, list <pthread_t> *  calcTripThread, list<int> * tripsToAssignDriver) {
-    int id, startx, starty, endx, endy ,numOfPassangers, taarif, startTime;
+
+void addTripToCenter(TaxiCenter *center, list <pthread_t> *calcTripThread, list<int> *tripsToAssignDriver) {
+    int id, startx, starty, endx, endy, numOfPassangers, taarif, startTime;
     char dummy;
-    Point * start;
-    Point * end;
-    Driver * tempDriver;
+    Point *start;
+    Point *end;
+    Driver *tempDriver;
     pthread_t thread;
 
-    // Gets the trip ditails.
-    cin >> id >> dummy >> startx >> dummy >> starty >> dummy >> endx  >> dummy >> endy >> dummy
+    // Gets the trip details.
+    cin >> id >> dummy >> startx >> dummy >> starty >> dummy >> endx >> dummy >> endy >> dummy
         >> numOfPassangers >> dummy >> taarif >> dummy >> startTime;
+
+    while (cin.bad()) {
+        cout << "inserted invalid types of input" << endl;
+        cin >> id >> dummy >> startx >> dummy >> starty >> dummy >> endx >> dummy >> endy >> dummy
+    }
+    //if inserted negative number/s
+    while (id < 0 || startx < 0 || starty < 0 || endx < 0 || endy < 0 || numOfPassangers < 0 || taarif < 0 ||
+           startTime < 0) {
+        cout << "invalid input!" << endl;
+        cin >> id >> dummy >> startx >> dummy >> starty >> dummy >> endx >> dummy >> endy >> dummy
+    }
     start = new Point(startx, starty);
     end = new Point(endx, endy);
 
     // Find a driver th take the trip.
-    tempDriver = center->answerCalls(id, taarif, *start, *end, numOfPassangers, startTime + 1,&thread);
+    tempDriver = center->answerCalls(id, taarif, *start, *end, numOfPassangers, startTime + 1, &thread);
 
     // If there was not a problem with the trip information.
     if (tempDriver != NULL) {
@@ -276,19 +314,24 @@ void addTripToCenter(TaxiCenter * center, list <pthread_t> *  calcTripThread, li
     delete (end);
     delete (start);
 }
+
 void askDriverLocation() {
     int id;
     string sendMessage;
     char askLocation[] = "location";
-    Point * location;
-    char * recivedMassage = new char[4096];
-    string * tempStr;
+    Point *location;
+    char *recivedMassage = new char[4096];
+    string *tempStr;
     // The parameters does not metter, the singketone is lready initiated;
-    Tcp * tcp = Tcp::getTcp(true,0);
+    Tcp *tcp = Tcp::getTcp(true, 0);
 
     cin >> id;
+    while (id < 0) {
+        cout << "invalid input" << endl;
+        cin >> id;
+    }
     sendMessage = askLocation;
-    tcp->sendDataByMapping(sendMessage,id);
+    tcp->sendDataByMapping(sendMessage, id);
     tcp->reciveDataByMapping(recivedMassage, 4096, id);
     location = HelpFunctions::deserializePoint(recivedMassage);
     tempStr = location->getString();
@@ -296,13 +339,17 @@ void askDriverLocation() {
     delete (location);
     delete (tempStr);
 }
-void getObsticals(Grid * grid) {
+
+void getObsticals(Grid *grid) {
     int index, obstacleNum;
     list <pstring> *seperatedListcoma, *seperatedList;
     string strInput, *tempStrx, *tempStry;
     cin >> obstacleNum;
-
-    for(index = 0; index < obstacleNum; ++index) {
+    while (obstacleNum < 0) {
+        cout << "invalid input" << endl;
+        cin >> obstacleNum;
+    }
+    for (index = 0; index < obstacleNum; ++index) {
         cin >> strInput;
         seperatedListcoma = HelpFunctions::split(&strInput, ',');
         tempStry = seperatedListcoma->back();
@@ -311,24 +358,25 @@ void getObsticals(Grid * grid) {
         seperatedListcoma->pop_back();
         int x = HelpFunctions::stringToInt(tempStrx[0]);
         int y = HelpFunctions::stringToInt(tempStry[0]);
-        grid->setObstical(x,y);
-        delete(seperatedListcoma);
+        grid->setObstical(x, y);
+        delete (seperatedListcoma);
         delete (tempStrx);
         delete (tempStry);
     }
 }
-void tellDriversToGo(int time, TaxiCenter * center, list<int> * tripsToAssignDriver,
-                     list <pthread_t> *  calcTripThread, list <pDriver> * drivers){
+
+void tellDriversToGo(int time, TaxiCenter *center, list<int> *tripsToAssignDriver,
+                     list <pthread_t> *calcTripThread, list <pDriver> *drivers) {
     pthread_t thread;
     char go[] = "go";
-    list <pthread_t> *  tempThreadList = new list<pthread_t>();
-    list<int> * tempTripsIdList = new list<int>();
-    list<pDriver> * tempDriversList = new list<pDriver>();
-    Driver * tempDriver;
-    Trip * tempTrp;
-    Tcp * tcp = Tcp::getTcp(true, 0);
+    list <pthread_t> *tempThreadList = new list<pthread_t>();
+    list<int> *tempTripsIdList = new list<int>();
+    list <pDriver> *tempDriversList = new list<pDriver>();
+    Driver *tempDriver;
+    Trip *tempTrp;
+    Tcp *tcp = Tcp::getTcp(true, 0);
     string sendMessage;
-    char * recivedMassage = new char[4096];
+    char *recivedMassage = new char[4096];
 
     // If there are trips wauting to be assigned to driver.
     while (!tripsToAssignDriver->empty()) {
@@ -337,7 +385,7 @@ void tellDriversToGo(int time, TaxiCenter * center, list<int> * tripsToAssignDri
         thread = calcTripThread->front();
 
         // If the trip was found(id != -1) and it is the time to find a driver to take the trip.
-        if(tempTrp->getID() != -1 && tempTrp->getStartTime() <= time) {
+        if (tempTrp->getID() != -1 && tempTrp->getStartTime() <= time) {
             pthread_join(thread, NULL);
             tempDriver = center->AssignTripToDriver(tripsToAssignDriver->front());
             // If there was a driver to take th trip(The driver's id is -1).
@@ -345,7 +393,7 @@ void tellDriversToGo(int time, TaxiCenter * center, list<int> * tripsToAssignDri
                 drivers->push_front(tempDriver);
                 // Send the driver the massage.
                 sendMessage = HelpFunctions::serialize(tempTrp);
-                tcp->sendDataByMapping(sendMessage,tempDriver->getID());
+                tcp->sendDataByMapping(sendMessage, tempDriver->getID());
 
                 // Take out the trip from the list of trips needed to be taken by a driver.
                 tripsToAssignDriver->pop_front();
@@ -360,7 +408,7 @@ void tellDriversToGo(int time, TaxiCenter * center, list<int> * tripsToAssignDri
             }
         } else {
             // If it is was not the time to assigned driver to the trip.
-            if(tempTrp->getStartTime() > time) {
+            if (tempTrp->getStartTime() > time) {
                 // Take the trip out of the list
                 tripsToAssignDriver->pop_front();
                 // Put the trip back in the list
@@ -368,8 +416,7 @@ void tellDriversToGo(int time, TaxiCenter * center, list<int> * tripsToAssignDri
 
                 tempThreadList->push_front(calcTripThread->front());
                 calcTripThread->pop_front();
-            }
-            else {
+            } else {
                 tripsToAssignDriver->pop_front();
                 calcTripThread->pop_front();
             }
@@ -377,12 +424,12 @@ void tellDriversToGo(int time, TaxiCenter * center, list<int> * tripsToAssignDri
     }
 
     // Return all the trips the need to be taken by a driver, to the whating list.
-    while(!tempTripsIdList->empty()) {
+    while (!tempTripsIdList->empty()) {
         tripsToAssignDriver->push_front(tempTripsIdList->front());
         tempTripsIdList->pop_front();
     }
 
-    while(!tempThreadList->empty()) {
+    while (!tempThreadList->empty()) {
         calcTripThread->push_front(tempThreadList->front());
         tempThreadList->pop_front();
     }
@@ -390,14 +437,14 @@ void tellDriversToGo(int time, TaxiCenter * center, list<int> * tripsToAssignDri
 
     // Tell the driver to go.
     sendMessage = go;
-    while(!drivers->empty()) {
+    while (!drivers->empty()) {
         tempDriver = drivers->front();
         drivers->pop_front();
-        tcp->sendDataByMapping(sendMessage,tempDriver->getID());
+        tcp->sendDataByMapping(sendMessage, tempDriver->getID());
         tcp->reciveDataByMapping(recivedMassage, 4096, tempDriver->getID());
 
         // checks if the driver reached its destination
-        if (strcmp(recivedMassage,"yes") == 0) {
+        if (strcmp(recivedMassage, "yes") == 0) {
             tempDriver->driveToDestination();
         } else {
             tempDriversList->push_front(tempDriver);
@@ -405,38 +452,39 @@ void tellDriversToGo(int time, TaxiCenter * center, list<int> * tripsToAssignDri
     }
 
 
-    while(!tempDriversList->empty()) {
+    while (!tempDriversList->empty()) {
         drivers->push_front(tempDriversList->front());
         tempDriversList->pop_front();
     }
 
-    delete(tempThreadList);
-    delete [](recivedMassage);
-    delete(tempTripsIdList);
-    delete(tempDriversList);
+    delete (tempThreadList);
+    delete[](recivedMassage);
+    delete (tempTripsIdList);
+    delete (tempDriversList);
 }
-void sayByeToDrivers(TaxiCenter * center) {
-    list<pDriver> * driversList = center->getDriver();
-    list<pDriver> * tempDriversList = new list<pDriver>();
-    Driver * tempDriver;
-    Tcp * tcp = Tcp::getTcp(true, 0);
+
+void sayByeToDrivers(TaxiCenter *center) {
+    list <pDriver> *driversList = center->getDriver();
+    list <pDriver> *tempDriversList = new list<pDriver>();
+    Driver *tempDriver;
+    Tcp *tcp = Tcp::getTcp(true, 0);
     char bye[] = "bye";
     string sendMessage;
 
 
-    while(!driversList->empty()) {
+    while (!driversList->empty()) {
         tempDriver = driversList->front();
         driversList->pop_front();
         tempDriversList->push_front(tempDriver);
 
         sendMessage = bye;
-        tcp->sendDataByMapping(sendMessage,tempDriver->getID());
+        tcp->sendDataByMapping(sendMessage, tempDriver->getID());
     }
 
-    while(!tempDriversList->empty()) {
+    while (!tempDriversList->empty()) {
         driversList->push_front(tempDriversList->front());
         tempDriversList->pop_front();
     }
 
-    delete(tempDriversList);
+    delete (tempDriversList);
 }
