@@ -29,6 +29,12 @@ struct threadArgs {
     int socketD;
 };
 
+bool isNumber(string str);
+
+int getNumber(string str);
+
+bool numberOfInputs(int numInputExpected);
+
 void *connectToClient(void *params);
 
 void addTaxiToCenter(TaxiCenter *center);
@@ -80,6 +86,10 @@ int main(int argc, char *argv[]) {
         cout << "invalid input!" << endl;
         cin >> height >> width;
     }
+    while (numberOfInputs(2) == false) {
+        cout << "invalid number of inputs" << endl;
+        cin >> height >> width;
+    }
     grid = new Grid(width, height);
     center = new TaxiCenter(grid);
     getObsticals(grid);
@@ -91,6 +101,14 @@ int main(int argc, char *argv[]) {
             case 1: {
 
                 cin >> numOfDrivers;
+                while (numberOfInputs(1) == false) {
+                    cout << "not enough variables..." << endl;
+                    cin >> numOfDrivers;
+                }
+                while(numOfDrivers<0){
+                    cout<<"invalid input"<<endl;
+                    cin>>numOfDrivers;
+                }
                 pthread_t t;
                 args = (struct threadArgs *) malloc(sizeof(struct threadArgs));
                 args->center = center;
@@ -252,14 +270,22 @@ void addTaxiToCenter(TaxiCenter *center) {
     Manufacturer mf;
 
     cin >> id >> dummy >> type >> dummy >> man >> dummy >> c;
+
+    while (numberOfInputs(4) == false) {
+        cout << "invalid number of inputs" << endl;
+        cin >> id >> dummy >> type >> dummy >> man >> dummy >> c;
+    }
+
     while (cin.bad()) {
         cout << "inserted invalid types of input" << endl;
         cin >> id >> dummy >> type >> dummy >> man >> dummy >> c;
     }
+
     while (id < 0 || type < 0 || type > 1) {
         cout << "invalid input!" << endl;
         cin >> id >> dummy >> type >> dummy >> man >> dummy >> c;
     }
+
     mf = TESLA;
     if (man == 'H') { mf = HONDA; }
     else if (man == 'T') { mf = TESLA; }
@@ -288,16 +314,26 @@ void addTripToCenter(TaxiCenter *center, list <pthread_t> *calcTripThread, list<
     cin >> id >> dummy >> startx >> dummy >> starty >> dummy >> endx >> dummy >> endy >> dummy
         >> numOfPassangers >> dummy >> taarif >> dummy >> startTime;
 
-    while (cin.bad()) {
+    while (numberOfInputs(8) == false) {
+        cout << "invalid number of inputs" << endl;
+        cin >> id >> dummy >> startx >> dummy >> starty >> dummy >> endx >> dummy >> endy >> dummy
+            >> numOfPassangers >> dummy >> taarif >> dummy >> startTime;
+    }
+
+    while (cin.bad()) {//????????????????????????????????????????????????????????????????????????????????
         cout << "inserted invalid types of input" << endl;
         cin >> id >> dummy >> startx >> dummy >> starty >> dummy >> endx >> dummy >> endy >> dummy
+            >> numOfPassangers >> dummy >> taarif >> dummy >> startTime;
     }
+
     //if inserted negative number/s
     while (id < 0 || startx < 0 || starty < 0 || endx < 0 || endy < 0 || numOfPassangers < 0 || taarif < 0 ||
            startTime < 0) {
         cout << "invalid input!" << endl;
         cin >> id >> dummy >> startx >> dummy >> starty >> dummy >> endx >> dummy >> endy >> dummy
+            >> numOfPassangers >> dummy >> taarif >> dummy >> startTime;
     }
+
     start = new Point(startx, starty);
     end = new Point(endx, endy);
 
@@ -326,6 +362,12 @@ void askDriverLocation() {
     Tcp *tcp = Tcp::getTcp(true, 0);
 
     cin >> id;
+
+    while (numberOfInputs(1) == false) {
+        cout << "invalid number of inputs" << endl;
+        cin >> id;
+    }
+
     while (id < 0) {
         cout << "invalid input" << endl;
         cin >> id;
@@ -345,6 +387,12 @@ void getObsticals(Grid *grid) {
     list <pstring> *seperatedListcoma, *seperatedList;
     string strInput, *tempStrx, *tempStry;
     cin >> obstacleNum;
+
+    while (numberOfInputs(1) == false) {
+        cout << "invalid number of inputs" << endl;
+        cin >> obstacleNum;
+    }
+
     while (obstacleNum < 0) {
         cout << "invalid input" << endl;
         cin >> obstacleNum;
@@ -487,4 +535,40 @@ void sayByeToDrivers(TaxiCenter *center) {
     }
 
     delete (tempDriversList);
+}
+
+bool isNumber(string s) {
+    char *p;
+    strtol(s.c_str(), &p, 10);
+    return *p == 0;
+}
+
+int getNumber(string s) {
+    char *p;
+    return strtol(s.c_str(), &p, 10);
+}
+
+bool numberOfInputs(int numInputExpected) {
+    string strInput;
+    int nums[numInputExpected];
+    int index;
+    do {
+        index = 0;
+        string s;
+        //gets a line from stream into string
+        getline(cin, strInput, '\n');
+        stringstream ss(strInput);
+        while (getline(ss, s, ' ')) {
+            if (isNumber(s)) {
+                if (index < numInputExpected) {
+                    nums[index] = getNumber(s);
+                }
+                index++;
+            }
+        }
+        if (index != numInputExpected) {
+            return false;
+        }
+    } while(index!=numInputExpected);
+    return true;
 }
