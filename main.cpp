@@ -39,7 +39,7 @@ void *connectToClient(void *params);
 
 void addTaxiToCenter(TaxiCenter *center);
 
-void addTripToCenter(TaxiCenter *center, list <pthread_t> *calcTripThread, list<int> *tripsToAssignDriver);
+void addTripToCenter(TaxiCenter *center, list <pthread_t> *calcTripThread, list<int> *tripsToAssignDriver,Grid *grid);
 
 void askDriverLocation();
 
@@ -87,7 +87,7 @@ int main(int argc, char *argv[]) {
         cin >> height >> width;
     }
     while (numberOfInputs(2) == false) {
-        cout << "invalid number of inputs" << endl;
+        cout << "-1" << endl;
         cin >> height >> width;
     }
     grid = new Grid(width, height);
@@ -95,12 +95,17 @@ int main(int argc, char *argv[]) {
     getObsticals(grid);
 
     cin >> task;
+
     while (continueProg) {
         switch (task) {
             // Gets a new driver.
             case 1: {
-
-                cin >> numOfDrivers;
+                //checks if the input us of correct type - in this case: int
+                while(!(cin >> numOfDrivers)){
+                    cout << "-1"<<endl;
+                    cin.clear();
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                }
                 while (numberOfInputs(1) == false) {
                     cout << "not enough variables..." << endl;
                     cin >> numOfDrivers;
@@ -124,7 +129,7 @@ int main(int argc, char *argv[]) {
             }
                 // Gets a new trip
             case 2: {
-                addTripToCenter(center, calcTripThread, tripsToAssignDriver);
+                addTripToCenter(center, calcTripThread, tripsToAssignDriver,grid);
                 break;
             }
                 // Gets a new cab
@@ -276,11 +281,6 @@ void addTaxiToCenter(TaxiCenter *center) {
         cin >> id >> dummy >> type >> dummy >> man >> dummy >> c;
     }
 
-    while (cin.bad()) {
-        cout << "inserted invalid types of input" << endl;
-        cin >> id >> dummy >> type >> dummy >> man >> dummy >> c;
-    }
-
     while (id < 0 || type < 0 || type > 1) {
         cout << "invalid input!" << endl;
         cin >> id >> dummy >> type >> dummy >> man >> dummy >> c;
@@ -302,7 +302,7 @@ void addTaxiToCenter(TaxiCenter *center) {
     center->addTaxi(id, mf, color, type);
 }
 
-void addTripToCenter(TaxiCenter *center, list <pthread_t> *calcTripThread, list<int> *tripsToAssignDriver) {
+void addTripToCenter(TaxiCenter *center, list <pthread_t> *calcTripThread, list<int> *tripsToAssignDriver,Grid *grid) {
     int id, startx, starty, endx, endy, numOfPassangers, taarif, startTime;
     char dummy;
     Point *start;
@@ -320,12 +320,6 @@ void addTripToCenter(TaxiCenter *center, list <pthread_t> *calcTripThread, list<
             >> numOfPassangers >> dummy >> taarif >> dummy >> startTime;
     }
 
-    while (cin.bad()) {//????????????????????????????????????????????????????????????????????????????????
-        cout << "inserted invalid types of input" << endl;
-        cin >> id >> dummy >> startx >> dummy >> starty >> dummy >> endx >> dummy >> endy >> dummy
-            >> numOfPassangers >> dummy >> taarif >> dummy >> startTime;
-    }
-
     //if inserted negative number/s
     while (id < 0 || startx < 0 || starty < 0 || endx < 0 || endy < 0 || numOfPassangers < 0 || taarif < 0 ||
            startTime < 0) {
@@ -333,6 +327,8 @@ void addTripToCenter(TaxiCenter *center, list <pthread_t> *calcTripThread, list<
         cin >> id >> dummy >> startx >> dummy >> starty >> dummy >> endx >> dummy >> endy >> dummy
             >> numOfPassangers >> dummy >> taarif >> dummy >> startTime;
     }
+
+    if(startx>)
 
     start = new Point(startx, starty);
     end = new Point(endx, endy);
