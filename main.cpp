@@ -36,11 +36,14 @@ void addTripToCenter(mainFlow *flow, int height, int width);
 
 void addTaxiToCenter(mainFlow *flow);
 
-void getObsticals(mainFlow *flow);
+bool getObsticals(mainFlow *flow);
+
+list <pstring> *split(string *str, char ch);
 
 int main(int argc, char *argv[]) {
     int task;
-    int height, width;
+    int height = 0;
+    int width = 0;
     int time = 0;
     int port;
     list<void *> *parameterToThread;
@@ -58,23 +61,39 @@ int main(int argc, char *argv[]) {
     port = HelpFunctions::stringToInt(argv[1]);
     tcp = Tcp::getTcp(true, port);
     tcp->initialize();
+
     string tempstr;
+    string arr;
+    list <pstring> *hw;
     // Getting the grid size and creates the grid.
-    //cin >> height >> width;
-    char *hw;
-    getline(cin, tempstr);
-    while (std::count(tempstr.begin(), tempstr.end(), ' ') != 1) {
-        //while ((numberOfInputs(2) == false) || (height < 0 || width < 0)) {
+    //cin >> arr;
+    getline(cin, arr);
+    while (arr.length()!=3){//->length() != 3) {
         cout << "-1" << endl;
-        break;// getline(cin, tempstr);
+        getline(cin, arr);
+    }
+    if ((arr.length()) == 3) {
+        if (!cin.fail()) {
+           // hw = split(arr, ' ');
+            string* s = hw->front();
+            height = stoi(*s);
+            hw->pop_front();
+            width = stoi(*s);
+            if (height < 0 || width < 0) {
+                cout << "-1" << endl;
+                cin.clear();
+                cin.ignore(256, '\n');
+                cin >> height >> width;
+            } else {
+                cout << "-1" << endl;
+                getline(cin, arr);
+            }
+        }
     }
 
-    //hw = strtok(tempstr," ");
-    //height = hw[0];
-    //width  = hw[1];
-    flow = new mainFlow(height, width);
-    getObsticals(flow);
-
+    while (getObsticals(flow)) {
+        flow = new mainFlow(height, width);
+    }
     cin >> task;
 
     while (continueProg) {
@@ -112,12 +131,10 @@ int main(int argc, char *argv[]) {
             case 4: {
                 int id;
                 string str;
-                //cin >> id;
-                getline(cin, str);
-                if (str.length() != 1) {
+                cin >> id;
+                if (cin.fail()) {
                     cout << "-1" << endl;
-                }
-                else {
+                } else {
                     //id = stoi(str);
                     if (str < "0" || str > "9") {
                         cout << "-1" << endl;
@@ -212,13 +229,13 @@ void addTripToCenter(mainFlow *flow, int height, int width) {
     delete (start);
 }
 
-void getObsticals(mainFlow *flow) {
+bool getObsticals(mainFlow *flow) {
     int index, obstacleNum;
     list <pstring> *seperatedListcoma, *seperatedList;
     string strInput, *tempStrx, *tempStry;
     cin >> obstacleNum;
 
-    while ((numberOfInputs(1) == false) || (obstacleNum < 0)) {
+    while (cin.fail() || (obstacleNum < 0)) {
         cout << "-1" << endl;
         cin >> obstacleNum;
     }
@@ -271,4 +288,27 @@ bool numberOfInputs(int numInputExpected) {
     } while (index != numInputExpected);
     //return strInput;
     return true;
+}
+
+list <pstring> *split(string *str, char ch) {
+    string *newStr = new string();
+    int index;
+    char tempChar;
+    list <pstring> *lst = new list<pstring>();
+    for (index = 0; index < str->length(); ++index) {
+        tempChar = str->at(index);
+        if (tempChar != ch) {
+            newStr->push_back(tempChar);
+        } else {
+            lst->push_front(newStr);
+            newStr = new string();
+        }
+    }
+
+    if (newStr->length() != 0) {
+        lst->push_front(newStr);
+    } else {
+        delete (newStr);
+    }
+    return lst;
 }

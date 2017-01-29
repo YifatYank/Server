@@ -2,9 +2,6 @@
 // Created by adi on 13/12/16.
 //
 
-//
-// Created by adi on 13/12/16.
-//
 
 #include <iostream>
 #include "Driver.h"
