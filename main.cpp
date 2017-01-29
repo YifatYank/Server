@@ -61,7 +61,7 @@ int main(int argc, char *argv[]) {
     int arr[2];
     // Getting the grid size and creates the grid.
     cin >> arr[0] >> arr[1];
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    //cin.ignore(numeric_limits<streamsize>::max(), '\n');
     while (cin.fail() || arr[0] < 0 || arr[1] < 0) {
         cout << "-1" << endl;
         break;
@@ -69,9 +69,9 @@ int main(int argc, char *argv[]) {
     height = arr[0];
     width = arr[1];
 
-    while (getObsticals(flow)) {
-        flow = new mainFlow(height, width);
-    }
+    // while (getObsticals(flow)) {
+    //      flow = new mainFlow(height, width);
+    // }
     cin >> task;
     while (continueProg) {
         switch (task) {
@@ -79,10 +79,9 @@ int main(int argc, char *argv[]) {
             case 1: {
                 string s;
                 //checks if the input us of correct type - in this case: int
-                // cin.ignore(numeric_limits<streamsize>::max(), '\n');
-                //getline(cin, s);
-                cin >> numOfDrivers;
-                if (cin.fail()) {//|| !StringisInt(s)) {
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                getline(cin, s);
+                if (cin.fail() || !StringisInt(s) || (count(s.begin(), s.end(), ' ') > 0)) {
                     cout << "-1" << endl;
                     break;
                 }
@@ -181,26 +180,26 @@ bool addTaxiToCenter(mainFlow *flow) {
     if (!StringisInt(params[0]) || !StringisInt(params[1])) {
         return false;
     }
-    id =  (int)*params[0];
-    type = (int)* params[1];
+    id = stoi(params[0]);
+    type = stoi(params[1]);
     if ((id < 0 || type < 0 || type > 1)) {
         cout << "-1" << endl;
         return false;
     }
 
     mf = TESLA;
-    if (params[2] == "H") { mf = HONDA; }
-    else if (params[2] == "T") { mf = TESLA; }
-    else if (params[2] == "S") { mf = SUBARO; }
-    else if (params[2] == "D") { mf = FIAT; }
+    if (*params[2] == 'H') { mf = HONDA; }
+    else if (*params[2] == 'T') { mf = TESLA; }
+    else if (*params[2] == 'S') { mf = SUBARO; }
+    else if (*params[2] == 'D') { mf = FIAT; }
     else { return false; }
 
     color = RED;
-    if (params[3] == "R") { color = RED; }
-    else if (params[3] == "B") { color = BLUE; }
-    else if (params[3] == "G") { color = GREEN; }
-    else if (params[3] == "P") { color = PINK; }
-    else if (params[3] == "W") { color = WHITE; }
+    if (*params[3] == 'R') { color = RED; }
+    else if (*params[3] == 'B') { color = BLUE; }
+    else if (*params[3] == 'G') { color = GREEN; }
+    else if (*params[3] == 'P') { color = PINK; }
+    else if (*params[3] == 'W') { color = WHITE; }
     else { return false; }
 
     flow->addTaxi(id, mf, color, type);
@@ -214,7 +213,7 @@ bool addTripToCenter(mainFlow *flow, int height, int width) {
     Driver *tempDriver;
     pthread_t thread;
     string s;
-    char *params[4];
+    char *params[8];
     int k = 0;
     char *split;
 // cin >> id >> dummy >> startx >> dummy >> starty >> dummy >> endx >> dummy >>
@@ -227,7 +226,7 @@ bool addTripToCenter(mainFlow *flow, int height, int width) {
 
     char *secondS = (char *) s.c_str();
     split = strtok(secondS, ",");
-    while (k < 7 && split != NULL) {
+    while (k < 8 && split != NULL) {
         params[k] = split;
         if (!StringisInt(params[k]) || params[k] < 0) {
             return false;
@@ -236,16 +235,20 @@ bool addTripToCenter(mainFlow *flow, int height, int width) {
         split = strtok(NULL, ",");
     }
     // Gets the trip details.
-    id = (int) *params[0];
-    startx = (int) *params[1];
-    starty = (int) *params[2];
-    endx = (int) *params[3];
-    endy = (int) *params[4];
-    numOfPassangers = (int) *params[5];
-    taarif = (int) *params[6];
-    startTime = (int) *params[7];
+    id = stoi(params[0]);
+    startx = stoi(params[1]);
+    starty = stoi(params[2]);
+    endx = stoi(params[3]);
+    endy = stoi(params[4]);
+    numOfPassangers = stoi(params[5]);
+    //taarif = (int) *params[6]-'0';
+    taarif = stoi(params[6]);
+    startTime = stoi(params[7]);
 
     if (startx > width || starty > height || endx > width || endy > height) {
+        return false;
+    }
+    if ((startx == endx) && (starty == endy)) {
         return false;
     }
 
@@ -312,5 +315,6 @@ inline bool StringisInt(const std::string &str) {
     if (str.empty() || ((!isdigit(str[0])) && (str[0] != '-') && (str[0] != '+'))) return false;
     char *temp;
     strtol(str.c_str(), &temp, 10);
+    return (*temp == 0);
 }
 
