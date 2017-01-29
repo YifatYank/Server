@@ -66,7 +66,7 @@ int main(int argc, char *argv[]) {
     while (std::count(tempstr.begin(), tempstr.end(), ' ') != 1) {
         //while ((numberOfInputs(2) == false) || (height < 0 || width < 0)) {
         cout << "-1" << endl;
-       break;// getline(cin, tempstr);
+        break;// getline(cin, tempstr);
     }
 
     //hw = strtok(tempstr," ");
@@ -111,12 +111,19 @@ int main(int argc, char *argv[]) {
                 // Gets  a driver location.
             case 4: {
                 int id;
-                cin >> id;
-                while ((numberOfInputs(1) == false) || (id < 0)) {
+                string str;
+                //cin >> id;
+                getline(cin, str);
+                if (str.length() != 1) {
                     cout << "-1" << endl;
-                    cin >> id;
                 }
-
+                else {
+                    //id = stoi(str);
+                    if (str < "0" || str > "9") {
+                        cout << "-1" << endl;
+                        cin >> id;
+                    }
+                }
                 flow->askDriverLocation(id);
                 break;
             }
