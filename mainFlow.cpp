@@ -33,7 +33,7 @@ mainFlow::~mainFlow() {
     // Todo : delete lists
 }
 
-void mainFlow::addTaxiToCenter(int id, Manufacturer mf, Color color, int type) {
+bool mainFlow::addTaxiToCenter(int id, Manufacturer mf, Color color, int type) {
     center->addTaxi(id, mf, color, type);
 }
 

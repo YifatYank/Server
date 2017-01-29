@@ -32,7 +32,7 @@ private:
 public:
     mainFlow(int height, int width);
     ~mainFlow();
-    void addTaxiToCenter(int id, Manufacturer mf, Color color, int type);
+    bool addTaxiToCenter(int id, Manufacturer mf, Color color, int type);
     Point * askDriverLocation(int id);
     void updateTime();
     void sayByeToDrivers();

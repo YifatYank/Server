@@ -25,20 +25,16 @@
 
 using namespace std;
 
+bool addTripToCenter(mainFlow *flow, int height, int width);
 
-bool isNumber(string str);
-
-int getNumber(string str);
-
-bool numberOfInputs(int numInputExpected);
-
-void addTripToCenter(mainFlow *flow, int height, int width);
-
-void addTaxiToCenter(mainFlow *flow);
+bool addTaxiToCenter(mainFlow *flow);
 
 bool getObsticals(mainFlow *flow);
 
 list <pstring> *split(string *str, char ch);
+
+inline bool StringisInt(const std::string &str);
+
 
 int main(int argc, char *argv[]) {
     int task;
@@ -62,49 +58,33 @@ int main(int argc, char *argv[]) {
     tcp = Tcp::getTcp(true, port);
     tcp->initialize();
 
-    string tempstr;
-    string arr;
-    list <pstring> *hw;
+    int arr[2];
     // Getting the grid size and creates the grid.
-    //cin >> arr;
-    getline(cin, arr);
-    while (arr.length()!=3){//->length() != 3) {
+    cin >> arr[0] >> arr[1];
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    while (cin.fail() || arr[0] < 0 || arr[1] < 0) {
         cout << "-1" << endl;
-        getline(cin, arr);
+        break;
     }
-    if ((arr.length()) == 3) {
-        if (!cin.fail()) {
-           // hw = split(arr, ' ');
-            string* s = hw->front();
-            height = stoi(*s);
-            hw->pop_front();
-            width = stoi(*s);
-            if (height < 0 || width < 0) {
-                cout << "-1" << endl;
-                cin.clear();
-                cin.ignore(256, '\n');
-                cin >> height >> width;
-            } else {
-                cout << "-1" << endl;
-                getline(cin, arr);
-            }
-        }
-    }
+    height = arr[0];
+    width = arr[1];
 
     while (getObsticals(flow)) {
         flow = new mainFlow(height, width);
     }
     cin >> task;
-
     while (continueProg) {
         switch (task) {
             // Gets a new driver.
             case 1: {
+                string s;
                 //checks if the input us of correct type - in this case: int
-                while (!(cin >> numOfDrivers) || (numberOfInputs(1) == false) || (numOfDrivers < 0)) {
+                // cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                //getline(cin, s);
+                cin >> numOfDrivers;
+                if (cin.fail()) {//|| !StringisInt(s)) {
                     cout << "-1" << endl;
-                    cin.clear();
-                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                    break;
                 }
 
                 pthread_t t;
@@ -119,28 +99,29 @@ int main(int argc, char *argv[]) {
             }
                 // Gets a new trip
             case 2: {
-                addTripToCenter(flow, height, width);
+                if (addTripToCenter(flow, height, width) == false) {
+                    cout << "-1" << endl;
+                    continueProg = true;
+                }
                 break;
             }
                 // Gets a new cab
             case 3: {
-                addTaxiToCenter(flow);
+                if (addTaxiToCenter(flow) == false) {
+                    cout << "-1" << endl;
+                    continueProg = true;
+                }
                 break;
             }
                 // Gets  a driver location.
             case 4: {
                 int id;
-                string str;
                 cin >> id;
-                if (cin.fail()) {
+                if (cin.fail()) {//|| !StringisInt(s)) {
                     cout << "-1" << endl;
-                } else {
-                    //id = stoi(str);
-                    if (str < "0" || str > "9") {
-                        cout << "-1" << endl;
-                        cin >> id;
-                    }
+                    break;
                 }
+
                 flow->askDriverLocation(id);
                 break;
             }
@@ -172,53 +153,100 @@ int main(int argc, char *argv[]) {
     return 0;
 }
 
-void addTaxiToCenter(mainFlow *flow) {
+bool addTaxiToCenter(mainFlow *flow) {
     int id, type;
     char dummy, c, man;
     Color color;
     Manufacturer mf;
+    string s;
+    char *params[4];
+    int k = 0;
+    char *split;
 
-    cin >> id >> dummy >> type >> dummy >> man >> dummy >> c;
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    // cin >> id >> dummy >> type >> dummy >> man >> dummy >> c;
+    getline(cin, s);
+    if (count(s.begin(), s.end(), ',') != 3) {
+        return false;
+    }
 
-    while ((numberOfInputs(4) == false) || (id < 0 || type < 0 || type > 1)) {
+    char *secondS = (char *) s.c_str();
+    split = strtok(secondS, ",");
+    while (k < 4 && split != NULL) {
+        params[k] = split;
+        ++k;
+        split = strtok(NULL, ",");
+    }
+
+    if (!StringisInt(params[0]) || !StringisInt(params[1])) {
+        return false;
+    }
+    id =  (int)*params[0];
+    type = (int)* params[1];
+    if ((id < 0 || type < 0 || type > 1)) {
         cout << "-1" << endl;
-        cin >> id >> dummy >> type >> dummy >> man >> dummy >> c;
+        return false;
     }
 
     mf = TESLA;
-    if (man == 'H') { mf = HONDA; }
-    else if (man == 'T') { mf = TESLA; }
-    else if (man == 'S') { mf = SUBARO; }
-    else if (man == 'D') { mf = FIAT; }
+    if (params[2] == "H") { mf = HONDA; }
+    else if (params[2] == "T") { mf = TESLA; }
+    else if (params[2] == "S") { mf = SUBARO; }
+    else if (params[2] == "D") { mf = FIAT; }
+    else { return false; }
 
     color = RED;
-    if (c == 'R') { color = RED; }
-    else if (c == 'B') { color = BLUE; }
-    else if (c == 'G') { color = GREEN; }
-    else if (c == 'P') { color = PINK; }
-    else if (c == 'W') { color = WHITE; }
+    if (params[3] == "R") { color = RED; }
+    else if (params[3] == "B") { color = BLUE; }
+    else if (params[3] == "G") { color = GREEN; }
+    else if (params[3] == "P") { color = PINK; }
+    else if (params[3] == "W") { color = WHITE; }
+    else { return false; }
 
     flow->addTaxi(id, mf, color, type);
 }
 
-void addTripToCenter(mainFlow *flow, int height, int width) {
+bool addTripToCenter(mainFlow *flow, int height, int width) {
     int id, startx, starty, endx, endy, numOfPassangers, taarif, startTime;
     char dummy;
     Point *start;
     Point *end;
     Driver *tempDriver;
     pthread_t thread;
+    string s;
+    char *params[4];
+    int k = 0;
+    char *split;
+// cin >> id >> dummy >> startx >> dummy >> starty >> dummy >> endx >> dummy >>
+// endy >> dummy>> numOfPassangers >> dummy >> taarif >> dummy >> startTime;
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    getline(cin, s);
+    if (count(s.begin(), s.end(), ',') != 7) {
+        return false;
+    }
 
+    char *secondS = (char *) s.c_str();
+    split = strtok(secondS, ",");
+    while (k < 7 && split != NULL) {
+        params[k] = split;
+        if (!StringisInt(params[k]) || params[k] < 0) {
+            return false;
+        }
+        ++k;
+        split = strtok(NULL, ",");
+    }
     // Gets the trip details.
-    cin >> id >> dummy >> startx >> dummy >> starty >> dummy >> endx >> dummy >> endy >> dummy
-        >> numOfPassangers >> dummy >> taarif >> dummy >> startTime;
+    id = (int) *params[0];
+    startx = (int) *params[1];
+    starty = (int) *params[2];
+    endx = (int) *params[3];
+    endy = (int) *params[4];
+    numOfPassangers = (int) *params[5];
+    taarif = (int) *params[6];
+    startTime = (int) *params[7];
 
-    while ((numberOfInputs(8) == false) || (startx > width || starty > height) ||
-           (id < 0 || startx < 0 || starty < 0 || endx < 0 || endy < 0 || numOfPassangers < 0 || taarif < 0 ||
-            startTime < 0)) {
-        cout << "-1" << endl;
-        cin >> id >> dummy >> startx >> dummy >> starty >> dummy >> endx >> dummy >> endy >> dummy
-            >> numOfPassangers >> dummy >> taarif >> dummy >> startTime;
+    if (startx > width || starty > height || endx > width || endy > height) {
+        return false;
     }
 
     start = new Point(startx, starty);
@@ -257,39 +285,6 @@ bool getObsticals(mainFlow *flow) {
 }
 
 
-bool isNumber(string s) {
-    char *p;
-    strtol(s.c_str(), &p, 10);
-    return *p == 0;
-}
-
-int getNumber(string s) {
-    char *p;
-    return strtol(s.c_str(), &p, 10);
-}
-
-bool numberOfInputs(int numInputExpected) {
-    string strInput;
-    int index = 0;
-    do {
-        //index = 0;
-        string s;
-        //gets a line from stream into string
-        getline(cin, strInput, '\n');
-        stringstream ss(strInput);
-        while (getline(ss, s, ' ')) {
-            if (isNumber(s)) {
-                index++;
-            }
-        }
-        if (index != numInputExpected) {
-            return false;
-        }
-    } while (index != numInputExpected);
-    //return strInput;
-    return true;
-}
-
 list <pstring> *split(string *str, char ch) {
     string *newStr = new string();
     int index;
@@ -312,3 +307,10 @@ list <pstring> *split(string *str, char ch) {
     }
     return lst;
 }
+
+inline bool StringisInt(const std::string &str) {
+    if (str.empty() || ((!isdigit(str[0])) && (str[0] != '-') && (str[0] != '+'))) return false;
+    char *temp;
+    strtol(str.c_str(), &temp, 10);
+}
+
