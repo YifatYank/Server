@@ -58,15 +58,20 @@ int main(int argc, char *argv[]) {
     port = HelpFunctions::stringToInt(argv[1]);
     tcp = Tcp::getTcp(true, port);
     tcp->initialize();
-
+    string tempstr;
     // Getting the grid size and creates the grid.
-    cin >> height >> width;
-
-    while ((numberOfInputs(2) == false) || (height < 0 || width < 0)) {
+    //cin >> height >> width;
+    char *hw;
+    getline(cin, tempstr);
+    while (std::count(tempstr.begin(), tempstr.end(), ' ') != 1) {
+        //while ((numberOfInputs(2) == false) || (height < 0 || width < 0)) {
         cout << "-1" << endl;
-        cin >> height >> width;
+       break;// getline(cin, tempstr);
     }
 
+    //hw = strtok(tempstr," ");
+    //height = hw[0];
+    //width  = hw[1];
     flow = new mainFlow(height, width);
     getObsticals(flow);
 
@@ -206,7 +211,7 @@ void getObsticals(mainFlow *flow) {
     string strInput, *tempStrx, *tempStry;
     cin >> obstacleNum;
 
-    while ((numberOfInputs(1) == false) || (obstacleNum < 0)){
+    while ((numberOfInputs(1) == false) || (obstacleNum < 0)) {
         cout << "-1" << endl;
         cin >> obstacleNum;
     }
@@ -240,21 +245,16 @@ int getNumber(string s) {
 }
 
 bool numberOfInputs(int numInputExpected) {
-    // To do - checks if works.
     string strInput;
-    int nums[numInputExpected];
-    int index;
+    int index = 0;
     do {
-        index = 0;
+        //index = 0;
         string s;
         //gets a line from stream into string
         getline(cin, strInput, '\n');
         stringstream ss(strInput);
         while (getline(ss, s, ' ')) {
             if (isNumber(s)) {
-                if (index < numInputExpected) {
-                    nums[index] = getNumber(s);
-                }
                 index++;
             }
         }
@@ -262,5 +262,6 @@ bool numberOfInputs(int numInputExpected) {
             return false;
         }
     } while (index != numInputExpected);
+    //return strInput;
     return true;
 }
