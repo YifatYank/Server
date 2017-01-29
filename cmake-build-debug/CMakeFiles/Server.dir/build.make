@@ -393,6 +393,126 @@ CMakeFiles/Server.dir/Socket.cpp.o.provides: CMakeFiles/Server.dir/Socket.cpp.o.
 CMakeFiles/Server.dir/Socket.cpp.o.provides.build: CMakeFiles/Server.dir/Socket.cpp.o
 
 
+CMakeFiles/Server.dir/Tcp.cpp.o: CMakeFiles/Server.dir/flags.make
+CMakeFiles/Server.dir/Tcp.cpp.o: ../Tcp.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/adi/ClionProjects/Server/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/Server.dir/Tcp.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Server.dir/Tcp.cpp.o -c /home/adi/ClionProjects/Server/Tcp.cpp
+
+CMakeFiles/Server.dir/Tcp.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Server.dir/Tcp.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/adi/ClionProjects/Server/Tcp.cpp > CMakeFiles/Server.dir/Tcp.cpp.i
+
+CMakeFiles/Server.dir/Tcp.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Server.dir/Tcp.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/adi/ClionProjects/Server/Tcp.cpp -o CMakeFiles/Server.dir/Tcp.cpp.s
+
+CMakeFiles/Server.dir/Tcp.cpp.o.requires:
+
+.PHONY : CMakeFiles/Server.dir/Tcp.cpp.o.requires
+
+CMakeFiles/Server.dir/Tcp.cpp.o.provides: CMakeFiles/Server.dir/Tcp.cpp.o.requires
+	$(MAKE) -f CMakeFiles/Server.dir/build.make CMakeFiles/Server.dir/Tcp.cpp.o.provides.build
+.PHONY : CMakeFiles/Server.dir/Tcp.cpp.o.provides
+
+CMakeFiles/Server.dir/Tcp.cpp.o.provides.build: CMakeFiles/Server.dir/Tcp.cpp.o
+
+
+CMakeFiles/Server.dir/mainClient.cpp.o: CMakeFiles/Server.dir/flags.make
+CMakeFiles/Server.dir/mainClient.cpp.o: ../mainClient.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/adi/ClionProjects/Server/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/Server.dir/mainClient.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Server.dir/mainClient.cpp.o -c /home/adi/ClionProjects/Server/mainClient.cpp
+
+CMakeFiles/Server.dir/mainClient.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Server.dir/mainClient.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/adi/ClionProjects/Server/mainClient.cpp > CMakeFiles/Server.dir/mainClient.cpp.i
+
+CMakeFiles/Server.dir/mainClient.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Server.dir/mainClient.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/adi/ClionProjects/Server/mainClient.cpp -o CMakeFiles/Server.dir/mainClient.cpp.s
+
+CMakeFiles/Server.dir/mainClient.cpp.o.requires:
+
+.PHONY : CMakeFiles/Server.dir/mainClient.cpp.o.requires
+
+CMakeFiles/Server.dir/mainClient.cpp.o.provides: CMakeFiles/Server.dir/mainClient.cpp.o.requires
+	$(MAKE) -f CMakeFiles/Server.dir/build.make CMakeFiles/Server.dir/mainClient.cpp.o.provides.build
+.PHONY : CMakeFiles/Server.dir/mainClient.cpp.o.provides
+
+CMakeFiles/Server.dir/mainClient.cpp.o.provides.build: CMakeFiles/Server.dir/mainClient.cpp.o
+
+
+CMakeFiles/Server.dir/HelpFunctions.cpp.o: CMakeFiles/Server.dir/flags.make
+CMakeFiles/Server.dir/HelpFunctions.cpp.o: ../HelpFunctions.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/adi/ClionProjects/Server/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object CMakeFiles/Server.dir/HelpFunctions.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Server.dir/HelpFunctions.cpp.o -c /home/adi/ClionProjects/Server/HelpFunctions.cpp
+
+CMakeFiles/Server.dir/HelpFunctions.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Server.dir/HelpFunctions.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/adi/ClionProjects/Server/HelpFunctions.cpp > CMakeFiles/Server.dir/HelpFunctions.cpp.i
+
+CMakeFiles/Server.dir/HelpFunctions.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Server.dir/HelpFunctions.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/adi/ClionProjects/Server/HelpFunctions.cpp -o CMakeFiles/Server.dir/HelpFunctions.cpp.s
+
+CMakeFiles/Server.dir/HelpFunctions.cpp.o.requires:
+
+.PHONY : CMakeFiles/Server.dir/HelpFunctions.cpp.o.requires
+
+CMakeFiles/Server.dir/HelpFunctions.cpp.o.provides: CMakeFiles/Server.dir/HelpFunctions.cpp.o.requires
+	$(MAKE) -f CMakeFiles/Server.dir/build.make CMakeFiles/Server.dir/HelpFunctions.cpp.o.provides.build
+.PHONY : CMakeFiles/Server.dir/HelpFunctions.cpp.o.provides
+
+CMakeFiles/Server.dir/HelpFunctions.cpp.o.provides.build: CMakeFiles/Server.dir/HelpFunctions.cpp.o
+
+
+CMakeFiles/Server.dir/calcPathTask.cpp.o: CMakeFiles/Server.dir/flags.make
+CMakeFiles/Server.dir/calcPathTask.cpp.o: ../calcPathTask.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/adi/ClionProjects/Server/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building CXX object CMakeFiles/Server.dir/calcPathTask.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Server.dir/calcPathTask.cpp.o -c /home/adi/ClionProjects/Server/calcPathTask.cpp
+
+CMakeFiles/Server.dir/calcPathTask.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Server.dir/calcPathTask.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/adi/ClionProjects/Server/calcPathTask.cpp > CMakeFiles/Server.dir/calcPathTask.cpp.i
+
+CMakeFiles/Server.dir/calcPathTask.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Server.dir/calcPathTask.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/adi/ClionProjects/Server/calcPathTask.cpp -o CMakeFiles/Server.dir/calcPathTask.cpp.s
+
+CMakeFiles/Server.dir/calcPathTask.cpp.o.requires:
+
+.PHONY : CMakeFiles/Server.dir/calcPathTask.cpp.o.requires
+
+CMakeFiles/Server.dir/calcPathTask.cpp.o.provides: CMakeFiles/Server.dir/calcPathTask.cpp.o.requires
+	$(MAKE) -f CMakeFiles/Server.dir/build.make CMakeFiles/Server.dir/calcPathTask.cpp.o.provides.build
+.PHONY : CMakeFiles/Server.dir/calcPathTask.cpp.o.provides
+
+CMakeFiles/Server.dir/calcPathTask.cpp.o.provides.build: CMakeFiles/Server.dir/calcPathTask.cpp.o
+
+
+CMakeFiles/Server.dir/mainFlow.cpp.o: CMakeFiles/Server.dir/flags.make
+CMakeFiles/Server.dir/mainFlow.cpp.o: ../mainFlow.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/adi/ClionProjects/Server/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building CXX object CMakeFiles/Server.dir/mainFlow.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Server.dir/mainFlow.cpp.o -c /home/adi/ClionProjects/Server/mainFlow.cpp
+
+CMakeFiles/Server.dir/mainFlow.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Server.dir/mainFlow.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/adi/ClionProjects/Server/mainFlow.cpp > CMakeFiles/Server.dir/mainFlow.cpp.i
+
+CMakeFiles/Server.dir/mainFlow.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Server.dir/mainFlow.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/adi/ClionProjects/Server/mainFlow.cpp -o CMakeFiles/Server.dir/mainFlow.cpp.s
+
+CMakeFiles/Server.dir/mainFlow.cpp.o.requires:
+
+.PHONY : CMakeFiles/Server.dir/mainFlow.cpp.o.requires
+
+CMakeFiles/Server.dir/mainFlow.cpp.o.provides: CMakeFiles/Server.dir/mainFlow.cpp.o.requires
+	$(MAKE) -f CMakeFiles/Server.dir/build.make CMakeFiles/Server.dir/mainFlow.cpp.o.provides.build
+.PHONY : CMakeFiles/Server.dir/mainFlow.cpp.o.provides
+
+CMakeFiles/Server.dir/mainFlow.cpp.o.provides.build: CMakeFiles/Server.dir/mainFlow.cpp.o
+
+
 # Object files for target Server
 Server_OBJECTS = \
 "CMakeFiles/Server.dir/main.cpp.o" \
@@ -408,7 +528,12 @@ Server_OBJECTS = \
 "CMakeFiles/Server.dir/Standart.cpp.o" \
 "CMakeFiles/Server.dir/TaxiCenter.cpp.o" \
 "CMakeFiles/Server.dir/Trip.cpp.o" \
-"CMakeFiles/Server.dir/Socket.cpp.o"
+"CMakeFiles/Server.dir/Socket.cpp.o" \
+"CMakeFiles/Server.dir/Tcp.cpp.o" \
+"CMakeFiles/Server.dir/mainClient.cpp.o" \
+"CMakeFiles/Server.dir/HelpFunctions.cpp.o" \
+"CMakeFiles/Server.dir/calcPathTask.cpp.o" \
+"CMakeFiles/Server.dir/mainFlow.cpp.o"
 
 # External object files for target Server
 Server_EXTERNAL_OBJECTS =
@@ -427,11 +552,16 @@ Server: CMakeFiles/Server.dir/Standart.cpp.o
 Server: CMakeFiles/Server.dir/TaxiCenter.cpp.o
 Server: CMakeFiles/Server.dir/Trip.cpp.o
 Server: CMakeFiles/Server.dir/Socket.cpp.o
+Server: CMakeFiles/Server.dir/Tcp.cpp.o
+Server: CMakeFiles/Server.dir/mainClient.cpp.o
+Server: CMakeFiles/Server.dir/HelpFunctions.cpp.o
+Server: CMakeFiles/Server.dir/calcPathTask.cpp.o
+Server: CMakeFiles/Server.dir/mainFlow.cpp.o
 Server: CMakeFiles/Server.dir/build.make
 Server: /usr/lib/x86_64-linux-gnu/libboost_serialization.so
 Server: /usr/lib/x86_64-linux-gnu/libboost_system.so
 Server: CMakeFiles/Server.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/adi/ClionProjects/Server/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Linking CXX executable Server"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/adi/ClionProjects/Server/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Linking CXX executable Server"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/Server.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -453,6 +583,11 @@ CMakeFiles/Server.dir/requires: CMakeFiles/Server.dir/Standart.cpp.o.requires
 CMakeFiles/Server.dir/requires: CMakeFiles/Server.dir/TaxiCenter.cpp.o.requires
 CMakeFiles/Server.dir/requires: CMakeFiles/Server.dir/Trip.cpp.o.requires
 CMakeFiles/Server.dir/requires: CMakeFiles/Server.dir/Socket.cpp.o.requires
+CMakeFiles/Server.dir/requires: CMakeFiles/Server.dir/Tcp.cpp.o.requires
+CMakeFiles/Server.dir/requires: CMakeFiles/Server.dir/mainClient.cpp.o.requires
+CMakeFiles/Server.dir/requires: CMakeFiles/Server.dir/HelpFunctions.cpp.o.requires
+CMakeFiles/Server.dir/requires: CMakeFiles/Server.dir/calcPathTask.cpp.o.requires
+CMakeFiles/Server.dir/requires: CMakeFiles/Server.dir/mainFlow.cpp.o.requires
 
 .PHONY : CMakeFiles/Server.dir/requires
 

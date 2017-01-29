@@ -120,6 +120,12 @@
 		<Unit filename="/home/adi/ClionProjects/Server/GridNode.h">
 			<Option target="Server"/>
 		</Unit>
+		<Unit filename="/home/adi/ClionProjects/Server/HelpFunctions.cpp">
+			<Option target="Server"/>
+		</Unit>
+		<Unit filename="/home/adi/ClionProjects/Server/HelpFunctions.h">
+			<Option target="Server"/>
+		</Unit>
 		<Unit filename="/home/adi/ClionProjects/Server/Luxury.cpp">
 			<Option target="Server"/>
 		</Unit>
@@ -162,13 +168,34 @@
 		<Unit filename="/home/adi/ClionProjects/Server/TaxiCenter.h">
 			<Option target="Server"/>
 		</Unit>
+		<Unit filename="/home/adi/ClionProjects/Server/Tcp.cpp">
+			<Option target="Server"/>
+		</Unit>
+		<Unit filename="/home/adi/ClionProjects/Server/Tcp.h">
+			<Option target="Server"/>
+		</Unit>
 		<Unit filename="/home/adi/ClionProjects/Server/Trip.cpp">
 			<Option target="Server"/>
 		</Unit>
 		<Unit filename="/home/adi/ClionProjects/Server/Trip.h">
 			<Option target="Server"/>
 		</Unit>
+		<Unit filename="/home/adi/ClionProjects/Server/calcPathTask.cpp">
+			<Option target="Server"/>
+		</Unit>
+		<Unit filename="/home/adi/ClionProjects/Server/calcPathTask.h">
+			<Option target="Server"/>
+		</Unit>
 		<Unit filename="/home/adi/ClionProjects/Server/main.cpp">
+			<Option target="Server"/>
+		</Unit>
+		<Unit filename="/home/adi/ClionProjects/Server/mainClient.cpp">
+			<Option target="Server"/>
+		</Unit>
+		<Unit filename="/home/adi/ClionProjects/Server/mainFlow.cpp">
+			<Option target="Server"/>
+		</Unit>
+		<Unit filename="/home/adi/ClionProjects/Server/mainFlow.h">
 			<Option target="Server"/>
 		</Unit>
 		<Unit filename="/home/adi/ClionProjects/Server/CMakeLists.txt">

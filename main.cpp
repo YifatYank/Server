@@ -32,7 +32,7 @@ int getNumber(string str);
 
 bool numberOfInputs(int numInputExpected);
 
-void addTripToCenter(mainFlow * flow);
+void addTripToCenter(mainFlow * flow,int height,int width);
 
 void addTaxiToCenter(mainFlow * flow);
 
@@ -105,7 +105,7 @@ int main(int argc, char *argv[]) {
             }
                 // Gets a new trip
             case 2: {
-                addTripToCenter(flow);
+                addTripToCenter(flow,height,width);
                 break;
             }
                 // Gets a new cab
@@ -143,6 +143,7 @@ int main(int argc, char *argv[]) {
                 break;
             }
             default: {
+                cout<<"-1"<<endl;
                 continueProg = true;
                 break;
             }
@@ -192,7 +193,7 @@ void addTaxiToCenter(mainFlow * flow) {
     flow->addTaxi(id, mf, color, type);
 }
 
-void addTripToCenter(mainFlow * flow) {
+void addTripToCenter(mainFlow * flow,int height,int width) {
     int id, startx, starty, endx, endy, numOfPassangers, taarif, startTime;
     char dummy;
     Point *start;
@@ -218,7 +219,10 @@ void addTripToCenter(mainFlow * flow) {
             >> numOfPassangers >> dummy >> taarif >> dummy >> startTime;
     }
 
-//    if(startx>)
+    if(startx>width||starty>height){
+        cout<<"-1"<<endl;
+    }
+
 
 
     start = new Point(startx, starty);

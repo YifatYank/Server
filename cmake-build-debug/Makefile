@@ -258,6 +258,33 @@ GridNode.cpp.s:
 	$(MAKE) -f CMakeFiles/Server.dir/build.make CMakeFiles/Server.dir/GridNode.cpp.s
 .PHONY : GridNode.cpp.s
 
+HelpFunctions.o: HelpFunctions.cpp.o
+
+.PHONY : HelpFunctions.o
+
+# target to build an object file
+HelpFunctions.cpp.o:
+	$(MAKE) -f CMakeFiles/Server.dir/build.make CMakeFiles/Server.dir/HelpFunctions.cpp.o
+.PHONY : HelpFunctions.cpp.o
+
+HelpFunctions.i: HelpFunctions.cpp.i
+
+.PHONY : HelpFunctions.i
+
+# target to preprocess a source file
+HelpFunctions.cpp.i:
+	$(MAKE) -f CMakeFiles/Server.dir/build.make CMakeFiles/Server.dir/HelpFunctions.cpp.i
+.PHONY : HelpFunctions.cpp.i
+
+HelpFunctions.s: HelpFunctions.cpp.s
+
+.PHONY : HelpFunctions.s
+
+# target to generate assembly for a file
+HelpFunctions.cpp.s:
+	$(MAKE) -f CMakeFiles/Server.dir/build.make CMakeFiles/Server.dir/HelpFunctions.cpp.s
+.PHONY : HelpFunctions.cpp.s
+
 Luxury.o: Luxury.cpp.o
 
 .PHONY : Luxury.o
@@ -447,6 +474,33 @@ TaxiCenter.cpp.s:
 	$(MAKE) -f CMakeFiles/Server.dir/build.make CMakeFiles/Server.dir/TaxiCenter.cpp.s
 .PHONY : TaxiCenter.cpp.s
 
+Tcp.o: Tcp.cpp.o
+
+.PHONY : Tcp.o
+
+# target to build an object file
+Tcp.cpp.o:
+	$(MAKE) -f CMakeFiles/Server.dir/build.make CMakeFiles/Server.dir/Tcp.cpp.o
+.PHONY : Tcp.cpp.o
+
+Tcp.i: Tcp.cpp.i
+
+.PHONY : Tcp.i
+
+# target to preprocess a source file
+Tcp.cpp.i:
+	$(MAKE) -f CMakeFiles/Server.dir/build.make CMakeFiles/Server.dir/Tcp.cpp.i
+.PHONY : Tcp.cpp.i
+
+Tcp.s: Tcp.cpp.s
+
+.PHONY : Tcp.s
+
+# target to generate assembly for a file
+Tcp.cpp.s:
+	$(MAKE) -f CMakeFiles/Server.dir/build.make CMakeFiles/Server.dir/Tcp.cpp.s
+.PHONY : Tcp.cpp.s
+
 Trip.o: Trip.cpp.o
 
 .PHONY : Trip.o
@@ -473,6 +527,33 @@ Trip.s: Trip.cpp.s
 Trip.cpp.s:
 	$(MAKE) -f CMakeFiles/Server.dir/build.make CMakeFiles/Server.dir/Trip.cpp.s
 .PHONY : Trip.cpp.s
+
+calcPathTask.o: calcPathTask.cpp.o
+
+.PHONY : calcPathTask.o
+
+# target to build an object file
+calcPathTask.cpp.o:
+	$(MAKE) -f CMakeFiles/Server.dir/build.make CMakeFiles/Server.dir/calcPathTask.cpp.o
+.PHONY : calcPathTask.cpp.o
+
+calcPathTask.i: calcPathTask.cpp.i
+
+.PHONY : calcPathTask.i
+
+# target to preprocess a source file
+calcPathTask.cpp.i:
+	$(MAKE) -f CMakeFiles/Server.dir/build.make CMakeFiles/Server.dir/calcPathTask.cpp.i
+.PHONY : calcPathTask.cpp.i
+
+calcPathTask.s: calcPathTask.cpp.s
+
+.PHONY : calcPathTask.s
+
+# target to generate assembly for a file
+calcPathTask.cpp.s:
+	$(MAKE) -f CMakeFiles/Server.dir/build.make CMakeFiles/Server.dir/calcPathTask.cpp.s
+.PHONY : calcPathTask.cpp.s
 
 main.o: main.cpp.o
 
@@ -501,6 +582,60 @@ main.cpp.s:
 	$(MAKE) -f CMakeFiles/Server.dir/build.make CMakeFiles/Server.dir/main.cpp.s
 .PHONY : main.cpp.s
 
+mainClient.o: mainClient.cpp.o
+
+.PHONY : mainClient.o
+
+# target to build an object file
+mainClient.cpp.o:
+	$(MAKE) -f CMakeFiles/Server.dir/build.make CMakeFiles/Server.dir/mainClient.cpp.o
+.PHONY : mainClient.cpp.o
+
+mainClient.i: mainClient.cpp.i
+
+.PHONY : mainClient.i
+
+# target to preprocess a source file
+mainClient.cpp.i:
+	$(MAKE) -f CMakeFiles/Server.dir/build.make CMakeFiles/Server.dir/mainClient.cpp.i
+.PHONY : mainClient.cpp.i
+
+mainClient.s: mainClient.cpp.s
+
+.PHONY : mainClient.s
+
+# target to generate assembly for a file
+mainClient.cpp.s:
+	$(MAKE) -f CMakeFiles/Server.dir/build.make CMakeFiles/Server.dir/mainClient.cpp.s
+.PHONY : mainClient.cpp.s
+
+mainFlow.o: mainFlow.cpp.o
+
+.PHONY : mainFlow.o
+
+# target to build an object file
+mainFlow.cpp.o:
+	$(MAKE) -f CMakeFiles/Server.dir/build.make CMakeFiles/Server.dir/mainFlow.cpp.o
+.PHONY : mainFlow.cpp.o
+
+mainFlow.i: mainFlow.cpp.i
+
+.PHONY : mainFlow.i
+
+# target to preprocess a source file
+mainFlow.cpp.i:
+	$(MAKE) -f CMakeFiles/Server.dir/build.make CMakeFiles/Server.dir/mainFlow.cpp.i
+.PHONY : mainFlow.cpp.i
+
+mainFlow.s: mainFlow.cpp.s
+
+.PHONY : mainFlow.s
+
+# target to generate assembly for a file
+mainFlow.cpp.s:
+	$(MAKE) -f CMakeFiles/Server.dir/build.make CMakeFiles/Server.dir/mainFlow.cpp.s
+.PHONY : mainFlow.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -525,6 +660,9 @@ help:
 	@echo "... GridNode.o"
 	@echo "... GridNode.i"
 	@echo "... GridNode.s"
+	@echo "... HelpFunctions.o"
+	@echo "... HelpFunctions.i"
+	@echo "... HelpFunctions.s"
 	@echo "... Luxury.o"
 	@echo "... Luxury.i"
 	@echo "... Luxury.s"
@@ -546,12 +684,24 @@ help:
 	@echo "... TaxiCenter.o"
 	@echo "... TaxiCenter.i"
 	@echo "... TaxiCenter.s"
+	@echo "... Tcp.o"
+	@echo "... Tcp.i"
+	@echo "... Tcp.s"
 	@echo "... Trip.o"
 	@echo "... Trip.i"
 	@echo "... Trip.s"
+	@echo "... calcPathTask.o"
+	@echo "... calcPathTask.i"
+	@echo "... calcPathTask.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
+	@echo "... mainClient.o"
+	@echo "... mainClient.i"
+	@echo "... mainClient.s"
+	@echo "... mainFlow.o"
+	@echo "... mainFlow.i"
+	@echo "... mainFlow.s"
 .PHONY : help
 
 

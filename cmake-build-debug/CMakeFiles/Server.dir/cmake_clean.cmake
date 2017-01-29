@@ -13,6 +13,11 @@ file(REMOVE_RECURSE
   "CMakeFiles/Server.dir/TaxiCenter.cpp.o"
   "CMakeFiles/Server.dir/Trip.cpp.o"
   "CMakeFiles/Server.dir/Socket.cpp.o"
+  "CMakeFiles/Server.dir/Tcp.cpp.o"
+  "CMakeFiles/Server.dir/mainClient.cpp.o"
+  "CMakeFiles/Server.dir/HelpFunctions.cpp.o"
+  "CMakeFiles/Server.dir/calcPathTask.cpp.o"
+  "CMakeFiles/Server.dir/mainFlow.cpp.o"
   "Server.pdb"
   "Server"
 )

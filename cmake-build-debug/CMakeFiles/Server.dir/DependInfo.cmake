@@ -9,6 +9,7 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "/home/adi/ClionProjects/Server/Driver.cpp" "/home/adi/ClionProjects/Server/cmake-build-debug/CMakeFiles/Server.dir/Driver.cpp.o"
   "/home/adi/ClionProjects/Server/Grid.cpp" "/home/adi/ClionProjects/Server/cmake-build-debug/CMakeFiles/Server.dir/Grid.cpp.o"
   "/home/adi/ClionProjects/Server/GridNode.cpp" "/home/adi/ClionProjects/Server/cmake-build-debug/CMakeFiles/Server.dir/GridNode.cpp.o"
+  "/home/adi/ClionProjects/Server/HelpFunctions.cpp" "/home/adi/ClionProjects/Server/cmake-build-debug/CMakeFiles/Server.dir/HelpFunctions.cpp.o"
   "/home/adi/ClionProjects/Server/Luxury.cpp" "/home/adi/ClionProjects/Server/cmake-build-debug/CMakeFiles/Server.dir/Luxury.cpp.o"
   "/home/adi/ClionProjects/Server/Passenger.cpp" "/home/adi/ClionProjects/Server/cmake-build-debug/CMakeFiles/Server.dir/Passenger.cpp.o"
   "/home/adi/ClionProjects/Server/Point.cpp" "/home/adi/ClionProjects/Server/cmake-build-debug/CMakeFiles/Server.dir/Point.cpp.o"
@@ -16,8 +17,12 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "/home/adi/ClionProjects/Server/Socket.cpp" "/home/adi/ClionProjects/Server/cmake-build-debug/CMakeFiles/Server.dir/Socket.cpp.o"
   "/home/adi/ClionProjects/Server/Standart.cpp" "/home/adi/ClionProjects/Server/cmake-build-debug/CMakeFiles/Server.dir/Standart.cpp.o"
   "/home/adi/ClionProjects/Server/TaxiCenter.cpp" "/home/adi/ClionProjects/Server/cmake-build-debug/CMakeFiles/Server.dir/TaxiCenter.cpp.o"
+  "/home/adi/ClionProjects/Server/Tcp.cpp" "/home/adi/ClionProjects/Server/cmake-build-debug/CMakeFiles/Server.dir/Tcp.cpp.o"
   "/home/adi/ClionProjects/Server/Trip.cpp" "/home/adi/ClionProjects/Server/cmake-build-debug/CMakeFiles/Server.dir/Trip.cpp.o"
+  "/home/adi/ClionProjects/Server/calcPathTask.cpp" "/home/adi/ClionProjects/Server/cmake-build-debug/CMakeFiles/Server.dir/calcPathTask.cpp.o"
   "/home/adi/ClionProjects/Server/main.cpp" "/home/adi/ClionProjects/Server/cmake-build-debug/CMakeFiles/Server.dir/main.cpp.o"
+  "/home/adi/ClionProjects/Server/mainClient.cpp" "/home/adi/ClionProjects/Server/cmake-build-debug/CMakeFiles/Server.dir/mainClient.cpp.o"
+  "/home/adi/ClionProjects/Server/mainFlow.cpp" "/home/adi/ClionProjects/Server/cmake-build-debug/CMakeFiles/Server.dir/mainFlow.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
