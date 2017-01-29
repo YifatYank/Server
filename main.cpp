@@ -32,11 +32,11 @@ int getNumber(string str);
 
 bool numberOfInputs(int numInputExpected);
 
-void addTripToCenter(mainFlow * flow,int height,int width);
+void addTripToCenter(mainFlow *flow, int height, int width);
 
-void addTaxiToCenter(mainFlow * flow);
+void addTaxiToCenter(mainFlow *flow);
 
-void getObsticals(mainFlow * flow);
+void getObsticals(mainFlow *flow);
 
 int main(int argc, char *argv[]) {
     int task;
@@ -48,7 +48,7 @@ int main(int argc, char *argv[]) {
     Tcp *tcp;
     struct threadArgs *args;
     int numOfDrivers;
-    mainFlow * flow;
+    mainFlow *flow;
 
     if (argc != 2) {
         return 0;
@@ -61,11 +61,8 @@ int main(int argc, char *argv[]) {
 
     // Getting the grid size and creates the grid.
     cin >> height >> width;
-    while (height < 0 || width < 0) {
-        cout << "invalid input!" << endl;
-        cin >> height >> width;
-    }
-    while (numberOfInputs(2) == false) {
+
+    while ((numberOfInputs(2) == false) || (height < 0 || width < 0)) {
         cout << "-1" << endl;
         cin >> height >> width;
     }
@@ -80,19 +77,12 @@ int main(int argc, char *argv[]) {
             // Gets a new driver.
             case 1: {
                 //checks if the input us of correct type - in this case: int
-                while(!(cin >> numOfDrivers)){
-                    cout << "-1"<<endl;
+                while (!(cin >> numOfDrivers) || (numberOfInputs(1) == false) || (numOfDrivers < 0)) {
+                    cout << "-1" << endl;
                     cin.clear();
                     cin.ignore(numeric_limits<streamsize>::max(), '\n');
                 }
-                while (numberOfInputs(1) == false) {
-                    cout << "not enough variables..." << endl;
-                    cin >> numOfDrivers;
-                }
-                while(numOfDrivers<0){
-                    cout<<"invalid input"<<endl;
-                    cin>>numOfDrivers;
-                }
+
                 pthread_t t;
                 args = (struct threadArgs *) malloc(sizeof(struct threadArgs));
                 args->flow = flow;
@@ -105,7 +95,7 @@ int main(int argc, char *argv[]) {
             }
                 // Gets a new trip
             case 2: {
-                addTripToCenter(flow,height,width);
+                addTripToCenter(flow, height, width);
                 break;
             }
                 // Gets a new cab
@@ -117,14 +107,8 @@ int main(int argc, char *argv[]) {
             case 4: {
                 int id;
                 cin >> id;
-
-                while (numberOfInputs(1) == false) {
-                    cout << "invalid number of inputs" << endl;
-                    cin >> id;
-                }
-
-                while (id < 0) {
-                    cout << "invalid input" << endl;
+                while ((numberOfInputs(1) == false) || (id < 0)) {
+                    cout << "-1" << endl;
                     cin >> id;
                 }
 
@@ -132,7 +116,7 @@ int main(int argc, char *argv[]) {
                 break;
             }
             case 9: {
-            flow->updateTime();
+                flow->updateTime();
                 break;
             }
             case 7: {
@@ -143,7 +127,7 @@ int main(int argc, char *argv[]) {
                 break;
             }
             default: {
-                cout<<"-1"<<endl;
+                cout << "-1" << endl;
                 continueProg = true;
                 break;
             }
@@ -159,7 +143,7 @@ int main(int argc, char *argv[]) {
     return 0;
 }
 
-void addTaxiToCenter(mainFlow * flow) {
+void addTaxiToCenter(mainFlow *flow) {
     int id, type;
     char dummy, c, man;
     Color color;
@@ -167,13 +151,8 @@ void addTaxiToCenter(mainFlow * flow) {
 
     cin >> id >> dummy >> type >> dummy >> man >> dummy >> c;
 
-    while (numberOfInputs(4) == false) {
-        cout << "invalid number of inputs" << endl;
-        cin >> id >> dummy >> type >> dummy >> man >> dummy >> c;
-    }
-
-    while (id < 0 || type < 0 || type > 1) {
-        cout << "invalid input!" << endl;
+    while ((numberOfInputs(4) == false) || (id < 0 || type < 0 || type > 1) {
+        cout << "-1" << endl;
         cin >> id >> dummy >> type >> dummy >> man >> dummy >> c;
     }
 
@@ -193,7 +172,7 @@ void addTaxiToCenter(mainFlow * flow) {
     flow->addTaxi(id, mf, color, type);
 }
 
-void addTripToCenter(mainFlow * flow,int height,int width) {
+void addTripToCenter(mainFlow *flow, int height, int width) {
     int id, startx, starty, endx, endy, numOfPassangers, taarif, startTime;
     char dummy;
     Point *start;
@@ -205,49 +184,33 @@ void addTripToCenter(mainFlow * flow,int height,int width) {
     cin >> id >> dummy >> startx >> dummy >> starty >> dummy >> endx >> dummy >> endy >> dummy
         >> numOfPassangers >> dummy >> taarif >> dummy >> startTime;
 
-    while (numberOfInputs(8) == false) {
-        cout << "invalid number of inputs" << endl;
+    while ((numberOfInputs(8) == false) || (startx > width || starty > height) ||
+           (id < 0 || startx < 0 || starty < 0 || endx < 0 || endy < 0 || numOfPassangers < 0 || taarif < 0 ||
+            startTime < 0)) {
+        cout << "-1" << endl;
         cin >> id >> dummy >> startx >> dummy >> starty >> dummy >> endx >> dummy >> endy >> dummy
             >> numOfPassangers >> dummy >> taarif >> dummy >> startTime;
     }
-
-    //if inserted negative number/s
-    while (id < 0 || startx < 0 || starty < 0 || endx < 0 || endy < 0 || numOfPassangers < 0 || taarif < 0 ||
-           startTime < 0) {
-        cout << "invalid input!" << endl;
-        cin >> id >> dummy >> startx >> dummy >> starty >> dummy >> endx >> dummy >> endy >> dummy
-            >> numOfPassangers >> dummy >> taarif >> dummy >> startTime;
-    }
-
-    if(startx>width||starty>height){
-        cout<<"-1"<<endl;
-    }
-
-
 
     start = new Point(startx, starty);
     end = new Point(endx, endy);
-    flow->addTrip(id, taarif, start, end, numOfPassangers,startTime);
+    flow->addTrip(id, taarif, start, end, numOfPassangers, startTime);
 
     delete (end);
     delete (start);
 }
 
-void getObsticals(mainFlow * flow) {
+void getObsticals(mainFlow *flow) {
     int index, obstacleNum;
     list <pstring> *seperatedListcoma, *seperatedList;
     string strInput, *tempStrx, *tempStry;
     cin >> obstacleNum;
 
-    while (numberOfInputs(1) == false) {
-        cout << "invalid number of inputs" << endl;
+    while ((numberOfInputs(1) == false) || (obstacleNum < 0)){
+        cout << "-1" << endl;
         cin >> obstacleNum;
     }
 
-    while (obstacleNum < 0) {
-        cout << "invalid input" << endl;
-        cin >> obstacleNum;
-    }
     for (index = 0; index < obstacleNum; ++index) {
         cin >> strInput;
         seperatedListcoma = HelpFunctions::split(&strInput, ',');
@@ -299,6 +262,6 @@ bool numberOfInputs(int numInputExpected) {
         if (index != numInputExpected) {
             return false;
         }
-    } while(index!=numInputExpected);
+    } while (index != numInputExpected);
     return true;
 }
