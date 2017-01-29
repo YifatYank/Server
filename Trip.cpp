@@ -13,6 +13,7 @@ Trip::Trip(int id,int taarif, Point start, Point end, int numOfPassangers, int s
     this->total_meters_passed = 0;
     this->trip_path = new list<pPoint>();
     this->startTime = startTime;
+    this->trip_path = NULL;
 }
 
 Trip::~Trip() {

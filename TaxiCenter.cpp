@@ -10,7 +10,6 @@
 #include "Luxury.h"
 #include "Grid.h"
 
-
 TaxiCenter::TaxiCenter(Grid *grid) {
     this->grid = grid;
     this->drivers = new list<pDriver>;
@@ -35,35 +34,15 @@ TaxiCenter::~TaxiCenter(){
     pthread_mutex_destroy(&this->lockDrivers);
 };
 
-
-Driver * TaxiCenter::answerCalls(int id, int taarif, Point start, Point end, int numOfPassangers, int startTime, pthread_t * thread){
+Trip * TaxiCenter::answerCalls(int id, int taarif, Point start, Point end, int numOfPassangers, int startTime){
     Trip * trip;
-    list<void *> * parametersToThread;
-    Grid * g;
-    int threadNo;
 
     // Checkd if there is already trip with the same id in the taxi center.
     trip = this->findTrip(id);
     if(trip->getID() == -1) {
         trip = new Trip(id, taarif, start, end, numOfPassangers, startTime);
-
-        // Prapare to sent the calaulates of the path to a difrent thread.
-        parametersToThread = new list<void *>();
-        parametersToThread->push_front(trip);
-        parametersToThread->push_front(this->grid);
-
-        // The calcuation if the path will be in anothe thread.
-        threadNo = pthread_create(thread,NULL,threadFunction,parametersToThread);
-
-        // If thecreation has faled
-        if(threadNo < 0) {
-            delete (trip);
-            return NULL;
-        }
-        //trip->setTrip_path(this->grid->getSortesrPath(&start, &end));
-
         this->trips->push_front(trip);
-        return this->dummyDriver;
+        return trip;
     }
 
     // If there is already a trip with that same id.
@@ -314,5 +293,3 @@ Driver *TaxiCenter::AssignTripToDriver(Trip * trip) {
     return chosenDriver;
 
 }
-
-

@@ -62,7 +62,7 @@ public:
  * @param start starting point
  * @param numOfPassangers number of passengers
 */
-    Driver * answerCalls(int id, int taarif, Point start, Point end, int numOfPassangers, int startTime, pthread_t * thread);
+    Trip * answerCalls(int id, int taarif, Point start, Point end, int numOfPassangers, int startTime);
 /**
  * addDriver
  * @param id id of a driver

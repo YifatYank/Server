@@ -42,6 +42,9 @@ public:
     * @param y y's position
     */
     Grid(int x, int y);
+
+    Grid * copyGrid();
+
     /* Grid.
     * <p>
     * destructor.

@@ -25,7 +25,7 @@
 using namespace boost::archive;
 using namespace std;
 
-int main(int argc, char* argv[]) {
+int nmain(int argc, char* argv[]) {
     int id, experience, vehicleId, age;
     //int currTime;
     char status, dummy;

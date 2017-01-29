@@ -14,6 +14,8 @@ Grid::Grid(int x, int y) {
     pthread_mutex_init(&this->gridLock, 0);
 }
 
+
+
 bool Grid::isObstical(int x, int y) {
     x += 1;
     y += 1;
@@ -90,6 +92,17 @@ Grid::~Grid() {
         delete [](grideWorld[index]);
     }
     delete [](grideWorld);
+
+    if(this->tempGride!= NULL) {
+        for(index = 0; index < height; ++ index) {
+            for(jndex = 0; jndex < width; ++jndex) {
+                delete(this->tempGride[index][jndex]);
+            }
+            delete [](this->tempGride[index]);
+        }
+    }
+
+    pthread_mutex_destroy(&this->gridLock);
 }
 
 void Grid::initiateGrid() {
@@ -234,6 +247,22 @@ void Grid::deleteTempGrid() {
     }
     delete [](this->tempGride);
 }
+
+Grid *Grid::copyGrid() {
+    int index, jundex;
+    Grid * grd = new Grid(this->height, this->width);
+
+    for(index = 0; index < this->height - 2 ; ++ index) {
+        for(jundex = 0; jundex < this->width - 2; ++ jundex) {
+            if(this->isObstical(index, jundex)) {
+                grd->setObstical(index, jundex);
+            }
+        }
+    }
+
+    return grd;
+}
+
 
 /*void *Grid::threadFunction(void *parameters) {
     Point * start, * end;
