@@ -151,7 +151,7 @@ void addTaxiToCenter(mainFlow *flow) {
 
     cin >> id >> dummy >> type >> dummy >> man >> dummy >> c;
 
-    while ((numberOfInputs(4) == false) || (id < 0 || type < 0 || type > 1) {
+    while ((numberOfInputs(4) == false) || (id < 0 || type < 0 || type > 1)) {
         cout << "-1" << endl;
         cin >> id >> dummy >> type >> dummy >> man >> dummy >> c;
     }
@@ -241,7 +241,6 @@ int getNumber(string s) {
 
 bool numberOfInputs(int numInputExpected) {
     // To do - checks if works.
-
     string strInput;
     int nums[numInputExpected];
     int index;
