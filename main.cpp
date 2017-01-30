@@ -216,8 +216,7 @@ bool addTripToCenter(mainFlow *flow, int height, int width) {
     char *params[8];
     int k = 0;
     char *split;
-// cin >> id >> dummy >> startx >> dummy >> starty >> dummy >> endx >> dummy >>
-// endy >> dummy>> numOfPassangers >> dummy >> taarif >> dummy >> startTime;
+
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
     getline(cin, s);
     if (count(s.begin(), s.end(), ',') != 7) {
