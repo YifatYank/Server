@@ -271,16 +271,33 @@ bool getObsticals(mainFlow *flow) {
         cout << "-1" << endl;
         cin >> obstacleNum;
     }
-
+    //check the obsticals
     for (index = 0; index < obstacleNum; ++index) {
         cin >> strInput;
+
+        //if inserted more than 1 comma
+        if (count(strInput.begin(), strInput.end(), ',') != 1) {
+            return false;
+        }
+
         seperatedListcoma = HelpFunctions::split(&strInput, ',');
         tempStry = seperatedListcoma->back();
         seperatedListcoma->pop_back();
         tempStrx = seperatedListcoma->back();
         seperatedListcoma->pop_back();
+
+        //if the obsticals are not numbers
+        if (!StringisInt(*tempStrx) || !StringisInt(*tempStry)) {
+            return false;
+        }
+
         int x = HelpFunctions::stringToInt(tempStrx[0]);
         int y = HelpFunctions::stringToInt(tempStry[0]);
+
+        if (x < 0 || y < 0) {
+            return false;
+        }
+
         flow->setObstical(x, y);
         delete (seperatedListcoma);
         delete (tempStrx);
