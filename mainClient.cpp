@@ -93,7 +93,7 @@ int nmain(int argc, char *argv[]) {
         // Gets the trip details.
         id = stoi(params[0]);
         age = stoi(params[1]);
-        //status = stoi(params[2]);
+        status = stoi(params[2]);
         experience = stoi(params[3]);
         vehicleId = stoi(params[4]);
 
@@ -106,7 +106,6 @@ int nmain(int argc, char *argv[]) {
             again = true;
             break;
         }
-        //again = false;
     }
 
     driver = new Driver(id, age, ms, experience);
