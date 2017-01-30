@@ -203,6 +203,7 @@ bool addTaxiToCenter(mainFlow *flow) {
     else { return false; }
 
     flow->addTaxi(id, mf, color, type);
+    return true;
 }
 
 bool addTripToCenter(mainFlow *flow, int height, int width) {
@@ -247,9 +248,6 @@ bool addTripToCenter(mainFlow *flow, int height, int width) {
     if (startx > width || starty > height || endx > width || endy > height) {
         return false;
     }
-    if ((startx == endx) && (starty == endy)) {
-        return false;
-    }
 
     start = new Point(startx, starty);
     end = new Point(endx, endy);
@@ -257,6 +255,7 @@ bool addTripToCenter(mainFlow *flow, int height, int width) {
 
     delete (end);
     delete (start);
+    return true;
 }
 
 bool getObsticals(mainFlow *flow) {
@@ -284,6 +283,7 @@ bool getObsticals(mainFlow *flow) {
         delete (tempStrx);
         delete (tempStry);
     }
+    return true;
 }
 
 
