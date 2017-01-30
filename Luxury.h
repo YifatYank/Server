@@ -25,22 +25,24 @@
 #include <boost/serialization/base_object.hpp>
 #include <boost/serialization/export.hpp>
 
-class Luxury : public ::Cab{
+class Luxury : public ::Cab {
 public:
     friend class boost::serialization::access;
+
     template<class Archive>
-    void serialize(Archive &ar, const unsigned int version)
-    {
+    void serialize(Archive &ar, const unsigned int version) {
         ar & boost::serialization::base_object<Cab>(*this);
     }
 
     Luxury();
+
     /**
  * Luxury
  * @param col color
  * @param manufact manufacturer
 */
     Luxury(int id, Manufacturer manufact, Color col);
+
     /**
  * Luxury
  * destructor
@@ -52,6 +54,7 @@ public:
  * move to the next point
 */
     virtual void moveNext();
+
     /**
  * updateTaarif
  * updating the taarif

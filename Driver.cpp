@@ -1,4 +1,5 @@
 #include "Driver.h"
+
 using namespace std;
 
 
@@ -50,16 +51,16 @@ void Driver::setEx(int x) {
 }
 
 
-Point * Driver::getPlace() {
+Point *Driver::getPlace() {
     return this->cab->getLocation();
 }
 
 
 bool Driver::isAvalable() {
-    if(this->cab == NULL) {
+    if (this->cab == NULL) {
         return false;
     }
-    if(this->cab->getTrip() != NULL) {
+    if (this->cab->getTrip() != NULL) {
         return false;
     }
     return true;
@@ -72,8 +73,8 @@ void Driver::addReview(int num) {
 }
 
 
-int Driver::getAvSa(){
-    return (double)this->sum_of_satisfaction / (double)this->num_of_customers;
+int Driver::getAvSa() {
+    return (double) this->sum_of_satisfaction / (double) this->num_of_customers;
 }
 
 
@@ -85,7 +86,7 @@ int Driver::getID() {
     return this->id;
 }
 
-void Driver::setCab(Cab * cab) {
+void Driver::setCab(Cab *cab) {
     this->cab = cab;
 }
 
@@ -94,15 +95,15 @@ Cab *Driver::getCab() {
 }
 
 void Driver::setTrip(Trip *trip) {
-    if(this->isAvalable()) {
+    if (this->isAvalable()) {
         this->cab->setTrip(trip);
     }
 }
 
 bool Driver::drive() {
-    Point * p;
-    if(this->cab != NULL) {
-        if(this->cab->getTrip() != NULL) {
+    Point *p;
+    if (this->cab != NULL) {
+        if (this->cab->getTrip() != NULL) {
             // If its the time to move
             this->cab->moveNext();
             // If the driver reached the destination
@@ -110,11 +111,11 @@ bool Driver::drive() {
             if (*p == *this->cab->getTrip()->getEP()) {
                 this->cab->setTrip(NULL);
                 // Returns that the driver has reached his destination.
-                delete(p);
+                delete (p);
                 return true;
             } else {
                 // Returns that the driver has not reached his destination yet.
-                delete(p);
+                delete (p);
                 return false;
             }
         }
@@ -126,7 +127,7 @@ bool Driver::drive() {
 }
 
 void Driver::driveToDestination() {
-    if(this->cab != NULL) {
+    if (this->cab != NULL) {
         if (this->cab->getTrip() != NULL) {
             this->cab->setLocation(*this->cab->getTrip()->getEP());
             this->cab->setTrip(NULL);

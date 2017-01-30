@@ -13,16 +13,18 @@
 #include "Driver.h"
 #include "Definitions.h"
 #include <pthread.h>
+
 using namespace std;
+
 class TaxiCenter {
 private:
-    Driver * dummyDriver;
-    Cab * dummyCab;
-    Trip * dummtTrip;
-    list <Driver *> * drivers;
-    list <Cab *> * cabs;
-    list <Trip *> * trips;
-    Grid * grid;
+    Driver *dummyDriver;
+    Cab *dummyCab;
+    Trip *dummtTrip;
+    list<Driver *> *drivers;
+    list<Cab *> *cabs;
+    list<Trip *> *trips;
+    Grid *grid;
     pthread_mutex_t lockDrivers;
 
 /**
@@ -30,17 +32,20 @@ private:
  * delete all the drivers in the list
 */
     void deleteDriversList();
+
 /**
  * deleteCabsList
  * delete all the cabs in the list
 */
     void deleteCabsList();
+
 /**
  * deleteTripsList
  * delete all the trips in the list
 */
     void deleteTripsList();
-    Driver * AssignTripToDriver(Trip * trip);
+
+    Driver *AssignTripToDriver(Trip *trip);
 
 public:
 /**
@@ -48,12 +53,14 @@ public:
  * constructor
  * @param grid a grid
 */
-    TaxiCenter(Grid * grid);
+    TaxiCenter(Grid *grid);
+
 /**
  * TaxiCenter
  * destructor
 */
     virtual ~TaxiCenter();
+
 /**
  * answerCalls
  * @param id id of a driver
@@ -62,7 +69,8 @@ public:
  * @param start starting point
  * @param numOfPassangers number of passengers
 */
-    Trip * answerCalls(int id, int taarif, Point start, Point end, int numOfPassangers, int startTime);
+    Trip *answerCalls(int id, int taarif, Point start, Point end, int numOfPassangers, int startTime);
+
 /**
  * addDriver
  * @param id id of a driver
@@ -71,6 +79,7 @@ public:
  * @param yearsOfExp years of experience
 */
     void addDriver(int id, Marital_Status ms, int age, int yearsOfExp);
+
 /**
  * addDriver
  * @param id id of a driver
@@ -80,6 +89,7 @@ public:
  * @param cabId id of a cab
 */
     void addDriver(int id, Marital_Status ms, int age, int yearsOfExp, int cabId);
+
     /**
  * addTaxi
  * @param c color
@@ -88,24 +98,28 @@ public:
  * @param id id value
 */
     void addTaxi(int x, Manufacturer mf, Color c, int type);
+
 /**
  * getDriver
  * returns a list of drivers
  * @return list of drivers
 */
-    list <pDriver> * getDriver();
+    list <pDriver> *getDriver();
+
 /**
  * getCabs
  * returns a list of cabs
  * @return list of cabs
 */
-    list <Cab *> * getCabs();
+    list<Cab *> *getCabs();
+
 /**
  * getTrips
  * returns a list of trips
  * @return list of trips
 */
-    list <Trip *> * getTrips();
+    list<Trip *> *getTrips();
+
     /**
  * getsDriverLocation
  * The function gets a driver id and returns its location.
@@ -113,7 +127,8 @@ public:
  * @param id The driver id.
  * @return The drivers location.
  */
-    Point * getsDriverLocation(int id);
+    Point *getsDriverLocation(int id);
+
     /**
  * setDriversCab
  * set a driver to a cab
@@ -121,28 +136,32 @@ public:
  * @param driverId id of a driver
 */
     void SetDriversCab(int driverId, int cabId);
+
     /**
  * findDriver
  * @param id driver's id
  * @return Driver
 */
-    Driver * findDriver(int id);
+    Driver *findDriver(int id);
+
     /**
 * findCab
 * @param id cab's id
 * @return Cab
 */
-    Cab * findCab(int id);
+    Cab *findCab(int id);
+
     /**
 * findTrip
 * @param id trip's id
 * @return Trip
 */
-    Trip * findTrip(int id);
-    Driver * AssignTripToDriver(int tripId);
+    Trip *findTrip(int id);
+
+    Driver *AssignTripToDriver(int tripId);
 
 
-    static void * threadFunction(void * parameters);
+    static void *threadFunction(void *parameters);
 };
 
 

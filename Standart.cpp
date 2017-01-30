@@ -4,11 +4,11 @@
 
 #include "Standart.h"
 
-void Standart::moveNext(){
+void Standart::moveNext() {
     // If the cab is driving somewere
-    if(this->getTrip() != NULL) {
+    if (this->getTrip() != NULL) {
         // If the cab's trip is not over.
-        if(!this->getTrip()->getTrip_path()->empty()) {
+        if (!this->getTrip()->getTrip_path()->empty()) {
             this->getTrip()->getTrip_path()->pop_front();
             this->setLocation(*this->getTrip()->getTrip_path()->front());
             this->setKilometers(this->getKilometers() + 1);
@@ -22,7 +22,7 @@ void Standart::updateTaarif() {
     }
 }
 
-Standart::Standart(int id, Manufacturer manufact, Color col) : Cab(id,manufact, col) {
+Standart::Standart(int id, Manufacturer manufact, Color col) : Cab(id, manufact, col) {
     this->setTaarif(1);
     this->setSpeed(1);
 }
@@ -30,7 +30,7 @@ Standart::Standart(int id, Manufacturer manufact, Color col) : Cab(id,manufact, 
 Standart::~Standart() {
 }
 
-Standart::Standart() : Cab(){
+Standart::Standart() : Cab() {
     this->setTaarif(1);
     this->setSpeed(1);
 }

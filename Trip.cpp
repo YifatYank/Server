@@ -4,11 +4,11 @@
 
 #include "Trip.h"
 
-Trip::Trip(int id,int taarif, Point start, Point end, int numOfPassangers, int startTime) {
+Trip::Trip(int id, int taarif, Point start, Point end, int numOfPassangers, int startTime) {
     this->id = id;
     this->tarrif = taarif;
-    this->starting_point = new Point(start.getX(),start.getY());
-    this->ending_point = new Point(end.getX(),end.getY());
+    this->starting_point = new Point(start.getX(), start.getY());
+    this->ending_point = new Point(end.getX(), end.getY());
     this->number_of_passenger = numOfPassangers;
     this->total_meters_passed = 0;
     this->trip_path = new list<pPoint>();
@@ -17,10 +17,10 @@ Trip::Trip(int id,int taarif, Point start, Point end, int numOfPassangers, int s
 }
 
 Trip::~Trip() {
-    Point * p;
-    delete(this->ending_point);
-    delete(this->starting_point);
-    if(this->trip_path != NULL) {
+    Point *p;
+    delete (this->ending_point);
+    delete (this->starting_point);
+    if (this->trip_path != NULL) {
         while (!this->trip_path->empty()) {
             p = this->trip_path->front();
             this->trip_path->pop_front();
@@ -31,45 +31,45 @@ Trip::~Trip() {
 }
 
 
-int Trip::getTMP(){
+int Trip::getTMP() {
     return this->total_meters_passed;
 }
 
-void Trip::setTMP(int x){
+void Trip::setTMP(int x) {
     this->total_meters_passed = x;
 }
 
-Point * Trip:: getSP(){
+Point *Trip::getSP() {
     return this->starting_point;
 }
 
-Point * Trip::getEP(){
+Point *Trip::getEP() {
     return this->ending_point;
 }
 
-int Trip::getNOP(){
+int Trip::getNOP() {
     return this->number_of_passenger;
 }
 
-void Trip::setNOP(int x){
+void Trip::setNOP(int x) {
     this->number_of_passenger = x;
 }
 
-int Trip:: getTaarif(){
+int Trip::getTaarif() {
     return this->tarrif;
 }
 
-void Trip::setTaarif(int x){
+void Trip::setTaarif(int x) {
     this->tarrif = x;
 }
 
-list<pPoint> * Trip::getTrip_path(){
+list <pPoint> *Trip::getTrip_path() {
     return this->trip_path;
 }
 
-void Trip::setTrip_path(list<pPoint> * lst){
-    if(lst != this->getTrip_path()) {
-        delete(this->trip_path);
+void Trip::setTrip_path(list <pPoint> *lst) {
+    if (lst != this->getTrip_path()) {
+        delete (this->trip_path);
         this->trip_path = lst;
     }
 }
@@ -78,11 +78,11 @@ int Trip::getID() {
     return this->id;
 }
 
-Trip::Trip(int id, int taarif, Point start, Point end, int numOfPassangers, list<pPoint> * path, int startTime) {
+Trip::Trip(int id, int taarif, Point start, Point end, int numOfPassangers, list <pPoint> *path, int startTime) {
     this->id = id;
     this->tarrif = taarif;
-    this->starting_point = new Point(start.getX(),start.getY());
-    this->ending_point = new Point(end.getX(),end.getY());
+    this->starting_point = new Point(start.getX(), start.getY());
+    this->ending_point = new Point(end.getX(), end.getY());
     this->number_of_passenger = numOfPassangers;
     this->total_meters_passed = 0;
     this->trip_path = path;

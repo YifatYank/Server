@@ -16,19 +16,19 @@ mainFlow::mainFlow(int height, int width) {
     this->deadPool = new list<pthread_t>();
     this->tripsToCalcPath = new list<Trip *>();
 
-    struct calcPathParams *  params = (struct calcPathParams *)malloc(sizeof(struct calcPathParams)) ;
+    struct calcPathParams *params = (struct calcPathParams *) malloc(sizeof(struct calcPathParams));
     params->map = this->grid->copyGrid();
     params->pathQueue = this->tripsToCalcPath;
 
-    for(index = 0;index < 5; ++ index) {
+    for (index = 0; index < 5; ++index) {
         pthread_t t;
-        status = pthread_create(&t, NULL, calcPathTask::threadFunction, (void *)params);//<--- NULL??
+        status = pthread_create(&t, NULL, calcPathTask::threadFunction, (void *) params);//<--- NULL??
     }
 }
 
 mainFlow::~mainFlow() {
-    delete(this->center);
-    delete(this->grid);
+    delete (this->center);
+    delete (this->grid);
 
     // Todo : delete lists
 }
@@ -37,7 +37,7 @@ bool mainFlow::addTaxiToCenter(int id, Manufacturer mf, Color color, int type) {
     center->addTaxi(id, mf, color, type);
 }
 
-Point * mainFlow::askDriverLocation(int id) {
+Point *mainFlow::askDriverLocation(int id) {
     string sendMessage;
     char askLocation[] = "location";
     Point *location;
@@ -59,11 +59,11 @@ void mainFlow::tellDriversToGo() {
     Driver *tempDriver;
     string sendMessage;
     char *recivedMassage = new char[4096];
-    list<pDriver> * tempDriversList = new list<Driver *>();
+    list <pDriver> *tempDriversList = new list<Driver *>();
 
     sendMessage = go;
     // While there are driver that need to drive.
-    while(!this->driversThatHasATrip->empty()) {
+    while (!this->driversThatHasATrip->empty()) {
         tempDriver = this->driversThatHasATrip->front();
         this->driversThatHasATrip->pop_front();
 
@@ -88,26 +88,26 @@ void mainFlow::tellDriversToGo() {
     }
 
     delete[](recivedMassage);
-    delete(tempDriversList);
+    delete (tempDriversList);
 }
 
 void mainFlow::assignTrips() {
     Driver *tempDriver;
     Trip *tempTrp;
-    list <int> * tempTripIdList = new list<int>();
+    list<int> *tempTripIdList = new list<int>();
     string sendMessage;
     char *recivedMassage = new char[4096];
 
     // While there are trips to assin drivers to.
-    while(this->tripsToAssignDriver->empty()) {
+    while (this->tripsToAssignDriver->empty()) {
         tempTrp = center->findTrip(this->tripsToAssignDriver->front());
         this->tripsToAssignDriver->pop_front();
 
         // If the trip was found in the taxiCenter(id != -1).
         // And it is the time to find a driver to take the trip.
-        if (tempTrp->getID() != -1 && tempTrp->getStartTime() <= this->time)  {
+        if (tempTrp->getID() != -1 && tempTrp->getStartTime() <= this->time) {
             // While the trip path was not calculated yet (By the threads that calculates the paths).
-            while(tempTrp->getTrip_path() == NULL) {
+            while (tempTrp->getTrip_path() == NULL) {
                 sleep(1);
             }
 
@@ -174,13 +174,13 @@ void mainFlow::sayByeToDrivers() {
 }
 
 void mainFlow::setObstical(int x, int y) {
-    this->grid->setObstical(x,y);
+    this->grid->setObstical(x, y);
 }
 
 void mainFlow::addTrip(int id, int taarif, Point *start, Point *end, int numOfPassangers, int startTime) {
-    Trip * trp;
+    Trip *trp;
     trp = this->center->answerCalls(id, taarif, *start, *end, numOfPassangers, startTime);
-    if(trp != NULL) {
+    if (trp != NULL) {
         this->tripsToCalcPath->push_front(trp);
     }
 }
@@ -189,7 +189,7 @@ void mainFlow::addDriver(int id, Marital_Status ms, int age, int yearsOfExp, int
     this->center->addDriver(id, ms, age, yearsOfExp, vehicle_id);
 }
 
-void * mainFlow::connectToClient(void *params) {
+void *mainFlow::connectToClient(void *params) {
     int vehicle_id;
     int socketD;
     Cab *tempCab;
@@ -197,7 +197,7 @@ void * mainFlow::connectToClient(void *params) {
     char *recivedMassage = new char[4096];
     char emptyMassage[] = "0";
     string sendMessage;
-    mainFlow * flow;
+    mainFlow *flow;
     list<int> *ids;
     struct threadArgs *args = (struct threadArgs *) params;
 
@@ -217,7 +217,7 @@ void * mainFlow::connectToClient(void *params) {
 
     // Add the driver to the texi center drivers list
     flow->addDriver(tempDriver->getID(), tempDriver->getMlStatus(), tempDriver->getAge(),
-                      tempDriver->getExp(), vehicle_id);
+                    tempDriver->getExp(), vehicle_id);
 
     // Send the driver the cab he reqected.
     tempCab = flow->center->findCab(vehicle_id);
@@ -232,12 +232,12 @@ void * mainFlow::connectToClient(void *params) {
     delete (tempDriver);
 }
 
-void * mainFlow::getClients(void *params) {
+void *mainFlow::getClients(void *params) {
     struct threadArgs *args = (struct threadArgs *) params;
     int numOfDrivers, index, socketD;
     int status;
     Tcp *tcp;
-    mainFlow * flow;
+    mainFlow *flow;
     list<int> *ids;
 
     tcp = Tcp::getTcp(true, 0);

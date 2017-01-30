@@ -29,12 +29,12 @@ std::stringstream ss;
 int main() {
     //GridPoint *gp = new GridPoint(new Point(1,5));
 
-    Trip * t = new Trip(0,1,Point(0,0), Point(1,1), 5);
-    Cab * cab = new Cab(0, HONDA, WHITE);
+    Trip *t = new Trip(0, 1, Point(0, 0), Point(1, 1), 5);
+    Cab *cab = new Cab(0, HONDA, WHITE);
     cab->setTrip(t);
-    Driver * driver = new Driver(0,22,single,2);
+    Driver *driver = new Driver(0, 22, single, 2);
     driver->setCab(cab);
-    Driver * copyDriver;
+    Driver *copyDriver;
 
     std::string serial_str;
     boost::iostreams::back_insert_device<std::string> inserter(serial_str);
@@ -51,22 +51,22 @@ int main() {
     boost::archive::binary_iarchive ia(s2);
     ia >> copyDriver;
 
-    delete(cab);
-    delete(t);
-    delete(driver);
-    delete(copyDriver);
-  //  string * stringP = p->getString();
-  //  cout << stringP;
+    delete (cab);
+    delete (t);
+    delete (driver);
+    delete (copyDriver);
+    //  string * stringP = p->getString();
+    //  cout << stringP;
 //    delete(stringP);
 
-   // stringP = p1->getString();
-   // cout << stringP;
-   // delete(stringP);
+    // stringP = p1->getString();
+    // cout << stringP;
+    // delete(stringP);
 
 
     // Srialize trip.
 //    oa << t;
- //   s.flush();
+    //   s.flush();
 
     // Deserialize trip
 //    ia >> copyTrip;

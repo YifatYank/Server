@@ -30,16 +30,17 @@ using namespace std;
 using namespace boost::archive;
 
 
-class Standart : public ::Cab{
+class Standart : public ::Cab {
 public:
     friend class boost::serialization::access;
+
     template<class Archive>
-    void serialize(Archive &ar, const unsigned int version)
-    {
+    void serialize(Archive &ar, const unsigned int version) {
         ar & boost::serialization::base_object<Cab>(*this);
     }
 
     Standart();
+
     /**
  * Standart
  * constructor
@@ -47,16 +48,19 @@ public:
  * @param manufact manufacturer
 */
     Standart(int id, Manufacturer manufact, Color col);
+
     /**
  * Standart
  * destructor
 */
     virtual ~Standart();
+
     /**
  * moveNext
  * move to the next point
 */
     virtual void moveNext();
+
     /**
  * updateTaarif
  * updating the taarif

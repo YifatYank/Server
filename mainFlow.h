@@ -22,30 +22,118 @@ private:
     Grid *grid;
     Tcp *tcp;
     list<Driver *> *driversThatHasATrip;
-    list<Trip *> * tripsToCalcPath;
+    list<Trip *> *tripsToCalcPath;
     list<int> *tripsToAssignDriver;
-    list<pthread_t> * deadPool;
+    list <pthread_t> *deadPool;
 
     void assignTrips();
+
     void tellDriversToGo();
 
 public:
+    /**
+   * mainFlow
+   * constructor
+   * @param height
+     * @param width
+     */
     mainFlow(int height, int width);
+
+/**
+   * mainFlow
+   * destructor
+  */
     ~mainFlow();
+
+/**
+   * addTaxiToCenter
+   * adding a taxi to center
+   * @param id
+   * @param mf manufacturer
+   * @param color
+   * @param type
+     * @return true\false
+  */
     bool addTaxiToCenter(int id, Manufacturer mf, Color color, int type);
-    Point * askDriverLocation(int id);
+
+/**
+   * askDriverLocation
+   * returns the driver's location
+   * @param id
+     * @return point
+  */
+    Point *askDriverLocation(int id);
+
+/**
+   * updateTime
+   * updating the time
+  */
     void updateTime();
+
+/**
+   * sayByeToDrivers
+   * deleting the drivers
+  */
     void sayByeToDrivers();
-    void setObstical (int x, int y);
-    void addTrip(int id, int  taarif, Point *start,Point *end, int numOfPassangers, int startTime);
+
+/**
+   * setObstical
+   * setting an obstical
+   * @param x
+     * @param y
+  */
+    void setObstical(int x, int y);
+
+/**
+   * addTrip
+   * adding a trip
+   * @param id
+     * @param taarif
+     * @param start
+     * @param end
+     * @param startTime
+     * @param numOfPassangers
+  */
+    void addTrip(int id, int taarif, Point *start, Point *end, int numOfPassangers, int startTime);
+
+/**
+   * addDriver
+   * adding a driver
+   * @param id
+     * @param ms marital status
+     * @param age
+     * @param yearsOfExp
+     * @param vehicle_id
+  */
     void addDriver(int id, Marital_Status ms, int age, int yearsOfExp, int vehicle_id);
+
+/**
+   * addTaxi
+   * adding a taxi
+   * @param x id
+   * @param c color
+     * @param mf manufacturer
+     * @param type
+  */
     void addTaxi(int x, Manufacturer mf, Color c, int type);
+
+/**
+   * connectToClient
+   * connecting to client
+   * @param param
+  */
     static void *connectToClient(void *params);
+
+/**
+   * getClients
+   *
+   * @param params
+  */
     static void *getClients(void *params);
 };
 
 struct threadArgs {
-    mainFlow * flow;
+    mainFlow *flow;
     int socketD;
 };
 

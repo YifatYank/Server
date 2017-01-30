@@ -4,27 +4,27 @@
 
 #include "Passenger.h"
 
-int Passenger::calculateSatisfaction(){
+int Passenger::calculateSatisfaction() {
     int grade = random() % 6;
 
     return grade;
 
 }
 
-Point * Passenger::getSP(){
+Point *Passenger::getSP() {
     return this->source_point;
 }
 
-Point * Passenger::getDP(){
+Point *Passenger::getDP() {
     return this->destination_point;
 }
 
 Passenger::Passenger(Point start, Point end) {
-    this->source_point = new Point(start.getX(),start.getY());
-    this->destination_point = new Point(end.getX(),end.getY());
+    this->source_point = new Point(start.getX(), start.getY());
+    this->destination_point = new Point(end.getX(), end.getY());
 }
 
 Passenger::~Passenger() {
-    delete(this->destination_point);
-    delete(this->source_point);
+    delete (this->destination_point);
+    delete (this->source_point);
 }

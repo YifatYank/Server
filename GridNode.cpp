@@ -8,7 +8,7 @@
 #include "GridNode.h"
 
 GridNode::GridNode(int x, int y) {
-    this->place = new Point(x,y);
+    this->place = new Point(x, y);
     this->obstical = false;
 }
 
@@ -16,7 +16,7 @@ GridNode::~GridNode() {
     delete (this->place);
 }
 
-Point * GridNode::getPlace() {
+Point *GridNode::getPlace() {
     return this->place;
 }
 

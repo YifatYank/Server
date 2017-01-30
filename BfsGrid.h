@@ -14,6 +14,7 @@
 using namespace std;
 
 #include "Definitions.h"
+
 class BfsGrid {
 private:
     /* isFound.
@@ -23,33 +24,38 @@ private:
     * @param item the point required
     * @isFound true or false
     */
-    static bool isFound(list <pPoint>* lst, Point * item);
+    static bool isFound(list <pPoint> *lst, Point *item);
+
     /* GridNode.
     * <p>
     * constructor.
     * @param x x's position
     * @param y y's position
     */
-    static void removeNodesFromeList(list<pPoint> * lst);
+    static void removeNodesFromeList(list <pPoint> *lst);
+
     /* deleteAllNodesList
     * <p>
     * deleting all the nodes in the list.
     * @param lst a list of nodes
     */
-    static void deleteAllNodesList(list<pPointNode> * lst);
+    static void deleteAllNodesList(list <pPointNode> *lst);
+
     /* makeList.
     * <p>
     * making a list of points
     * @param node a node
     * @return lst a list of points
     */
-    static list<pPoint> * makeList(PointNode * node);
+    static list <pPoint> *makeList(PointNode *node);
+
     /* deleteAllNodesQueue.
     * <p>
     * deleting all the nodes in the queue.
     * @param que a queue of nodes
     */
-    static void deleteAllNodesQueue(queue<pPointNode> * que);
+    static void deleteAllNodesQueue(queue<pPointNode> *que);
+
 public:
     /* getShortestPath.
     * <p>
@@ -59,7 +65,7 @@ public:
     * @param end ending point
     * @return pPoint a list of point
     */
-    static list<pPoint > * getShortestPath(Grid * grid, Point * start, Point * end);
+    static list <pPoint> *getShortestPath(Grid *grid, Point *start, Point *end);
 };
 
 

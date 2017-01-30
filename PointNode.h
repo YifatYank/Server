@@ -10,8 +10,8 @@
 
 class PointNode {
 private:
-    Point * data;
-    PointNode * next;
+    Point *data;
+    PointNode *next;
     bool isNextSet;
 public:
 /* PointNode.
@@ -20,29 +20,34 @@ public:
     * @param data a point
     */
     PointNode(Point p);
+
 /* PointNode.
     * <p>
     * destructor.
     */
     ~PointNode();
+
 /* getData.
     * <p>
     * returns the data of a point.
     * @return data the data of a point
     */
-    Point * getData();
+    Point *getData();
+
 /* getNext.
     * <p>
     * returns the next point.
     * @return next next point
     */
-    PointNode * getNext();
+    PointNode *getNext();
+
 /* setNext.
     * <p>
     * sets the next node.
     * @param node a node
     */
-    void setNext(PointNode * node);
+    void setNext(PointNode *node);
+
 /* isNextDifined.
     * <p>
     * returns true if the next point is difined.

@@ -12,9 +12,9 @@
 #include "Driver.h"
 
 using namespace std;
-typedef Point * pPoint;
-typedef string * pstring;
-typedef PointNode * pPointNode;
-typedef Driver * pDriver;
+typedef Point *pPoint;
+typedef string *pstring;
+typedef PointNode *pPointNode;
+typedef Driver *pDriver;
 
 #endif //UNITTEST_DEFINITIONS_H

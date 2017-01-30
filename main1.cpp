@@ -11,10 +11,11 @@
 using namespace std;
 
 
-list<pstring> * split(string * str,char ch);
+list <pstring> *split(string *str, char ch);
+
 int stringToInt(string str);
 
-int main(int argc, char* argv[]) {
+int main(int argc, char *argv[]) {
     int task;// = 0;
     int id;
     int index;
@@ -29,14 +30,14 @@ int main(int argc, char* argv[]) {
     Marital_Status ms;
     Manufacturer mf;
     Color color;
-    TaxiCenter * center;
-    Grid* grid;
-    Driver* d;
-    Point* obPoint;
+    TaxiCenter *center;
+    Grid *grid;
+    Driver *d;
+    Point *obPoint;
     list <pstring> *seperatedListcoma, *seperatedList;
-    list <pDriver> * drivers = new list<pDriver >();
+    list <pDriver> *drivers = new list<pDriver>();
     bool continueProg = true;
-    string * tempStr;
+    string *tempStr;
 
 
     // Getting the grid size and creates thee grid.
@@ -45,7 +46,7 @@ int main(int argc, char* argv[]) {
     center = new TaxiCenter(grid);
     cin >> obstacleNum;
 
-    for(index = 0; index < obstacleNum; ++index) {
+    for (index = 0; index < obstacleNum; ++index) {
         cin >> strInput;
         seperatedListcoma = split(&strInput, ',');
         tempStry = seperatedListcoma->back();
@@ -54,12 +55,12 @@ int main(int argc, char* argv[]) {
         seperatedListcoma->pop_back();
         int x = stringToInt(tempStrx[0]);
         int y = stringToInt(tempStry[0]);
-        grid->setObstical(x,y);
-        delete(seperatedListcoma);
+        grid->setObstical(x, y);
+        delete (seperatedListcoma);
         delete (tempStrx);
         delete (tempStry);
     }
-    cin>>task;
+    cin >> task;
     while (continueProg) {
         switch (task) {
 
@@ -76,12 +77,13 @@ int main(int argc, char* argv[]) {
             }
                 break;
             case 2: {
-                cin >> id >> dummy >> startx >> dummy >> starty >> dummy >> endx >> dummy >> endy >> dummy >> NOP >> dummy >> taarif;
+                cin >> id >> dummy >> startx >> dummy >> starty >> dummy >> endx >> dummy >> endy >> dummy >> NOP
+                    >> dummy >> taarif;
                 Point *start = new Point(startx, starty);
                 Point *end = new Point(endx, endy);
                 drivers->push_front(center->answerCalls(id, taarif, *start, *end, NOP));
                 delete (end);
-                delete(start);
+                delete (start);
                 break;
             }
             case 3: {
@@ -105,8 +107,8 @@ int main(int argc, char* argv[]) {
                 obPoint = center->getsDriverLocation(id);
                 tempStr = obPoint->getString();
                 cout << *tempStr << endl;
-                delete(obPoint);
-                delete(tempStr);
+                delete (obPoint);
+                delete (tempStr);
                 break;
             }
             case 6: {
@@ -118,31 +120,31 @@ int main(int argc, char* argv[]) {
                 break;
             }
             case 7: {
-                while(!drivers->empty()) {
+                while (!drivers->empty()) {
                     drivers->pop_front();
                 }
-                delete(drivers);
+                delete (drivers);
                 delete (center);
                 delete (grid);
                 continueProg = false;
                 break;
             }
         }
-        if(continueProg) {
+        if (continueProg) {
             cin >> task;
         }
     }
     return 0;
 }
 
-list<pstring> * split(string * str,char ch) {
-    string * newStr = new string();
+list <pstring> *split(string *str, char ch) {
+    string *newStr = new string();
     int index;
     char tempChar;
-    list<pstring> *  lst = new list<pstring>();
-    for(index = 0; index < str->length(); ++index) {
+    list <pstring> *lst = new list<pstring>();
+    for (index = 0; index < str->length(); ++index) {
         tempChar = str->at(index);
-        if(tempChar != ch) {
+        if (tempChar != ch) {
             newStr->push_back(tempChar);
         } else {
             lst->push_front(newStr);
@@ -150,19 +152,19 @@ list<pstring> * split(string * str,char ch) {
         }
     }
 
-    if(newStr->length() != 0) {
+    if (newStr->length() != 0) {
         lst->push_front(newStr);
     } else {
-        delete(newStr);
+        delete (newStr);
     }
     return lst;
 }
 
-int stringToInt(string str){
+int stringToInt(string str) {
     char ch;
     int index, num = 0, digit;
 
-    for(index = 0; index < str.size(); ++index) {
+    for (index = 0; index < str.size(); ++index) {
         ch = str.at(index);
         digit = ch - 48;
         num = num * 10 + digit;

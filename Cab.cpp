@@ -5,22 +5,25 @@
 #include "Cab.h"
 
 
-Cab::Cab(int id,Manufacturer manufacturer, Color color) {
+Cab::Cab(int id, Manufacturer manufacturer, Color color) {
     this->id = id;
     this->kilometers_passed = 0;
     this->taarif = 0;
     this->speed = 0;
     this->manufacturer = manufacturer;
     this->color = color;
-    this->location = new Point(0,0);
+    this->location = new Point(0, 0);
     this->trip = NULL;
 }
+
 int Cab::getId() {
     return this->id;
 }
+
 int Cab::getTaarif() {
     return this->taarif;
 }
+
 Manufacturer Cab::getManufacturer() {
     return this->manufacturer;
 }
@@ -30,12 +33,12 @@ Color Cab::getColor() {
 }
 
 Point *Cab::getLocation() {
-    return new Point (this->location->getX(), this->location->getY());
+    return new Point(this->location->getX(), this->location->getY());
 }
 
 void Cab::setLocation(Point location) {
-    delete(this->location);
-    this->location = new Point (location.getX(), location.getY());
+    delete (this->location);
+    this->location = new Point(location.getX(), location.getY());
 }
 
 
@@ -52,11 +55,11 @@ int Cab::getSpeed() {
 }
 
 
-Trip * Cab::getTrip() {
+Trip *Cab::getTrip() {
     return this->trip;
 }
 
-void Cab::setTrip(Trip * trip) {
+void Cab::setTrip(Trip *trip) {
     this->trip = trip;
 }
 
@@ -65,7 +68,7 @@ int Cab::getTaarifForTrip() {
 }
 
 Cab::~Cab() {
-    delete(this->location);
+    delete (this->location);
 }
 
 void Cab::setTaarif(int i) {

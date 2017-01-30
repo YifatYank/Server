@@ -6,11 +6,11 @@
 
 PointNode::PointNode(Point data) {
     this->isNextSet = false;
-    this->data = new Point(data.getX(),data.getY());
+    this->data = new Point(data.getX(), data.getY());
 }
 
 PointNode::~PointNode() {
-    delete(this->data);
+    delete (this->data);
 }
 
 Point *PointNode::getData() {

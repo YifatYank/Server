@@ -3,15 +3,17 @@
 //
 
 #include "HelpFunctions.h"
+
 std::stringstream ss;
-list<pstring> * HelpFunctions::split(string * str,char ch) {
-    string * newStr = new string();
+
+list <pstring> *HelpFunctions::split(string *str, char ch) {
+    string *newStr = new string();
     int index;
     char tempChar;
-    list<pstring> *  lst = new list<pstring>();
-    for(index = 0; index < str->length(); ++index) {
+    list <pstring> *lst = new list<pstring>();
+    for (index = 0; index < str->length(); ++index) {
         tempChar = str->at(index);
-        if(tempChar != ch) {
+        if (tempChar != ch) {
             newStr->push_back(tempChar);
         } else {
             lst->push_front(newStr);
@@ -19,25 +21,27 @@ list<pstring> * HelpFunctions::split(string * str,char ch) {
         }
     }
 
-    if(newStr->length() != 0) {
+    if (newStr->length() != 0) {
         lst->push_front(newStr);
     } else {
-        delete(newStr);
+        delete (newStr);
     }
     return lst;
 }
-int HelpFunctions::stringToInt(string str){
+
+int HelpFunctions::stringToInt(string str) {
     char ch;
     int index, num = 0, digit;
 
-    for(index = 0; index < str.size(); ++index) {
+    for (index = 0; index < str.size(); ++index) {
         ch = str.at(index);
         digit = ch - 48;
         num = num * 10 + digit;
     }
     return num;
 }
-string HelpFunctions::serialize(Point * point) {
+
+string HelpFunctions::serialize(Point *point) {
     std::string serial_str;
     boost::iostreams::back_insert_device<std::string> inserter(serial_str);
     boost::iostreams::stream<boost::iostreams::back_insert_device<std::string> > s(inserter);
@@ -48,7 +52,8 @@ string HelpFunctions::serialize(Point * point) {
 
     return serial_str;
 }
-string HelpFunctions::serialize(Trip * trp){
+
+string HelpFunctions::serialize(Trip *trp) {
     std::string serial_str;
     boost::iostreams::back_insert_device<std::string> inserter(serial_str);
     boost::iostreams::stream<boost::iostreams::back_insert_device<std::string> > s(inserter);
@@ -59,7 +64,8 @@ string HelpFunctions::serialize(Trip * trp){
 
     return serial_str;
 }
-string HelpFunctions::serialize(Cab * cab) {
+
+string HelpFunctions::serialize(Cab *cab) {
     std::string serial_str;
     boost::iostreams::back_insert_device<std::string> inserter(serial_str);
     boost::iostreams::stream<boost::iostreams::back_insert_device<std::string> > s(inserter);
@@ -70,7 +76,8 @@ string HelpFunctions::serialize(Cab * cab) {
 
     return serial_str;
 }
-string HelpFunctions::serialize(Driver * driver) {
+
+string HelpFunctions::serialize(Driver *driver) {
     int index;
     int lenth;
 
@@ -92,8 +99,9 @@ string HelpFunctions::serialize(Driver * driver) {
     //serial_str.replace('\0','|');
     return serial_str;
 }
-Point * HelpFunctions::deserializePoint(char * str){
-    Point * point;
+
+Point *HelpFunctions::deserializePoint(char *str) {
+    Point *point;
     boost::iostreams::basic_array_source<char> device(str, 4096);
     boost::iostreams::stream<boost::iostreams::basic_array_source<char> > s2(device);
     boost::archive::binary_iarchive ia(s2);
@@ -101,8 +109,9 @@ Point * HelpFunctions::deserializePoint(char * str){
 
     return point;
 }
-Trip * HelpFunctions::deserializeTrip(char * str){
-    Trip * trp;
+
+Trip *HelpFunctions::deserializeTrip(char *str) {
+    Trip *trp;
 
     boost::iostreams::basic_array_source<char> device(str, 2048);
     boost::iostreams::stream<boost::iostreams::basic_array_source<char> > s2(device);
@@ -111,8 +120,9 @@ Trip * HelpFunctions::deserializeTrip(char * str){
 
     return trp;
 }
-Cab * HelpFunctions::desrializeCab(char * str){
-    Cab * cab;
+
+Cab *HelpFunctions::desrializeCab(char *str) {
+    Cab *cab;
     boost::iostreams::basic_array_source<char> device(str, 2048);
     boost::iostreams::stream<boost::iostreams::basic_array_source<char> > s2(device);
     boost::archive::binary_iarchive ia(s2);
@@ -120,8 +130,9 @@ Cab * HelpFunctions::desrializeCab(char * str){
 
     return cab;
 }
-Driver * HelpFunctions::desrializeDriver(char * str) {
-    Driver * driver;
+
+Driver *HelpFunctions::desrializeDriver(char *str) {
+    Driver *driver;
     int index;
     //int lenth = str.length();
     //for(index = 0;index < lenth - 1; ++ index) {

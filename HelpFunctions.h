@@ -35,18 +35,86 @@ using namespace boost::archive;using namespace std;
 
 class HelpFunctions {
 public:
-    static list <pstring> * split(string * str,char ch);
+    /**
+   * split
+   *splits a string by a char
+   * @param str a string
+     * @param ch the char
+     * @return a list
+  */
+    static list <pstring> *split(string *str, char ch);
+
+/**
+   * stringToInt
+   * converts string to int
+   * @param str string
+     * @return integer
+  */
     static int stringToInt(string str);
 
-    static string serialize(Point * point);
-    static string serialize(Trip * trp);
-    static string serialize(Cab * cab);
-    static string serialize(Driver * driver);
+/**
+   * serialize
+   * serialize a point to string
+   * @param point
+     * @return a string
+  */
+    static string serialize(Point *point);
 
-    static Point * deserializePoint(char * str);
-    static Trip * deserializeTrip(char * str);
-    static Cab * desrializeCab(char * str);
-    static Driver * desrializeDriver(char * str);
+/**
+   * serialize
+   * serialize a trip to string
+   * @param trip
+     * @return a string
+  */
+    static string serialize(Trip *trp);
+
+/**
+   * serialize
+   * serialize a cab to string
+   * @param cab
+     * @return a string
+  */
+    static string serialize(Cab *cab);
+
+/**
+   * serialize
+   * serialize a driver to string
+   * @param driver
+     * @return a string
+  */
+    static string serialize(Driver *driver);
+
+/**
+   * deserialize
+   * deserialize a string to pointer
+   * @param str a string
+     * @return point
+  */
+    static Point *deserializePoint(char *str);
+
+/**
+   * deserialize
+   * deserialize a string to trip
+   * @param str a string
+     * @return trip
+  */
+    static Trip *deserializeTrip(char *str);
+
+/**
+   * deserialize
+   * deserialize a string to cab
+   * @param str a string
+     * @return cab
+  */
+    static Cab *desrializeCab(char *str);
+
+/**
+   * deserialize
+   * deserialize a string to driver
+   * @param str a string
+     * @return driver
+  */
+    static Driver *desrializeDriver(char *str);
 };
 
 #endif //SERVER_HELPFUNCTIONS_H

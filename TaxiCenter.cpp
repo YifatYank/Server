@@ -16,30 +16,31 @@ TaxiCenter::TaxiCenter(Grid *grid) {
     this->trips = new list<pTrip>;
     this->cabs = new list<pCab>;
     this->dummyCab = new Cab(-1, HONDA, RED);
-    this->dummtTrip = new Trip (-1,-1, Point(-1,-1) , Point(-1,-1),-1, -1);
-    this->dummyDriver = new Driver (-1, -1, single,-1);
+    this->dummtTrip = new Trip(-1, -1, Point(-1, -1), Point(-1, -1), -1, -1);
+    this->dummyDriver = new Driver(-1, -1, single, -1);
     pthread_mutex_init(&this->lockDrivers, 0);
 
 }
-TaxiCenter::~TaxiCenter(){
+
+TaxiCenter::~TaxiCenter() {
     this->deleteCabsList();
     this->deleteDriversList();
     this->deleteTripsList();
-    delete(this->cabs);
-    delete(this->drivers);
-    delete(this->trips);
-    delete(this->dummyCab);
-    delete(this->dummyDriver);
-    delete(this->dummtTrip);
+    delete (this->cabs);
+    delete (this->drivers);
+    delete (this->trips);
+    delete (this->dummyCab);
+    delete (this->dummyDriver);
+    delete (this->dummtTrip);
     pthread_mutex_destroy(&this->lockDrivers);
 };
 
-Trip * TaxiCenter::answerCalls(int id, int taarif, Point start, Point end, int numOfPassangers, int startTime){
-    Trip * trip;
+Trip *TaxiCenter::answerCalls(int id, int taarif, Point start, Point end, int numOfPassangers, int startTime) {
+    Trip *trip;
 
     // Checkd if there is already trip with the same id in the taxi center.
     trip = this->findTrip(id);
-    if(trip->getID() == -1) {
+    if (trip->getID() == -1) {
         trip = new Trip(id, taarif, start, end, numOfPassangers, startTime);
         this->trips->push_front(trip);
         return trip;
@@ -50,42 +51,42 @@ Trip * TaxiCenter::answerCalls(int id, int taarif, Point start, Point end, int n
 }
 
 void *TaxiCenter::threadFunction(void *parameters) {
-    Grid * grid;
-    Trip * trip;
-    list <void *> * lst;
+    Grid *grid;
+    Trip *trip;
+    list<void *> *lst;
 
     // 'parmeters' is a list of parameters.
-    lst = (list<void *> *)parameters;
+    lst = (list<void *> *) parameters;
     // Get the grid out of the parameters list.
-    grid = (Grid *)lst->front();
+    grid = (Grid *) lst->front();
     lst->pop_front();
-    trip = (Trip *)lst->front();
+    trip = (Trip *) lst->front();
     lst->pop_front();
 
     // Delete the list.
-    delete(lst);
+    delete (lst);
 
     trip->setTrip_path(grid->getSortesrPath(trip->getSP(), trip->getEP()));
 }
 
 void TaxiCenter::addDriver(int id, Marital_Status ms, int age, int yearsOfExp) {
-    Driver * driver;
+    Driver *driver;
 
     pthread_mutex_lock(&this->lockDrivers);
     driver = this->findDriver(id);
     // If he driver is not exist in the center
-    if (driver->getID() == - 1) {
+    if (driver->getID() == -1) {
         driver = new Driver(id, age, ms, yearsOfExp);
         this->drivers->push_front(driver);
     }
     pthread_mutex_unlock(&this->lockDrivers);
 }
 
-void TaxiCenter::addTaxi(int id, Manufacturer mf, Color c, int type){
-    Cab * cab;
+void TaxiCenter::addTaxi(int id, Manufacturer mf, Color c, int type) {
+    Cab *cab;
 
     cab = findCab(id);
-    if(cab->getId() == -1) {
+    if (cab->getId() == -1) {
         if (type == 1) {
             cab = new Standart(id, mf, c);
         } else if (type == 2) {
@@ -109,90 +110,90 @@ list<Trip *> *TaxiCenter::getTrips() {
 }
 
 Driver *TaxiCenter::findDriver(int id) {
-    list <pDriver> * templst = new list<pDriver>();
-    Driver * driver;
-    Driver * found  = this->dummyDriver;
+    list <pDriver> *templst = new list<pDriver>();
+    Driver *driver;
+    Driver *found = this->dummyDriver;
 
-    while(!this->drivers->empty()) {
+    while (!this->drivers->empty()) {
         driver = this->drivers->front();
         this->drivers->pop_front();
         templst->push_front(driver);
     }
 
-    while(!templst->empty()) {
+    while (!templst->empty()) {
         driver = templst->front();
         templst->pop_front();
-        if(driver->getID() == id) {
+        if (driver->getID() == id) {
             found = driver;
         }
 
         this->drivers->push_front(driver);
     }
 
-    delete(templst);
+    delete (templst);
     return found;
 }
 
 Cab *TaxiCenter::findCab(int id) {
-    list <pCab> * templst = new list<pCab>();
-    Cab * cab;
-    Cab * found = this->dummyCab;
+    list <pCab> *templst = new list<pCab>();
+    Cab *cab;
+    Cab *found = this->dummyCab;
 
-    while(!this->cabs->empty()) {
+    while (!this->cabs->empty()) {
         cab = this->cabs->front();
         this->cabs->pop_front();
         templst->push_front(cab);
     }
 
-    while(!templst->empty()) {
+    while (!templst->empty()) {
         cab = templst->front();
         templst->pop_front();
-        if(cab->getId() == id) {
+        if (cab->getId() == id) {
             found = cab;
         }
 
         this->cabs->push_front(cab);
     }
 
-    delete(templst);
+    delete (templst);
     return found;
 }
 
-Trip * TaxiCenter::findTrip(int id) {
-    list <pTrip> * templst = new list<pTrip>();
-    Trip * trip;
-    Trip * found = this->dummtTrip;
+Trip *TaxiCenter::findTrip(int id) {
+    list <pTrip> *templst = new list<pTrip>();
+    Trip *trip;
+    Trip *found = this->dummtTrip;
 
-    while(!this->trips->empty()) {
+    while (!this->trips->empty()) {
         trip = this->trips->front();
         this->trips->pop_front();
         templst->push_front(trip);
     }
 
-    while(!templst->empty()) {
+    while (!templst->empty()) {
         trip = templst->front();
         templst->pop_front();
-        if(trip->getID() == id) {
+        if (trip->getID() == id) {
             found = trip;
         }
 
         this->trips->push_front(trip);
     }
 
-    delete(templst);
+    delete (templst);
     return found;
 
 }
 
 Point *TaxiCenter::getsDriverLocation(int id) {
-    Driver * driver = this->findDriver(id);
-    Point * location = driver->getPlace();
+    Driver *driver = this->findDriver(id);
+    Point *location = driver->getPlace();
     return location;
 }
 
 void TaxiCenter::addDriver(int id, Marital_Status ms, int age, int yearsOfExp, int cabId) {
     Driver *driver;
-    Cab * cab;
+    Cab *cab;
 
     driver = this->findDriver(id);
     // If he driver is not exist in the center
@@ -201,62 +202,62 @@ void TaxiCenter::addDriver(int id, Marital_Status ms, int age, int yearsOfExp, i
         this->drivers->push_front(driver);
 
         cab = this->findCab(id);
-        if(cab->getId() != -1) {
+        if (cab->getId() != -1) {
             driver->setCab(cab);
         }
     }
 }
 
 void TaxiCenter::SetDriversCab(int driverId, int cabId) {
-    Driver * driver;
-    Cab * cab;
+    Driver *driver;
+    Cab *cab;
     driver = this->findDriver(driverId);
     cab = this->findCab(cabId);
-    if(driver != NULL && cab != NULL) {
+    if (driver != NULL && cab != NULL) {
         driver->setCab(cab);
     }
 }
 
 void TaxiCenter::deleteDriversList() {
-    Driver * driver;
-    while(!this->drivers->empty()) {
+    Driver *driver;
+    while (!this->drivers->empty()) {
         driver = this->drivers->front();
         this->drivers->pop_front();
-        delete(driver);
+        delete (driver);
     }
 }
 
 void TaxiCenter::deleteCabsList() {
-    Cab * cab;
-    while(!this->cabs->empty()) {
+    Cab *cab;
+    while (!this->cabs->empty()) {
         cab = this->cabs->front();
         this->cabs->pop_front();
-        delete(cab);
+        delete (cab);
     }
 }
 
 void TaxiCenter::deleteTripsList() {
-    Trip * trip;
-    while(!this->trips->empty()) {
+    Trip *trip;
+    while (!this->trips->empty()) {
         trip = this->trips->front();
         this->trips->pop_front();
-        delete(trip);
+        delete (trip);
     }
 }
 
 Driver *TaxiCenter::AssignTripToDriver(int tripId) {
-    Trip * trip = this->findTrip(tripId);
-    if(trip->getID() != -1) {
+    Trip *trip = this->findTrip(tripId);
+    if (trip->getID() != -1) {
         return this->AssignTripToDriver(trip);
     }
     return NULL;
 }
 
-Driver *TaxiCenter::AssignTripToDriver(Trip * trip) {
-    list <pDriver > * tempList = new list<pDriver> ();
-    Driver * chosenDriver = this->dummyDriver;
-    Driver * driver;
-    Point * tempPoint;
+Driver *TaxiCenter::AssignTripToDriver(Trip *trip) {
+    list <pDriver> *tempList = new list<pDriver>();
+    Driver *chosenDriver = this->dummyDriver;
+    Driver *driver;
+    Point *tempPoint;
     bool isAssined = false;
 
     // Sreach for a driver to take the passanger.
@@ -279,7 +280,7 @@ Driver *TaxiCenter::AssignTripToDriver(Trip * trip) {
             chosenDriver->setTrip(trip);
             isAssined = true;
         }
-        delete(tempPoint);
+        delete (tempPoint);
         this->drivers->push_front(driver);
     }
 
@@ -288,7 +289,7 @@ Driver *TaxiCenter::AssignTripToDriver(Trip * trip) {
         tempList->pop_front();
         this->drivers->push_front(driver);
     }
-    delete(tempList);
+    delete (tempList);
 
     return chosenDriver;
 

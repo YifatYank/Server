@@ -28,6 +28,7 @@
 
 using namespace std;
 using namespace boost::archive;
+
 #include "Point.h"
 #include <list>
 
@@ -39,15 +40,14 @@ private:
     int number_of_passenger;
     int tarrif;
     int startTime;
-    Point * starting_point;
-    Point * ending_point;
-    list<pPoint>* trip_path;
+    Point *starting_point;
+    Point *ending_point;
+    list <pPoint> *trip_path;
 public:
     friend class boost::serialization::access;
 
     template<class Archive>
-    void serialize(Archive &ar, const unsigned int version)
-    {
+    void serialize(Archive &ar, const unsigned int version) {
         ar & this->id;
         ar & this->total_meters_passed;
         ar & this->number_of_passenger;
@@ -58,8 +58,8 @@ public:
         ar & this->startTime;
     }
 
-    Trip() : id(0) , tarrif(0), starting_point(NULL) , ending_point(NULL), number_of_passenger(0) , trip_path(NULL)
-            , startTime(0){}
+    Trip() : id(0), tarrif(0), starting_point(NULL), ending_point(NULL), number_of_passenger(0), trip_path(NULL),
+             startTime(0) {}
 
     /**
  * Trip
@@ -69,10 +69,10 @@ public:
  * @param end ending point
  * @param numOfPassangers num of passengers
 */
-    Trip(int id,int taarif, Point start, Point end, int numOfPassangers, int startTime);
+    Trip(int id, int taarif, Point start, Point end, int numOfPassangers, int startTime);
 
 
-    Trip(int id,int taarif, Point start, Point end, int numOfPassangers, list<pPoint> * path, int startTime);
+    Trip(int id, int taarif, Point start, Point end, int numOfPassangers, list <pPoint> *path, int startTime);
 
 
     /**
@@ -80,69 +80,81 @@ public:
    * destructor
   */
     ~Trip();
+
     int getID();
+
     /**
  * getTMP
  * returns the total meters passed
  * @return tmp
 */
     int getTMP();
+
     /**
  * setTMP
  * sets total meters passed
  * @param x total meters passed
 */
     void setTMP(int x);
+
     /**
  * getSP
  * returns the source point
  * @return sp
 */
-    Point * getSP();
+    Point *getSP();
+
     /**
  * getEP
  * returns the ending point
  * @return ep
 */
-    Point * getEP();
+    Point *getEP();
+
     /**
  * getNOP
  * returns the number of passengers
  * @return nop
 */
     int getNOP();
+
     /**
  * setNOP
  * sets the number of passengers
  * @param x num pf passengers
 */
     void setNOP(int x);
+
     /**
  * getTaarif
  * returns the taarif
  * @return t taarif
 */
     int getTaarif();
+
     /**
  * setTaarif
  * sets the taarif
  * @param x taarif
 */
     void setTaarif(int x);
+
     /**
  * getTrip_path
  * returns the trip path
  * @return point list of points
 */
-    list<pPoint> * getTrip_path();
+    list <pPoint> *getTrip_path();
+
     /**
  * setTrip_path
  * sets the trip path
  * @param lst list of points
 */
-    void setTrip_path(list<pPoint> * lst);
+    void setTrip_path(list <pPoint> *lst);
+
     int getStartTime();
 };
 
-typedef Trip * pTrip;
+typedef Trip *pTrip;
 #endif //UNITTEST_TRIP_H

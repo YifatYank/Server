@@ -7,10 +7,12 @@
 
 #include "Point.h"
 #include "PointNode.h"
+
 using namespace std;
+
 class GridNode {
 private:
-    Point * place;
+    Point *place;
     bool obstical;
 public:
     /**
@@ -20,32 +22,37 @@ public:
     * @param x x's coordinate
     * @param y y's coordinate
     */
-    GridNode(int x,int y);
+    GridNode(int x, int y);
+
     /**
     * GridNode.
     * <p>
     * Destructor.
     */
     ~GridNode();
+
     /**
     * getPlace.
     * <p>
     * return the current place point.
     * @return place a Point
     */
-    Point * getPlace();
+    Point *getPlace();
+
     /**
     * SetAsOnbltical.
     * <p>
     * setting the obstacle.
     */
     void setAsOnbltical();
+
     /**
     * removeObstical.
     * <p>
     * removing the obstacle.
     */
     void removeObstical();
+
     /**
      * isObstical.
      * <p>

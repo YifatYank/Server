@@ -31,8 +31,6 @@ bool addTaxiToCenter(mainFlow *flow);
 
 bool getObsticals(mainFlow *flow);
 
-list <pstring> *split(string *str, char ch);
-
 inline bool StringisInt(const std::string &str);
 
 
@@ -69,9 +67,9 @@ int main(int argc, char *argv[]) {
     height = arr[0];
     width = arr[1];
 
-    // while (getObsticals(flow)) {
-    //      flow = new mainFlow(height, width);
-    // }
+    while (getObsticals(flow)) {
+        flow = new mainFlow(height, width);
+    }
     cin >> task;
     while (continueProg) {
         switch (task) {
@@ -85,6 +83,7 @@ int main(int argc, char *argv[]) {
                     cout << "-1" << endl;
                     break;
                 }
+                numOfDrivers = stoi(s);
 
                 pthread_t t;
                 args = (struct threadArgs *) malloc(sizeof(struct threadArgs));
@@ -115,11 +114,15 @@ int main(int argc, char *argv[]) {
                 // Gets  a driver location.
             case 4: {
                 int id;
-                cin >> id;
-                if (cin.fail()) {//|| !StringisInt(s)) {
+                string s;
+                //checks if the input us of correct type - in this case: int
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                getline(cin, s);
+                if (cin.fail() || !StringisInt(s) || (count(s.begin(), s.end(), ' ') > 0)) {
                     cout << "-1" << endl;
                     break;
                 }
+                id = stoi(s);
 
                 flow->askDriverLocation(id);
                 break;

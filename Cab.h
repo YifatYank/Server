@@ -31,7 +31,9 @@
 #include "Trip.h"
 #include "Point.h"
 #include "Enums.h"
+
 using namespace std;
+
 class Cab {
 private:
     int id;
@@ -40,15 +42,14 @@ private:
     double taarif;
     Manufacturer manufacturer;
     Color color;
-    Point * location;
-    Trip * trip;
+    Point *location;
+    Trip *trip;
 
 public:
     friend class boost::serialization::access;
 
     template<class Archive>
-    void serialize(Archive &ar, const unsigned int version)
-    {
+    void serialize(Archive &ar, const unsigned int version) {
         ar & this->id;
         ar & this->kilometers_passed;
         ar & this->speed;
@@ -59,7 +60,8 @@ public:
         ar & this->trip;
     }
 
-    Cab() : id(0) , manufacturer(HONDA), color(RED){}
+    Cab() : id(0), manufacturer(HONDA), color(RED) {}
+
     /**
  * Cab
  *constructor
@@ -67,84 +69,99 @@ public:
  * @param manufacturer the cab's manufacturer
  * @param color the cab's color
 */
-    Cab(int id,Manufacturer manufacturer, Color color);
+    Cab(int id, Manufacturer manufacturer, Color color);
+
     virtual ~Cab();
+
     /**
      * getId
      * @return The cab's id.
      */
     int getId();
+
     /**
     * updateTaarif
      * The function updates cab's ride taarif.
     * returns the taarif
     * @return Nothing
     */
-    void virtual updateTaarif(){};
+    void virtual updateTaarif() {};
+
 /**
  * moveNext
  * move the cab to the next place
 */
-    void virtual moveNext(){};
+    void virtual moveNext() {};
+
     /**
  * getKilometers
  *returns the kilometers
  * @return kil
 */
     int getKilometers();
+
     /**
  *setKilometers
  *sets the number of kilometers
  * @param num number of kilometers
 */
     void setKilometers(int num);
+
     /**
  * getSpeed
  *returns speed
  * @return speed
 */
     int getSpeed();
+
 /**
  * getLocation
  *returns the location, the functions return a new instance of point.
  * @return location
 */
-    Point * getLocation();
+    Point *getLocation();
+
     /**
  * setLocation
  * sets the location of the cab
  * @param location a location on the grid
 */
     void setLocation(Point location);
+
     /**
     * getColor
     * @return The ca's color.
     */
     Color getColor();
+
     /**
     * getManufacturer
     * The function returns the manufacturer
     * @return The cab's manufacturer
     */
     Manufacturer getManufacturer();
+
     /**
  * getTaarif
  * returns the taarif of the cab
  * @return taarif
 */
     int getTaarif();
+
     /**
  * getTrip
  *returns trip pointer
  * @return ptr
 */
-    Trip * getTrip();
+    Trip *getTrip();
+
     /**
  *setTrip
  *sets the trip
  * @param trip a trip
 */
-    void setTrip(Trip * trp);
+    void setTrip(Trip *trp);
+
     /**
  * getTaarifForTrip
  *returns taarif for a trip
@@ -152,10 +169,10 @@ public:
 */
     int getTaarifForTrip();
 
-  /** setTaarif
-   * Sets the cab taarif
-   * @param i
-   */
+    /** setTaarif
+     * Sets the cab taarif
+     * @param i
+     */
     void setTaarif(int i);
 
     /**
@@ -164,6 +181,7 @@ public:
      */
     void setSpeed(int speed);
 };
+
 BOOST_SERIALIZATION_ASSUME_ABSTRACT(Cab);
-typedef Cab * pCab;
+typedef Cab *pCab;
 #endif //UNITTEST_CAB_H

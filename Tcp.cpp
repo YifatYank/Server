@@ -24,7 +24,7 @@
 Tcp::Tcp(bool isServers, int port_num) {
     this->port_number = port_num;
     this->isServer = isServers;
-    this->soketMapping = new map<int,int>();
+    this->soketMapping = new map<int, int>();
 }
 
 /***********************************************************************
@@ -34,7 +34,7 @@ Tcp::Tcp(bool isServers, int port_num) {
 * The Function operation: default destructor					       *
 ***********************************************************************/
 Tcp::~Tcp() {
-    delete(soketMapping);
+    delete (soketMapping);
 }
 
 /***********************************************************************
@@ -61,7 +61,7 @@ int Tcp::initialize() {
         sin.sin_addr.s_addr = INADDR_ANY;           // binds to all ip address of the host
         sin.sin_port = htons(this->port_number);    // pass Server Post number
         //bind
-        if (::bind(this->socketDescriptor,(struct sockaddr *) &sin, sizeof(sin)) < 0) {
+        if (::bind(this->socketDescriptor, (struct sockaddr *) &sin, sizeof(sin)) < 0) {
             //return an error represent error at this method
             perror("ERROR_BIND - in initialize()\n");
             return 0;
@@ -104,7 +104,7 @@ int Tcp::initialize() {
 * The Function operation: getting data from the other socket to,	   *
 * enter it to the buffer and print the data							   *
 ***********************************************************************/
-int Tcp::acceptOneClient(){
+int Tcp::acceptOneClient() {
     int clientDescriptor = 0;
     struct sockaddr_in client_sin;
     unsigned int addr_len = sizeof(client_sin);
@@ -115,7 +115,7 @@ int Tcp::acceptOneClient(){
         perror("ERROR_CONNECT - in acceptOneClient()\n");
         exit(1);
     }
-    return  clientDescriptor;
+    return clientDescriptor;
 }
 
 
@@ -129,7 +129,7 @@ int Tcp::acceptOneClient(){
 ***********************************************************************/
 int Tcp::sendData(string data, int clientDescriptor) {
     size_t data_len = data.length();
-    const char * datas = data.c_str();
+    const char *datas = data.c_str();
     ssize_t sent_bytes = send(this->isServer ? clientDescriptor : this->socketDescriptor, datas, data_len, 0);
     if (sent_bytes < 0) {
         string host = "";
@@ -154,7 +154,7 @@ int Tcp::sendData(string data, int clientDescriptor) {
 * The Function operation: getting data from the other socket to,	   *
 * enter it to the buffer and print the data							   *
 ***********************************************************************/
-int Tcp::reciveData(char* buffer, int size,int socketDescriptor) {
+int Tcp::reciveData(char *buffer, int size, int socketDescriptor) {
     ssize_t read_bytes = recv(this->isServer ? socketDescriptor : this->socketDescriptor, buffer, size, 0);
     //checking the errors
     if (read_bytes <= 0) {
@@ -179,13 +179,13 @@ int Tcp::reciveData(char* buffer, int size,int socketDescriptor) {
     return read_bytes;
 }
 
-Tcp * Tcp::getTcp(bool isServers, int port_num) {
-    static Tcp * tcp = new Tcp(isServers, port_num);
+Tcp *Tcp::getTcp(bool isServers, int port_num) {
+    static Tcp *tcp = new Tcp(isServers, port_num);
     return tcp;
 }
 
 void Tcp::addMapping(int soketId, int descriptor) {
-    this->soketMapping->insert(std::pair<int,int>(descriptor,soketId));
+    this->soketMapping->insert(std::pair<int, int>(descriptor, soketId));
 }
 
 int Tcp::sendDataByMapping(string data, int clientDescriptor) {
@@ -193,7 +193,7 @@ int Tcp::sendDataByMapping(string data, int clientDescriptor) {
 }
 
 int Tcp::reciveDataByMapping(char *buffer, int size, int socketDescriptor) {
-    this->reciveData(buffer,size, this->soketMapping->at(socketDescriptor));
+    this->reciveData(buffer, size, this->soketMapping->at(socketDescriptor));
 }
 
 
