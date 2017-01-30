@@ -22,7 +22,8 @@ calcPathTask::~calcPathTask() {
 }
 
 void calcPathTask::calcPaths() {
-    Trip *trip;
+    Trip *trip = NULL;
+    Point * start, * end;
     // While the jobQueue was destrord by the father thread.
     while (this->jobQueue != NULL) {
         // If there are paths to calculate
@@ -33,14 +34,14 @@ void calcPathTask::calcPaths() {
             if (this->jobQueue->size() != 0) {
                 trip = this->jobQueue->front();
                 this->jobQueue->pop_front();
-            } else {
-                trip = NULL;
             }
-            pthread_mutex_lock(&this->jobQueueLock);
+            pthread_mutex_unlock(&this->jobQueueLock);
 
             // If there was a trip to take out of the job list.
             if (trip != NULL) {
-                trip->setTrip_path(this->grid->getSortesrPath(trip->getSP(), trip->getEP()));
+                start = trip->getSP();
+                end = trip->getEP();
+                trip->setTrip_path(this->grid->getSortesrPath(start, end));
             }
         }
     }

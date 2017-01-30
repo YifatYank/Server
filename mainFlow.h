@@ -94,7 +94,7 @@ public:
      * @param startTime
      * @param numOfPassangers
   */
-    void addTrip(int id, int taarif, Point *start, Point *end, int numOfPassangers, int startTime);
+    bool addTrip(int id, int taarif, Point *start, Point *end, int numOfPassangers, int startTime);
 
 /**
    * addDriver
@@ -115,7 +115,7 @@ public:
      * @param mf manufacturer
      * @param type
   */
-    void addTaxi(int x, Manufacturer mf, Color c, int type);
+    bool addTaxi(int x, Manufacturer mf, Color c, int type);
 
 /**
    * connectToClient

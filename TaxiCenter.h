@@ -97,7 +97,7 @@ public:
  * @param b boolean
  * @param id id value
 */
-    void addTaxi(int x, Manufacturer mf, Color c, int type);
+    bool addTaxi(int x, Manufacturer mf, Color c, int type);
 
 /**
  * getDriver

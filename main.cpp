@@ -29,7 +29,7 @@ bool addTripToCenter(mainFlow *flow, int height, int width);
 
 bool addTaxiToCenter(mainFlow *flow);
 
-bool getObsticals(mainFlow *flow);
+bool getObsticals(mainFlow **flow);
 
 inline bool StringisInt(const std::string &str);
 
@@ -56,19 +56,10 @@ int main(int argc, char *argv[]) {
     tcp = Tcp::getTcp(true, port);
     tcp->initialize();
 
-    int arr[2];
-    // Getting the grid size and creates the grid.
-    cin >> arr[0] >> arr[1];
-    //cin.ignore(numeric_limits<streamsize>::max(), '\n');
-    while (cin.fail() || arr[0] < 0 || arr[1] < 0) {
-        cout << "-1" << endl;
-        break;
-    }
-    height = arr[0];
-    width = arr[1];
 
-    while (getObsticals(flow)) {
-        flow = new mainFlow(height, width);
+
+    while (!getObsticals(&flow)) {
+        delete(flow);// = new mainFlow(height, width);
     }
     cin >> task;
     while (continueProg) {
@@ -97,7 +88,7 @@ int main(int argc, char *argv[]) {
             }
                 // Gets a new trip
             case 2: {
-                if (addTripToCenter(flow, height, width) == false) {
+                while(addTripToCenter(flow, height, width) == false) {
                     cout << "-1" << endl;
                     continueProg = true;
                 }
@@ -205,8 +196,7 @@ bool addTaxiToCenter(mainFlow *flow) {
     else if (*params[3] == 'W') { color = WHITE; }
     else { return false; }
 
-    flow->addTaxi(id, mf, color, type);
-    return true;
+    return flow->addTaxi(id, mf, color, type);
 }
 
 bool addTripToCenter(mainFlow *flow, int height, int width) {
@@ -220,6 +210,8 @@ bool addTripToCenter(mainFlow *flow, int height, int width) {
     char *params[8];
     int k = 0;
     char *split;
+    Trip * trp;
+    bool isOk;
 
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
     getline(cin, s);
@@ -248,28 +240,40 @@ bool addTripToCenter(mainFlow *flow, int height, int width) {
     taarif = stoi(params[6]);
     startTime = stoi(params[7]);
 
-    if (startx > width || starty > height || endx > width || endy > height) {
-        return false;
-    }
-
     start = new Point(startx, starty);
     end = new Point(endx, endy);
-    flow->addTrip(id, taarif, start, end, numOfPassangers, startTime);
+    isOk = flow->addTrip(id, taarif, start, end, numOfPassangers, startTime);
 
     delete (end);
     delete (start);
-    return true;
+
+    return isOk;
 }
 
-bool getObsticals(mainFlow *flow) {
+bool getObsticals(mainFlow ** flow) {
     int index, obstacleNum;
     list <pstring> *seperatedListcoma, *seperatedList;
     string strInput, *tempStrx, *tempStry;
+    int height, width;
+
+    int arr[2];
+    // Getting the grid size and creates the grid.
+    cin >> arr[0] >> arr[1];
+    //cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    if (cin.fail() || arr[0] < 0 || arr[1] < 0) {
+        cout << "-1" << endl;
+        return false;
+    }
+    height = arr[0];
+    width = arr[1];
+
+    *flow = new mainFlow(height, width);
+
     cin >> obstacleNum;
 
-    while (cin.fail() || (obstacleNum < 0)) {
+    if (cin.fail() || (obstacleNum < 0)) {
         cout << "-1" << endl;
-        cin >> obstacleNum;
+        return false;
     }
     //check the obsticals
     for (index = 0; index < obstacleNum; ++index) {
@@ -298,14 +302,13 @@ bool getObsticals(mainFlow *flow) {
             return false;
         }
 
-        flow->setObstical(x, y);
+        (*flow)->setObstical(x, y);
         delete (seperatedListcoma);
         delete (tempStrx);
         delete (tempStry);
     }
     return true;
 }
-
 
 list <pstring> *split(string *str, char ch) {
     string *newStr = new string();

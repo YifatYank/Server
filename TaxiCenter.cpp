@@ -37,7 +37,12 @@ TaxiCenter::~TaxiCenter() {
 
 Trip *TaxiCenter::answerCalls(int id, int taarif, Point start, Point end, int numOfPassangers, int startTime) {
     Trip *trip;
-
+    // (starty >  width|| starty > height || endx > width || endy > height) if(sta)
+    if((start.getY() > this->grid->getWidth()) || (start.getX() > this->grid->getHeight()) ||
+            (end.getY() > this->grid->getWidth()) || (end.getX() > this->grid->getHeight()))
+    {
+        return NULL;
+    }
     // Checkd if there is already trip with the same id in the taxi center.
     trip = this->findTrip(id);
     if (trip->getID() == -1) {
@@ -82,8 +87,8 @@ void TaxiCenter::addDriver(int id, Marital_Status ms, int age, int yearsOfExp) {
     pthread_mutex_unlock(&this->lockDrivers);
 }
 
-void TaxiCenter::addTaxi(int id, Manufacturer mf, Color c, int type) {
-    Cab *cab;
+bool TaxiCenter::addTaxi(int id, Manufacturer mf, Color c, int type) {
+    Cab *cab = NULL;
 
     cab = findCab(id);
     if (cab->getId() == -1) {
@@ -94,7 +99,9 @@ void TaxiCenter::addTaxi(int id, Manufacturer mf, Color c, int type) {
         }
 
         this->cabs->push_front(cab);
+        return true;
     }
+    return false;
 }
 
 list <pDriver> *TaxiCenter::getDriver() {

@@ -119,6 +119,8 @@ public:
     */
     list<Point *> *getSortesrPath(Point *start, Point *end);
 
+    int getHeight();
+    int getWidth();
     //static void * threadFunction(void * points);
 };
 

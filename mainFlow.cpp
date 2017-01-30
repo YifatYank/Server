@@ -6,6 +6,7 @@
 
 mainFlow::mainFlow(int height, int width) {
     int index, status;
+    struct calcPathParams * params;
 
     this->grid = new Grid(height, width);
     this->center = new TaxiCenter(this->grid);
@@ -16,12 +17,15 @@ mainFlow::mainFlow(int height, int width) {
     this->deadPool = new list<pthread_t>();
     this->tripsToCalcPath = new list<Trip *>();
 
-    struct calcPathParams *params = (struct calcPathParams *) malloc(sizeof(struct calcPathParams));
+    params = (struct calcPathParams *) malloc(sizeof(struct calcPathParams));
     params->map = this->grid->copyGrid();
     params->pathQueue = this->tripsToCalcPath;
 
     for (index = 0; index < 5; ++index) {
         pthread_t t;
+        params = (struct calcPathParams *) malloc(sizeof(struct calcPathParams));
+        params->map = this->grid->copyGrid();
+        params->pathQueue = this->tripsToCalcPath;
         status = pthread_create(&t, NULL, calcPathTask::threadFunction, (void *) params);//<--- NULL??
     }
 }
@@ -99,7 +103,7 @@ void mainFlow::assignTrips() {
     char *recivedMassage = new char[4096];
 
     // While there are trips to assin drivers to.
-    while (this->tripsToAssignDriver->empty()) {
+    while (!this->tripsToAssignDriver->empty()) {
         tempTrp = center->findTrip(this->tripsToAssignDriver->front());
         this->tripsToAssignDriver->pop_front();
 
@@ -112,7 +116,7 @@ void mainFlow::assignTrips() {
             }
 
             // Find a driver to take the trip.
-            tempDriver = this->center->AssignTripToDriver(tripsToAssignDriver->front());
+            tempDriver = this->center->AssignTripToDriver(tempTrp->getID());
 
             // If there was a driver to take the trip(The driver's id is -1).
             if (tempDriver->getID() != -1) {
@@ -134,13 +138,15 @@ void mainFlow::assignTrips() {
     }
 
     // Return all the trips the need to be taken by a driver, to the whating list.
-    while (!tempTripIdList->empty()) {
-        this->tripsToAssignDriver->push_front(tempTripIdList->front());
-        tempTripIdList->pop_front();
-    }
+  //  while (!tempTripIdList->empty()) {
+  //      int id = tempTripIdList->front();
+  //      this->tripsToAssignDriver->push_front(id);
+  //      tempTripIdList->pop_front();
+  //  }
 
     delete[](recivedMassage);
-    delete (tempTripIdList);
+    delete (this->tripsToAssignDriver);
+    this->tripsToAssignDriver = tempTripIdList;
 }
 
 void mainFlow::updateTime() {
@@ -177,12 +183,15 @@ void mainFlow::setObstical(int x, int y) {
     this->grid->setObstical(x, y);
 }
 
-void mainFlow::addTrip(int id, int taarif, Point *start, Point *end, int numOfPassangers, int startTime) {
+bool mainFlow::addTrip(int id, int taarif, Point *start, Point *end, int numOfPassangers, int startTime) {
     Trip *trp;
     trp = this->center->answerCalls(id, taarif, *start, *end, numOfPassangers, startTime);
     if (trp != NULL) {
         this->tripsToCalcPath->push_front(trp);
+        this->tripsToAssignDriver->push_front(trp->getID());
+        return true;
     }
+    return false;
 }
 
 void mainFlow::addDriver(int id, Marital_Status ms, int age, int yearsOfExp, int vehicle_id) {
@@ -262,6 +271,6 @@ void *mainFlow::getClients(void *params) {
     }
 }
 
-void mainFlow::addTaxi(int x, Manufacturer mf, Color c, int type) {
+bool mainFlow::addTaxi(int x, Manufacturer mf, Color c, int type) {
     this->center->addTaxi(x, mf, c, type);
 }

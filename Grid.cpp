@@ -135,45 +135,52 @@ list <pPoint> *Grid::getNeighborsOfPoint(Point *p) {
     Point temp(p->getX() + 1, p->getY() + 1);
     Point *tempPointer;
     list <pPoint> *lst = new list<pPoint>();
-
+    cout << "(" << p->getX() << "," << p->getY() << "): ";
 
     if (this->tempGride == NULL) {
         if (!this->grideWorld[temp.getX() - 1][temp.getY()]->isObstical()) {
             tempPointer = this->grideWorld[temp.getX() - 1][temp.getY()]->getPlace();
             lst->push_front(new Point(tempPointer->getX() - 1, tempPointer->getY() - 1));
+            cout << "(" << tempPointer->getX() - 1 << "," <<tempPointer->getY() - 1 << ")";
         }
         if (!this->grideWorld[temp.getX()][temp.getY() + 1]->isObstical()) {
             tempPointer = this->grideWorld[temp.getX()][temp.getY() + 1]->getPlace();
             lst->push_front(new Point(tempPointer->getX() - 1, tempPointer->getY() - 1));
+            cout << "(" << tempPointer->getX() - 1 << "," <<tempPointer->getY() - 1 << ")";
         }
         if (!this->grideWorld[temp.getX() + 1][temp.getY()]->isObstical()) {
             tempPointer = this->grideWorld[temp.getX() + 1][temp.getY()]->getPlace();
             lst->push_front(new Point(tempPointer->getX() - 1, tempPointer->getY() - 1));
-
+            cout << "(" << tempPointer->getX() - 1 << "," <<tempPointer->getY() - 1 << ")";
         }
         if (!this->grideWorld[temp.getX()][temp.getY() - 1]->isObstical()) {
             tempPointer = this->grideWorld[temp.getX()][temp.getY() - 1]->getPlace();
             lst->push_front(new Point(tempPointer->getX() - 1, tempPointer->getY() - 1));
+            cout << "(" << tempPointer->getX() - 1 << "," <<tempPointer->getY() - 1 << ")";
         }
     } else {
         if (!this->tempGride[temp.getX() - 1][temp.getY()]->isObstical()) {
             tempPointer = this->tempGride[temp.getX() - 1][temp.getY()]->getPlace();
             lst->push_front(new Point(tempPointer->getX() - 1, tempPointer->getY() - 1));
+            cout << "(" << tempPointer->getX() - 1 << "," <<tempPointer->getY() - 1 << ")";
         }
         if (!this->tempGride[temp.getX()][temp.getY() + 1]->isObstical()) {
             tempPointer = this->tempGride[temp.getX()][temp.getY() + 1]->getPlace();
             lst->push_front(new Point(tempPointer->getX() - 1, tempPointer->getY() - 1));
+            cout << "(" << tempPointer->getX() - 1 << "," <<tempPointer->getY() - 1 << ")";
         }
         if (!this->tempGride[temp.getX() + 1][temp.getY()]->isObstical()) {
             tempPointer = this->tempGride[temp.getX() + 1][temp.getY()]->getPlace();
             lst->push_front(new Point(tempPointer->getX() - 1, tempPointer->getY() - 1));
-
+            cout << "(" << tempPointer->getX() - 1 << "," <<tempPointer->getY() - 1 << ")";
         }
         if (!this->tempGride[temp.getX()][temp.getY() - 1]->isObstical()) {
             tempPointer = this->tempGride[temp.getX()][temp.getY() - 1]->getPlace();
             lst->push_front(new Point(tempPointer->getX() - 1, tempPointer->getY() - 1));
+            cout << "(" << tempPointer->getX() - 1 << "," <<tempPointer->getY() - 1 << ")";
         }
     }
+    cout << endl;
     return lst;
 }
 
@@ -257,6 +264,12 @@ Grid *Grid::copyGrid() {
     return grd;
 }
 
+int Grid::getHeight() {
+    return this->height - 2;
+}
+ int Grid::getWidth() {
+     return this->width - 2;
+ }
 
 /*void *Grid::threadFunction(void *parameters) {
     Point * start, * end;

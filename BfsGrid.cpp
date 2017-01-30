@@ -30,6 +30,7 @@ list <pPoint> *BfsGrid::getShortestPath(Grid *grid, Point *start, Point *end) {
         currNode = que->front();
         // Set the node as marked.
         grid->setObstical(currNode->getData()->getX(), currNode->getData()->getY());
+        //cout << "(" << currNode->getData()->getX() << ","<< currNode->getData()->getY() <<")";
         que->pop();
 
         // If we have rached the end point
@@ -45,24 +46,26 @@ list <pPoint> *BfsGrid::getShortestPath(Grid *grid, Point *start, Point *end) {
             return tempList;
         }
 
-        lstNeibors = grid->getNeighborsOfPoint((Point *) currNode->getData());
-        while (!lstNeibors->empty()) {
-            tempPoint = lstNeibors->back();
-            newNode = new PointNode(*tempPoint);
-            lstNeibors->pop_back();
-            delete (tempPoint);
+        if(!grid->isObstical(currNode->getData()->getX(),currNode->getData()->getY()))
+        {
+            lstNeibors = grid->getNeighborsOfPoint((Point *) currNode->getData());
+            while (!lstNeibors->empty()) {
+                tempPoint = lstNeibors->back();
+                newNode = new PointNode(*tempPoint);
+                lstNeibors->pop_back();
+                delete (tempPoint);
 
-            // If the value was not checked allready.
-            //if(!BfsGrid::isFound(chekedData, (Point *)newNode->getData())) {
-            newNode->setNext(currNode);
-            que->push(newNode);
-            //} else {
-            //    delete(newNode);
-            //}
+                // If the value was not checked allready.
+                //if(!BfsGrid::isFound(chekedData, (Point *)newNode->getData())) {
+                newNode->setNext(currNode);
+                que->push(newNode);
+                //} else {
+                //    delete(newNode);
+                //}
+            }
+            delete (lstNeibors);
         }
-        delete (lstNeibors);
-
-        //cout <<
+      //  cout << chekedData->size() << endl;
         chekedData->push_front((Point *) currNode->getData());
         checkedNodes->push_front(currNode);
     }
